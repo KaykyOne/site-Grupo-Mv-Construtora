@@ -38,6 +38,13 @@ import caminhaopipa from "@/assets/caminhaopipa.png";
 import logoImg from "@/assets/logomvbanner.png";
 import logomvbanner from "@/assets/logomvbanner.png";
 import rolocompactador from "@/assets/rolocompactador.png";
+import fotodaobra from "@/assets/fotodaobra.png";
+import operadoreseterceiros from "@/assets/operadoreseterceiros.png";
+import fotodasplacas from "@/assets/fotodasplacas.png";
+import fotodaplacaalan from "@/assets/fotodaplacaalan.png";
+import eventoinauguracao from "@/assets/eventoinauguracao.png";
+import fotodaplacatigd from "@/assets/fotodaplacatigd.png";
+import andamentodaobra from "@/assets/andamentodaobra.png";
 
 // --- Company constants (edite aqui para atualizar contato/endereço) ---
 const WHATSAPP_NUMBER = "5598992368928"; // DDI+DDD+numero, sem símbolos
@@ -164,12 +171,12 @@ const categorias: ("Todos" | FrotaCategoria)[] = [
 // --- Slide de fotos (logo após o Hero) ---
 // Placeholders: troque os "src" abaixo pelas fotos reais da empresa quando tiver.
 const slideshowImages: { src: string; alt: string }[] = [
-  { src: diferenciaisImg, alt: "Equipe da MV Construtora em obra" },
-  { src: escavadeira1, alt: "Escavadeira em operação" },
-  { src: caminhao, alt: "Caminhão prancha transportando máquina" },
-  { src: pacarregadeira, alt: "Pá-carregadeira em atividade" },
-  { src: rolocompactador, alt: "Rolo compactador em pavimentação" },
-  { src: patrolImg, alt: "Motoniveladora nivelando terreno" },
+  { src: fotodaobra, alt: "Equipe da MV Construtora em obra" },
+  { src: operadoreseterceiros, alt: "Gestores, Operadores e Terceiros" },
+  { src: fotodasplacas, alt: "Placas" },
+  { src: fotodaplacaalan, alt: "Ceo" },
+  { src: fotodaplacatigd, alt: "Placa Terminal Intermodal Gonçalves Dias" },
+  { src: eventoinauguracao, alt: "Evento de Inauguração" },
 ];
 
 const faqs: [string, string][] = [
@@ -193,7 +200,7 @@ const faqs: [string, string][] = [
 
 const reveal = {
   hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.65, ease: "easeOut" as const } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.95, ease: "easeOut" as const } },
 };
 
 // --- Validação do formulário ---
@@ -317,7 +324,11 @@ function WhatsAppFloating() {
 // Coloque seus arquivos .mp4 dentro de public/videos/ com esses nomes,
 // ou troque os caminhos abaixo pelos nomes dos seus arquivos.
 const slideshowVideos: { src: string; poster: string; alt: string }[] = [
-  { src: "/videos/videodasmaquinas.mp4", poster: escavadeira1, alt: "Vídeo: escavação em andamento" },
+  {
+    src: "/videos/videodasmaquinas.mp4",
+    poster: escavadeira1,
+    alt: "Vídeo: escavação em andamento",
+  },
 ];
 
 function VideoSlideshow() {

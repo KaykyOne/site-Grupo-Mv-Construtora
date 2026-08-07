@@ -57,6 +57,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 76px;
+  overflow-x: hidden;
 }
 
 @layer base {
@@ -68,6 +69,12 @@ html {
     color: var(--color-foreground);
     font-family: "Manrope", "Helvetica Neue", Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  img,
+  video,
+  iframe {
+    max-width: 100%;
   }
   ::selection {
     background: oklch(0.635 0.27 27);
