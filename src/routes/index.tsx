@@ -48,6 +48,7 @@ import andamentodaobra from "@/assets/andamentodaobra.png";
 
 // --- Company constants (edite aqui para atualizar contato/endereço) ---
 const WHATSAPP_NUMBER = "5598992368928"; // DDI+DDD+numero, sem símbolos
+const CNPJ_NUMBER = "14.299.029/0001-20";
 const WHATSAPP_DISPLAY = "(98) 99236-8928";
 const COMPANY_ADDRESS = "Pitombeira, Pindaré-Mirim — MA, 65370-000";
 const COMPANY_EMAIL = "mvconstru@outlook.com";
@@ -270,26 +271,12 @@ function CTAButton({
   rel,
   className = "",
 }: CTAButtonProps) {
-  const classes = `group relative isolation-auto z-10 flex items-center justify-center gap-3 overflow-hidden rounded-full border-2 border-red-600 bg-red-600 px-7 py-4 text-sm font-bold text-white shadow-xl backdrop-blur-md transition-colors duration-300 before:absolute before:-left-full before:-z-10 before:aspect-square before:w-full before:rounded-full before:bg-zinc-900 before:transition-all before:duration-700 before:hover:left-0 before:hover:w-full before:hover:scale-150 before:hover:duration-700 hover:text-white disabled:cursor-not-allowed disabled:opacity-60 ${className}`;
-
-  const icon = (
-    <svg
-      className="h-8 w-8 rotate-45 rounded-full border border-white/50 p-2 text-white duration-300 ease-linear group-hover:rotate-90 group-hover:border-none group-hover:bg-white group-hover:text-zinc-900"
-      viewBox="0 0 16 19"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z"
-        className="fill-current"
-      />
-    </svg>
-  );
+  const classes = `inline-flex items-center justify-center gap-2 rounded-[0.4em] border-[3px] border-black bg-red-600 px-[1.3em] py-[0.6em] font-black text-white shadow-[0.1em_0.1em_0px_#000] transition-all duration-150 hover:-translate-x-[0.05em] hover:-translate-y-[0.05em] hover:shadow-[0.15em_0.15em_0px_#000] active:translate-x-[0.05em] active:translate-y-[0.05em] active:shadow-[0.05em_0.05em_0px_#000] disabled:cursor-not-allowed disabled:opacity-60 ${className}`;
 
   if (href) {
     return (
       <a href={href} target={target} rel={rel} className={classes}>
         {children}
-        {icon}
       </a>
     );
   }
@@ -297,7 +284,6 @@ function CTAButton({
   return (
     <button type={type} onClick={onClick} disabled={disabled} className={classes}>
       {children}
-      {icon}
     </button>
   );
 }
@@ -587,7 +573,7 @@ function Index() {
             <img src={logoImg} alt="MV Construtora" className="h-11 w-auto sm:h-12" />
           </a>
           <nav className="hidden items-center gap-8 lg:flex" aria-label="Navegação principal">
-            {["Frota", "Serviços", "Diferenciais", "Contato"].map((item) => (
+            {["Frota", "Serviços", "Sobre", "Diferenciais", "Contato"].map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
@@ -615,7 +601,7 @@ function Index() {
             animate={{ opacity: 1, y: 0 }}
             className="border-t border-white/10 bg-zinc-950 px-5 py-6 lg:hidden"
           >
-            {["Frota", "Serviços", "Diferenciais", "FAQ", "Contato"].map((item) => (
+            {["Frota", "Serviços", "Sobre", "Diferenciais", "FAQ", "Contato"].map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
@@ -633,10 +619,10 @@ function Index() {
         {/* HERO */}
         <section
           id="inicio"
-          className="relative overflow-hidden bg-zinc-950 pb-16 pt-28 sm:pb-20 lg:pb-24"
+          className="relative overflow-hidden bg-zinc-950 pb-16 pt-22 sm:pb-20 lg:pb-24"
         >
-          <div className="mx-auto max-w-7xl px-5 sm:px-8">
-            <div className="relative flex h-[480px] items-end overflow-hidden rounded-sm bg-zinc-900 sm:h-[560px] lg:h-[680px] xl:h-[760px]">
+          <div className="mx-auto max-w-5xl px-5 sm:px-12">
+            <div className="relative flex h-[480px] items-end overflow-hidden rounded-sm bg-zinc-900 sm:h-[560px] lg:h-[680px] xl:h-[700px]">
               <HeroBackgroundSlideshow />
               <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,9,11,.95)_0%,rgba(9,9,11,.7)_44%,rgba(9,9,11,.15)_75%),linear-gradient(0deg,rgba(9,9,11,.8)_0%,transparent_50%)]" />
               <motion.div
@@ -956,6 +942,84 @@ function Index() {
           </motion.div>
         </section>
 
+        {/* SOBRE */}
+        <section id="sobre" className="bg-zinc-950 py-24 text-white lg:py-32">
+          <div className="mx-auto grid max-w-7xl gap-14 px-5 sm:px-8 lg:grid-cols-2 lg:items-center">
+            <div>
+              <SectionTitle
+                eyebrow="Quem somos"
+                title="Construção que nasce da experiência de campo."
+                light
+              />
+              <p className="mt-7 max-w-lg leading-7 text-white/70">
+                Nossa História A MV Construtora nasceu do sonho, da determinação e da visão
+                empreendedora de Alan Robson Leite Pereira, fundador da empresa em 14 de setembro de
+                2011.
+                <br />
+                Filho de Maria Aparecida e de José de Anchieta (in memoriam), Alan sempre acreditou
+                que o trabalho realizado com honestidade, dedicação e compromisso é capaz de
+                transformar vidas e construir um legado. Corretor de imóveis por formação,
+                empreendedor por vocação, é casado com Talita Mendes e pai de Miguel Ângelo e Alan
+                Vinícius.
+                <br />
+                <br /> Foi justamente do maior patrimônio de sua vida — sua família — que surgiu o
+                nome da empresa. A união das iniciais de seus filhos, Miguel e Vinícius, deu origem
+                à MV Construtora, simbolizando que cada obra executada carrega os mesmos valores
+                cultivados dentro de casa: responsabilidade, confiança, respeito e compromisso com o
+                futuro.
+                <br /> <br /> Ao longo de sua trajetória, a empresa atuou na construção de edifícios
+                e residências, adquirindo sólida experiência no setor da construção civil. Com o
+                passar dos anos, acompanhando as necessidades do mercado e investindo continuamente
+                em pessoas, equipamentos e tecnologia, a MV Construtora expandiu sua atuação e
+                especializou-se em obras de terraplenagem e infraestrutura.
+                <br /> <br />
+                Hoje, a empresa é referência na execução de serviços como: <br />* Terraplenagem; *
+                Construção e recuperação de estradas vicinais; <br />* Escavação, corte e aterro; *
+                Regularização e nivelamento de terrenos; <br />* Preparação de solo para plantio e
+                empreendimentos agrícolas; <br />* Limpeza e conformação de áreas; * Movimentação de
+                terra para obras públicas e privadas.
+                <br /> <br /> Cada projeto é conduzido com planejamento, segurança, qualidade
+                técnica e respeito aos prazos estabelecidos, buscando sempre superar as expectativas
+                de clientes e parceiros.
+                <br />
+                {/* Mais do que executar obras, a MV Construtora constrói relacionamentos
+                duradouros, gera desenvolvimento para as comunidades onde atua e contribui para o
+                crescimento da infraestrutura do Brasil.*/}
+                <br />
+                <br /> MV Construtora — Movendo a terra, construindo o futuro e deixando um legado
+                de confiança, excelência e compromisso em cada projeto.
+              </p>
+              {/* Edite os números abaixo pelos dados reais da empresa */}
+              <div className="mt-10 grid grid-cols-3 gap-6 border-t border-white/20 pt-7">
+                {[
+                  ["+11", "anos de atuação"],
+                  //["+50", "obras entregues"],
+                  ["100%", "compromisso com prazos"],
+                ].map(([value, label]) => (
+                  <div key={label}>
+                    <p className="text-3xl font-semibold tracking-tight text-red-500 sm:text-6xl">
+                      {value}
+                    </p>
+                    <p className="mt-1 text-sm leading-5 text-white/60">{label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <img
+                src={andamentodaobra}
+                alt="Obra em andamento conduzida pela MV Construtora"
+                className="h-[420px] w-full object-cover grayscale-[1%] lg:h-[520px]"
+              />
+            </motion.div>
+          </div>
+        </section>
+
         {/* DIFERENCIAIS */}
         <section
           id="diferenciais"
@@ -1253,7 +1317,7 @@ function Index() {
           </div>
           <div>
             <p className="mb-5 text-xs font-bold uppercase tracking-[.2em] text-white">Navegação</p>
-            {["Frota", "Serviços", "Diferenciais", "Localizacao"].map((x) => (
+            {["Frota", "Serviços", "Sobre", "Diferenciais", "Localizacao"].map((x) => (
               <a
                 key={x}
                 href={`#${x.toLowerCase()}`}
@@ -1276,6 +1340,7 @@ function Index() {
             >
               WhatsApp: {WHATSAPP_DISPLAY}
             </a>
+            <p className="mb-3 text-sm">CNPJ: {CNPJ_NUMBER}</p>
             <p className="text-sm">Seg a Sex · 08h às 18h</p>
           </div>
         </div>
