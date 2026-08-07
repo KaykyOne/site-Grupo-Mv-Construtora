@@ -633,46 +633,51 @@ function Index() {
         {/* HERO */}
         <section
           id="inicio"
-          className="relative flex min-h-[780px] items-end overflow-hidden bg-zinc-950 pt-28 lg:min-h-screen"
+          className="relative overflow-hidden bg-zinc-950 pb-16 pt-28 sm:pb-20 lg:pb-24"
         >
-          <HeroBackgroundSlideshow />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,9,11,.95)_0%,rgba(9,9,11,.7)_44%,rgba(9,9,11,.15)_75%),linear-gradient(0deg,rgba(9,9,11,.8)_0%,transparent_50%)]" />
-          <motion.div
-            className="absolute right-[12%] top-[28%] h-40 w-40 rounded-full bg-red-600/20 blur-3xl"
-            animate={{ y: [0, -25, 0], scale: [1, 1.2, 1] }}
-            transition={{ duration: 7, repeat: Infinity }}
-          />
-          <div className="relative z-10 mx-auto w-full max-w-7xl px-5 pb-16 sm:px-8 lg:pb-20">
-            <motion.div
-              initial="hidden"
-              animate="show"
-              variants={{ show: { transition: { staggerChildren: 0.16 } } }}
-              className="max-w-4xl"
-            >
+          <div className="mx-auto max-w-7xl px-5 sm:px-8">
+            <div className="relative flex h-[480px] items-end overflow-hidden rounded-sm bg-zinc-900 sm:h-[560px] lg:h-[680px] xl:h-[760px]">
+              <HeroBackgroundSlideshow />
+              <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,9,11,.95)_0%,rgba(9,9,11,.7)_44%,rgba(9,9,11,.15)_75%),linear-gradient(0deg,rgba(9,9,11,.8)_0%,transparent_50%)]" />
               <motion.div
-                variants={reveal}
-                className="mb-7 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em] text-red-600"
-              >
-                <span className="h-px w-10 bg-red-600" /> Construção que move o futuro
-              </motion.div>
-              <motion.h1
-                variants={reveal}
-                className="max-w-3xl text-5xl font-semibold leading-[0.98] tracking-[-0.055em] text-white sm:text-6xl lg:text-[86px]"
-              >
-                Força para executar. <span className="text-white/45">Precisão para entregar.</span>
-              </motion.h1>
-              <motion.p
-                variants={reveal}
-                className="mt-5 max-w-xl text-base leading-7 text-white/70 sm:text-lg"
-              >
-                Terraplanagem, locação de máquinas pesadas e gestão de obras com segurança,
-                produtividade, qualidade compromisso desde o primeiro movimento até à entrega.
-              </motion.p>
-              <motion.div variants={reveal} className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <CTAButton href="#contato">Solicitar orçamento</CTAButton>
-                <CTAButton href="#serviços">Conhecer soluções</CTAButton>
-              </motion.div>
-            </motion.div>
+                className="absolute right-[8%] top-[18%] h-40 w-40 rounded-full bg-red-600/20 blur-3xl"
+                animate={{ y: [0, -25, 0], scale: [1, 1.2, 1] }}
+                transition={{ duration: 7, repeat: Infinity }}
+              />
+              <div className="relative z-10 w-full px-6 pb-10 sm:px-10 sm:pb-12 lg:px-14 lg:pb-16">
+                <motion.div
+                  initial="hidden"
+                  animate="show"
+                  variants={{ show: { transition: { staggerChildren: 0.16 } } }}
+                  className="max-w-4xl"
+                >
+                  <motion.div
+                    variants={reveal}
+                    className="mb-7 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em] text-red-600"
+                  >
+                    <span className="h-px w-10 bg-red-600" /> Construção que move o futuro
+                  </motion.div>
+                  <motion.h1
+                    variants={reveal}
+                    className="max-w-3xl text-4xl font-semibold leading-[0.98] tracking-[-0.055em] text-white sm:text-5xl lg:text-[64px]"
+                  >
+                    Força para executar.{" "}
+                    <span className="text-white/45">Precisão para entregar.</span>
+                  </motion.h1>
+                  <motion.p
+                    variants={reveal}
+                    className="mt-5 max-w-xl text-base leading-7 text-white/70 sm:text-lg"
+                  >
+                    Terraplanagem, locação de máquinas pesadas e gestão de obras com segurança,
+                    produtividade, qualidade compromisso desde o primeiro movimento até à entrega.
+                  </motion.p>
+                  <motion.div variants={reveal} className="mt-9 flex flex-col gap-3 sm:flex-row">
+                    <CTAButton href="#contato">Solicitar orçamento</CTAButton>
+                    <CTAButton href="#serviços">Conhecer soluções</CTAButton>
+                  </motion.div>
+                </motion.div>
+              </div>
+            </div>
           </div>
         </section>
 
