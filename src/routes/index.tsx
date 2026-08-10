@@ -734,7 +734,7 @@ function Index() {
           <div className="mx-auto max-w-4xl px-5 sm:px-1">
             <div className="relative flex min-h-[560px] items-end overflow-hidden rounded-sm bg-zinc-900 sm:min-h-[600px] lg:min-h-[680px] xl:min-h-[700px]">
               <HeroBackgroundSlideshow />
-              <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(51, 51, 255, 0.95)_0%,rgba(9,9,11,.8)_44%,rgba(9,9,11,.55)_75%),linear-gradient(0deg,rgba(9,9,11,.85)_0%,transparent_55%)]" />
+              <div />
               <motion.div
                 className="absolute right-[8%] top-[18%] h-40 w-40 rounded-full bg-red-600/20 blur-3xl"
                 animate={{ y: [0, -25, 0], scale: [1, 1.2, 1] }}
