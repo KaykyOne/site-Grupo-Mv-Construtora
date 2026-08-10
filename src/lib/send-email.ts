@@ -22,189 +22,199 @@ export const sendEmail = createServerFn({
 
       replyTo: data.email,
 
-      subject: `Novo orçamento - ${data.nome}`,
+      subject: `🏗️ Novo Orçamento | ${data.nome}`,
 
       html: `
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Novo Orçamento</title>
 </head>
 
 <body style="
   margin:0;
   padding:0;
-  background:#f3f4f6;
-  font-family:Arial, Helvetica, sans-serif;
+  background:#f4f4f5;
+  font-family:Arial,Helvetica,sans-serif;
 ">
 
-  <table width="100%" cellpadding="0" cellspacing="0">
-    <tr>
-      <td align="center" style="padding:40px 20px;">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="center" style="padding:40px 15px;">
 
-        <table width="700" cellpadding="0" cellspacing="0"
-          style="
-            background:#ffffff;
-            border-radius:16px;
-            overflow:hidden;
-            box-shadow:0 10px 35px rgba(0,0,0,.08);
-          ">
+<table width="700" cellpadding="0" cellspacing="0" border="0" style="
+  background:#ffffff;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 10px 35px rgba(0,0,0,.08);
+">
 
-          <!-- TOPO -->
+<!-- CABEÇALHO -->
 
-          <tr>
-            <td
+<tr>
+<td align="center" style="
+  background:#111111;
+  padding:35px 25px;
+  border-bottom:5px solid #dc2626;
+">
+
+<img
+  src="https://grupomvconstrutora.com.br/assets/logomv.png"
+  alt="MV Construtora"
   style="
-    background:#111111;
-    text-align:center;
-    padding:30px;
-  ">
+    width:180px;
+    max-width:100%;
+    height:auto;
+    display:block;
+    margin:auto;
+  "
+>
 
-  <img
-    src="https://www.grupomvconstrutora.com.br/logo-email.png"
-    alt="MV Construtora"
-    style="
-      max-width:520px;
-      width:100%;
-      height:auto;
-            </td>
-          </tr>
+</td>
+</tr>
 
-          <!-- TITULO -->
+<!-- TÍTULO -->
 
-          <tr>
-            <td style="padding:35px;">
+<tr>
+<td style="padding:40px;">
 
-              <h1 style="
-                margin:0;
-                color:#dc2626;
-                font-size:28px;
-              ">
-                Novo orçamento recebido
-              </h1>
+<h1   margin-top:15px;
+  line-height:1.7;
+  font-size:15px;
+">
+Um visitante enviou uma solicitação através do formulário do site da MV Construtora.
+</p>
 
-              <p style="
-                color:#666;
-                font-size:15px;
-                line-height:1.7;
-                margin-top:12px;
-              ">
-                Um cliente enviou uma solicitação através do formulário do site.
-              </p>
+<!-- DADOS -->
 
-              <!-- DADOS -->
+<table width="100%" cellpadding="12" cellspacing="0" style="
+  margin-top:25px;
+  border:1px solid #e5e7eb;
+  border-radius:10px;
+  background:#fafafa;
+">
 
-              <table
-                width="100%"
-                cellpadding="12"
-                cellspacing="0"
-                style="
-                  margin-top:25px;
-                  background:#fafafa;
-                  border:1px solid #e5e7eb;
-                  border-radius:10px;
-                "
-              >
+<tr>
+<td width="150">
+<strong>Nome</strong>
+</td>
 
-                <tr>
-                  <td width="140">
-                    <strong>Nome</strong>
-                  </td>
+<td>
+${data.nome}
+</td>
+</tr>
 
-                  <td>
-                    ${data.nome}
-                  </td>
-                </tr>
+<tr>
+<td>
+<strong>E-mail</strong>
+</td>
 
-                <tr>
-                  <td>
-                    <strong>E-mail</strong>
-                  </td>
+<td>
+${data.email}
+</td>
+</tr>
 
-                  <td>
-                    ${data.email}
-                  </td>
-                </tr>
+<tr>
+<td>
+<strong>Telefone</strong>
+</td>
 
-                <tr>
-                  <td>
-                    <strong>Telefone</strong>
-                  </td>
+<td>
+${data.telefone}
+</td>
+</tr>
 
-                  <td>
-                    ${data.telefone}
-                  </td>
-                </tr>
+</table>
 
-              </table>
+<!-- MENSAGEM -->
 
-              <!-- MENSAGEM -->
+<div style="
+  margin-top:25px;
+  background:#fafafa;
+  border-left:6px solid #dc2626;
+  padding:22px;
+  border-radius:8px;
+">
 
-              <div style="
-                margin-top:25px;
-                padding:22px;
-                background:#fafafa;
-                border-left:5px solid #dc2626;
-                border-radius:8px;
-              ">
+<p style="
+  color:#111827;
+  font-size:16px;
+  font-weight:bold;
+  margin:0 0 12px 0;
+">
+Mensagem
+</p>
 
-                <strong style="
-                  color:#111;
-                  font-size:16px;
-                ">
-                  Mensagem
-                </strong>
+<p style="
+  margin:0;
+  color:#374151;
+  line-height:1.8;
+  white-space:pre-line;
+">
+${data.mensagem}
+</p>
 
-                <p style="
-                  margin-top:12px;
-                  color:#444;
-                  line-height:1.8;
-                ">
-                  ${data.mensagem}
-                </p>
+</div>
 
-              </div>
+</td>
+</tr>
 
-            </td>
-          </tr>
+<!-- RODAPÉ -->
 
-          <!-- RODAPE -->
+<tr>
+<td style="
+  background:#111111;
+  color:#d4d4d8;
+  text-align:center;
+  padding:35px 25px;
+">
 
-          <tr>
-            <td
-              style="
-                background:#111111;
-                color:#d1d5db;
-                text-align:center;
-                padding:25px;
-                font-size:13px;
-              "
-            >
+<p style="
+  margin:0;
+  color:#ffffff;
+  font-size:20px;
+  font-weight:bold;
+">
+MV CONSTRUTORA
+</p>
 
-              <strong style="color:#ffffff;">
-                MV Construtora
-              </strong>
+<p style="
+  margin:15px 0;
+  line-height:1.8;
+">
+Locações • Transportes • Terraplanagem • Gestão de Obras
+</p>
 
-              <br><br>
+<p style="margin:0;line-height:1.8;">
+📧 atendimento@grupomvconstrutora.com.br
+</p>
 
-              Locações • Transportes • Terraplanagem • Gestão de Obras
+<p style="margin:0;line-height:1.8;">
+📞 (98) 99236-8928
+</p>
 
-              <br><br>
+<p style="margin:0;line-height:1.8;">
+🌐 www.grupomvconstrutora.com.br
+</p>
 
-              📧 atendimento@grupomvconstrutora.com.br
+<p style="
+  margin-top:20px;
+  font-size:12px;
+  color:#a1a1aa;
+">
+Este e-mail foi gerado automaticamente pelo formulário do site.
+</p>
 
-              <br>
+</td>
+</tr>
 
-              🌐 www.grupomvconstrutora.com.br
+</table>
 
-            </td>
-          </tr>
-
-        </table>
-
-      </td>
-    </tr>
-  </table>
+</td>
+</tr>
+</table>
 
 </body>
 </html>
