@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { sendEmail } from "@/lib/send-email";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, useScroll, useSpring, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
@@ -235,18 +236,18 @@ const reveal = {
 
 // --- Validação do formulário ---
 const contactSchema = z.object({
-  nome: z.string().trim().min(2, "Informe seu nome completo").max(100, "Nome muito longo"),
+  nome: z.string().trim().min(2, "Informe seu nome completo").max(100),
+
+  email: z.string().trim().email("Informe um e-mail válido"),
+
   telefone: z
     .string()
     .trim()
     .min(10, "Telefone com DDD (mín. 10 dígitos)")
     .max(20, "Telefone muito longo")
     .regex(/^[\d\s()+-]+$/, "Use apenas números e ( ) + -"),
-  mensagem: z
-    .string()
-    .trim()
-    .min(10, "Descreva sua necessidade (mín. 10 caracteres)")
-    .max(1000, "Mensagem muito longa"),
+
+  mensagem: z.string().trim().min(10, "Descreva sua necessidade").max(1000, "Mensagem muito longa"),
 });
 type ContactForm = z.infer<typeof contactSchema>;
 
@@ -663,14 +664,28 @@ function Index() {
     });
   }, [lightboxIndex, frotaFiltrada]);
 
-  const onSubmit = (data: ContactForm) => {
-    const msg = `Olá, me chamo ${data.nome}. Telefone: ${data.telefone}.\n\n${data.mensagem}`;
-    window.open(waLink(msg), "_blank", "noopener,noreferrer");
-    setSent(true);
-    reset();
-    setTimeout(() => setSent(false), 5000);
-  };
+  const onSubmit = async (data: ContactForm) => {
+    try {
+      await sendEmail({
+        data: {
+          nome: data.nome,
+          email: data.email,
+          telefone: data.telefone,
+          mensagem: data.mensagem,
+        },
+      });
 
+      setSent(true);
+      reset();
+
+      setTimeout(() => {
+        setSent(false);
+      }, 5000);
+    } catch (error) {
+      console.error(error);
+      alert("Erro ao enviar mensagem.");
+    }
+  };
   return (
     <div className="min-h-screen overflow-hidden bg-[#f5f4f0] text-zinc-950">
       <motion.div
@@ -1299,8 +1314,9 @@ function Index() {
                 Sua obra precisa avançar rápido? Solicite um orçamento conosco.
               </h2>
               <p className="mt-6 max-w-md text-white/60">
-                Preencha e enviamos sua solicitação direto para nossa equipe pelo WhatsApp — retorno
-                em até 24h.
+                Preencha o formulário e nossa equipe entrará em contato com você o mais rápido
+                possível. Ou se preferir, clique no botão abaixo para falar diretamente conosco pelo
+                WhatsApp.
               </p>
               <div className="mt-8 inline-block">
                 <CTAButton
@@ -1341,6 +1357,35 @@ function Index() {
                   </p>
                 )}
               </div>
+              {/* EMAIL */}
+              <div>
+                <label
+                  htmlFor="email"
+                  className="mb-2 block text-xs font-bold uppercase tracking-[.18em] text-zinc-600"
+                >
+                  E-mail
+                </label>
+
+                <input
+                  id="email"
+                  type="email"
+                  autoComplete="email"
+                  {...register("email")}
+                  aria-invalid={!!errors.email}
+                  className={`w-full border-b-2 bg-transparent py-3 text-base outline-none transition-colors placeholder:text-zinc-400 ${
+                    errors.email ? "border-red-500" : "border-zinc-300 focus:border-red-500"
+                  }`}
+                  placeholder="seuemail@exemplo.com"
+                />
+
+                {errors.email && (
+                  <p role="alert" className="mt-2 text-xs font-medium text-red-600">
+                    {errors.email.message}
+                  </p>
+                )}
+              </div>
+
+              {/* TELEFONE */}
               <div>
                 <label
                   htmlFor="telefone"
@@ -1390,11 +1435,13 @@ function Index() {
               </CTAButton>
               {sent && (
                 <p className="text-center text-sm font-semibold text-green-600">
-                  Redirecionando para o WhatsApp… fale conosco por lá!
+                  Seu orçamento foi enviado com sucesso!! Entraremos em contato em breve por
+                  WhatsApp ou e-mail, aguarde!
                 </p>
               )}
               <p className="text-center text-[11px] text-zinc-500">
-                Ao enviar, você abrirá uma conversa no WhatsApp com nossa equipe comercial.
+                Ao enviar, pedimos que aguarde nosso retorno. <br /> Não compartilhamos seus dados
+                com terceiros e respeitamos sua privacidade.
               </p>
             </form>
           </div>
