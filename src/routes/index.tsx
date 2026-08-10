@@ -515,7 +515,7 @@ function HeroBackgroundSlideshow() {
 
   return (
     <div className="absolute inset-0">
-      <AnimatePresence initial={false}>
+      <AnimatePresence initial={false} mode="wait">
         <motion.img
           key={index}
           src={slideshowImages[index].src}
@@ -523,7 +523,7 @@ function HeroBackgroundSlideshow() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.0, ease: "easeInOut" }}
+          transition={{ duration: 0.6, ease: "easeInOut" }}
           className="absolute inset-0 h-full w-full object-cover"
         />
       </AnimatePresence>
@@ -732,9 +732,9 @@ function Index() {
           className="relative overflow-hidden bg-zinc-950 pb-16 pt-19 sm:pb-20 lg:pb-4"
         >
           <div className="mx-auto max-w-4xl px-5 sm:px-1">
-            <div className="relative flex h-[480px] items-end overflow-hidden rounded-sm bg-zinc-900 sm:h-[560px] lg:h-[680px] xl:h-[700px]">
+            <div className="relative flex min-h-[560px] items-end overflow-hidden rounded-sm bg-zinc-900 sm:min-h-[600px] lg:min-h-[680px] xl:min-h-[700px]">
               <HeroBackgroundSlideshow />
-              <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(21, 21, 255, 0.95)_0%,rgba(9,9,11,.7)_44%,rgba(9,9,11,.15)_75%),linear-gradient(0deg,rgba(9,9,11,.8)_0%,transparent_50%)]" />
+              <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,9,11,.95)_0%,rgba(9,9,11,.8)_44%,rgba(9,9,11,.55)_75%),linear-gradient(0deg,rgba(9,9,11,.85)_0%,transparent_55%)]" />
               <motion.div
                 className="absolute right-[8%] top-[18%] h-40 w-40 rounded-full bg-red-600/20 blur-3xl"
                 animate={{ y: [0, -25, 0], scale: [1, 1.2, 1] }}
