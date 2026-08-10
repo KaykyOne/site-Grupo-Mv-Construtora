@@ -30,127 +30,108 @@ export const sendEmail = createServerFn({
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Novo Orçamento</title>
 </head>
 
 <body style="
   margin:0;
-  padding:0;
-  background:#f4f4f5;
+  padding:40px 20px;
+  background:#f3f4f6;
   font-family:Arial,Helvetica,sans-serif;
 ">
 
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
 <tr>
-<td align="center" style="padding:40px 15px;">
+<td align="center">
 
-<table width="700" cellpadding="0" cellspacing="0" border="0" style="
+<table width="700" cellpadding="0" cellspacing="0" border="0"
+style="
   background:#ffffff;
-  border-radius:16px;
+  border-radius:20px;
   overflow:hidden;
-  box-shadow:0 10px 35px rgba(0,0,0,.08);
+  box-shadow:0 12px 35px rgba(0,0,0,.12);
 ">
-
-<!-- CABEÇALHO -->
 
 <tr>
-<td align="center" style="
-  background:#111111;
-  padding:35px 25px;
-  border-bottom:5px solid #dc2626;
-">
+<td>
 
 <img
   src="https://grupomvconstrutora.com.br/assets/logomv.png"
   alt="MV Construtora"
   style="
-    width:180px;
-    max-width:100%;
-    height:auto;
+    width:100%;
     display:block;
-    margin:auto;
+    background:#111;
   "
 >
 
 </td>
 </tr>
 
-<!-- TÍTULO -->
-
 <tr>
 <td style="padding:40px;">
 
-<h1   margin-top:15px;
-  line-height:1.7;
-  font-size:15px;
+<p style="
+  margin:0;
+  color<h1 style="
+  margin:10px 0 30px;
+  color:#111827;
+  font-size:32px;
 ">
-Um visitante enviou uma solicitação através do formulário do site da MV Construtora.
-</p>
-
-<!-- DADOS -->
-
-<table width="100%" cellpadding="12" cellspacing="0" style="
-  margin-top:25px;
-  border:1px solid #e5e7eb;
-  border-radius:10px;
-  background:#fafafa;
-">
-
-<tr>
-<td width="150">
-<strong>Nome</strong>
-</td>
-
-<td>
-${data.nome}
-</td>
-</tr>
-
-<tr>
-<td>
-<strong>E-mail</strong>
-</td>
-
-<td>
-${data.email}
-</td>
-</tr>
-
-<tr>
-<td>
-<strong>Telefone</strong>
-</td>
-
-<td>
-${data.telefone}
-</td>
-</tr>
-
-</table>
-
-<!-- MENSAGEM -->
+Solicitação de Orçamento
+</h1>
 
 <div style="
-  margin-top:25px;
   background:#fafafa;
-  border-left:6px solid #dc2626;
-  padding:22px;
-  border-radius:8px;
+  border:1px solid #eeeeee;
+  border-radius:14px;
+  padding:25px;
+">
+
+<div style="margin-bottom:22px;">
+  <p style="margin:0;color:#888;font-size:12px;">CLIENTE</p>
+  <p style="margin:4px 0 0;font-size:18px;font-weight:bold;color:#111;">
+    ${data.nome}
+  </p>
+</div>
+
+<div style="margin-bottom:22px;">
+  <p style="margin:0;color:#888;font-size:12px;">E-MAIL</p>
+  <p style="margin:4px 0 0;font-size:16px;color:#111;">
+    ${data.email}
+  </p>
+</div>
+
+<div>
+  <p style="margin:0;color:#888;font-size:12px;">TELEFONE</p>
+  <p style="margin:4px 0 0;font-size:16px;color:#111;">
+    ${data.telefone}
+  </p>
+</div>
+
+</div>
+
+<div style="
+  margin-top:30px;
+  background:#fff7f7;
+  border-left:5px solid #dc2626;
+  border-radius:12px;
+  padding:25px;
 ">
 
 <p style="
-  color:#111827;
-  font-size:16px;
+  margin:0 0 15px;
   font-weight:bold;
-  margin:0 0 12px 0;
+  color:#111;
+  font-size:18px;
 ">
-Mensagem
+Mensagem do Cliente
 </p>
 
 <p style="
   margin:0;
-  color:#374151;
-  line-height:1.8;
+  line-height:1.9;
+  color:#444;
+  font-size:15px;
   white-space:pre-line;
 ">
 ${data.mensagem}
@@ -158,53 +139,65 @@ ${data.mensagem}
 
 </div>
 
+<div style="
+  margin-top:30px;
+  text-align:center;
+">
+
+<a
+  href="mailto:${data.email}"
+  style="
+    display:inline-block;
+    background:#dc2626;
+    color:#ffffff;
+    text-decoration:none;
+    padding:14px 24px;
+    border-radius:10px;
+    font-weight:bold;
+  "
+>
+Responder Cliente
+</a>
+
+</div>
+
 </td>
 </tr>
-
-<!-- RODAPÉ -->
 
 <tr>
 <td style="
   background:#111111;
-  color:#d4d4d8;
-  text-align:center;
-  padding:35px 25px;
-">
-
-<p style="
-  margin:0;
-  color:#ffffff;
-  font-size:20px;
-  font-weight:bold;
-">
-MV CONSTRUTORA
-</p>
-
-<p style="
-  margin:15px 0;
-  line-height:1.8;
-">
+  padding:">
 Locações • Transportes • Terraplanagem • Gestão de Obras
 </p>
 
-<p style="margin:0;line-height:1.8;">
+<p style="
+  margin:25px 0 0;
+  color:#d1d5db;
+">
 📧 atendimento@grupomvconstrutora.com.br
 </p>
 
-<p style="margin:0;line-height:1.8;">
+<p style="
+  margin:8px 0;
+  color:#d1d5db;
+">
 📞 (98) 99236-8928
 </p>
 
-<p style="margin:0;line-height:1.8;">
-🌐 www.grupomvconstrutora.com.br
+<p style="
+  margin:8px 0;
+  color:#d1d5db;
+">
+🌐 grupomvconstrutora.com.br
 </p>
 
 <p style="
-  margin-top:20px;
+  margin-top:25px;
+  color:#888;
   font-size:12px;
-  color:#a1a1aa;
 ">
-Este e-mail foi gerado automaticamente pelo formulário do site.
+Mensagem enviada automaticamente pelo site da MV Construtora.
 </p>
 
 </td>
