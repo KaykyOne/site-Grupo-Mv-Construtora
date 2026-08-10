@@ -755,7 +755,7 @@ function Index() {
                   </motion.div>
                   <motion.h1
                     variants={reveal}
-                    className="max-w-3xl text-4xl font-semibold leading-[120%] tracking-[-0.055em] text-white sm:text-5xl lg:text-[88px]"
+                    className="max-w-3xl text-4xl font-semibold leading-[112%] tracking-[-0.055em] text-white sm:text-5xl lg:text-[70px]"
                   >
                     Força para executar.{" "}
                     <span className="text-white/60">Precisão para entregar.</span>
