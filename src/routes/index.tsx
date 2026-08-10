@@ -26,32 +26,44 @@ import {
   TrafficCone,
   Construction,
 } from "lucide-react";
-import patrolImg from "@/assets/patrol.png";
+import patrol from "@/assets/patrol.png";
 import caminhao from "@/assets/caminhao.png";
 import caminhaotraseira from "@/assets/caminhaotraseira.png";
 import pacarregadeira from "@/assets/pacarregadeira.png";
 import escavadeira1 from "@/assets/escavadeira1.png";
 import escavadeira2 from "@/assets/escavadeira2.png";
 import escavadeira3 from "@/assets/escavadeira3.png";
-import diferenciaisImg from "@/assets/diferenciais.png";
+import tresescavadeiras1 from "@/assets/tresescavadeiras1.png";
+import diferenciais from "@/assets/diferenciais.png";
 import caminhaopipa from "@/assets/caminhaopipa.png";
-import logoImg from "@/assets/logomvbanner.png";
+import logomv from "@/assets/logomv.png";
 import logomvbanner from "@/assets/logomvbanner.png";
 import rolocompactador from "@/assets/rolocompactador.png";
 import fotodaobra from "@/assets/fotodaobra.png";
 import operadoreseterceiros from "@/assets/operadoreseterceiros.png";
 import fotodasplacas from "@/assets/fotodasplacas.png";
 import fotodaplacaalan from "@/assets/fotodaplacaalan.png";
+import fotoalanetalita from "@/assets/fotoalanetalita.png";
 import eventoinauguracao from "@/assets/eventoinauguracao.png";
 import fotodaplacatigd from "@/assets/fotodaplacatigd.png";
 import andamentodaobra from "@/assets/andamentodaobra.png";
+import colaboradores from "@/assets/colaboradores.png";
+import alanemaquinas from "@/assets/alaneasmaquinas.png";
+import alaneasmaquinas1 from "@/assets/alaneasmaquinas1.png";
+import caminhaopipa1 from "@/assets/caminhaopipa1.png";
+import caminhaoprancha from "@/assets/caminhaoprancha.png";
+import colaboradores1 from "@/assets/colaboradores1.png";
+import fotodapatrol from "@/assets/fotodapatrol.png";
+import fotodas3escavadeiras from "@/assets/fotodas3escavadeiras.png";
+import fotodosmaquinarios from "@/assets/fotodosmaquinarios.png";
+import placapedrafundamental from "@/assets/placapedrafundamental.png";
 
 // --- Company constants (edite aqui para atualizar contato/endereço) ---
 const WHATSAPP_NUMBER = "5598992368928"; // DDI+DDD+numero, sem símbolos
 const CNPJ_NUMBER = "14.299.029/0001-20";
 const WHATSAPP_DISPLAY = "(98) 99236-8928";
-const COMPANY_ADDRESS = "Pitombeira, Pindaré-Mirim — MA, 65370-000";
-const COMPANY_EMAIL = "mvconstru@outlook.com";
+const COMPANY_ADDRESS = "Próximo ao Condomínio OASIS - Pitombeira, Pindaré-Mirim/MA-320, 65370-000";
+const COMPANY_EMAIL = "grupomvconstrutora@gmail.com.br";
 const MAPS_QUERY = encodeURIComponent("MV Construtora " + COMPANY_ADDRESS);
 const MAPS_EMBED_URL = `https://www.google.com/maps?q=${MAPS_QUERY}&z=15&output=embed`;
 const MAPS_OPEN_URL = "https://maps.app.goo.gl/6hsdYDJWft6A9H6G6";
@@ -126,7 +138,7 @@ const frotaItens: FrotaItem[] = [
   {
     nome: "Escavadeira",
     categoria: "Escavação",
-    imgs: [escavadeira1, escavadeira2, escavadeira3],
+    imgs: [escavadeira1, escavadeira2, escavadeira3, fotodas3escavadeiras, tresescavadeiras1],
     desc: "Versátil para valas, remoção de terra e serviços urbanos.",
   },
   {
@@ -138,19 +150,19 @@ const frotaItens: FrotaItem[] = [
   {
     nome: "Caminhão Prancha",
     categoria: "Transporte",
-    imgs: [caminhao, caminhaotraseira],
+    imgs: [caminhao, caminhaotraseira, caminhaoprancha],
     desc: "Transporte seguro de máquinas pesadas e equipamentos de grande porte para obras.",
   },
   {
     nome: "Caminhão Pipa",
     categoria: "Transporte",
-    imgs: [caminhaopipa],
+    imgs: [caminhaopipa, caminhaopipa1],
     desc: "Transporte eficiente de materiais e equipamentos para obras em áreas de difícil acesso.",
   },
   {
     nome: "Motoniveladora",
     categoria: "Nivelamento",
-    imgs: [patrolImg],
+    imgs: [patrol, fotodapatrol],
     desc: "Nivelamento preciso de terrenos, vias e plataformas.",
   },
   {
@@ -170,14 +182,31 @@ const categorias: ("Todos" | FrotaCategoria)[] = [
 ];
 
 // --- Slide de fotos (logo após o Hero) ---
-// Placeholders: troque os "src" abaixo pelas fotos reais da empresa quando tiver.
+// Este array não tem limite de quantidade: para adicionar uma nova foto, basta
+// 1) importar a imagem lá em cima (import minhaFoto from "@/assets/minhafoto.png")
+// 2) adicionar uma nova linha aqui embaixo no formato { src: minhaFoto, alt: "Descrição da foto" }
 const slideshowImages: { src: string; alt: string }[] = [
-  { src: fotodaobra, alt: "Equipe da MV Construtora em obra" },
+  { src: colaboradores, alt: "Equipe da MV Construtora em obra" },
   { src: operadoreseterceiros, alt: "Gestores, Operadores e Terceiros" },
-  { src: fotodasplacas, alt: "Placas" },
-  { src: fotodaplacaalan, alt: "Ceo" },
+  { src: placapedrafundamental, alt: "Placa Pedra Fundamental" },
+  { src: colaboradores1, alt: "Colaboradores da MV" },
   { src: fotodaplacatigd, alt: "Placa Terminal Intermodal Gonçalves Dias" },
   { src: eventoinauguracao, alt: "Evento de Inauguração" },
+  { src: andamentodaobra, alt: "Andamento da obra" },
+  { src: fotodaobra, alt: "Foto da obra em execução" },
+  { src: fotodosmaquinarios, alt: "Maquinários da MV Construtora" },
+  { src: fotodas3escavadeiras, alt: "Escavadeiras da frota MV" },
+];
+
+// --- Imagens da seção "Por que escolher a MV" (também em slide, sem limite) ---
+// Mesma lógica do array acima: importe a foto no topo do arquivo e adicione
+// uma nova linha aqui para ela entrar no slide.
+const diferenciaisImages: { src: string; alt: string }[] = [
+  { src: diferenciais, alt: "Equipe da MV Construtora em obra" },
+  { src: fotodaplacaalan, alt: "Placa da MV Construtora" },
+  { src: fotoalanetalita, alt: "Placas de identificação da obra" },
+  { src: colaboradores1, alt: "Motoniveladora em operação" },
+  { src: colaboradores, alt: "Caminhão pipa em operação" },
 ];
 
 const faqs: [string, string][] = [
@@ -313,7 +342,31 @@ const slideshowVideos: { src: string; poster: string; alt: string }[] = [
   {
     src: "/videos/videodasmaquinas.mp4",
     poster: escavadeira1,
-    alt: "Vídeo: escavação em andamento",
+    alt: "Vídeo: Video apresentando as maquinas",
+  },
+
+  {
+    src: "/videos/videodosmaquinarios.mp4",
+    poster: escavadeira1,
+    alt: "Vídeo: Video apresentando as maquinas",
+  },
+
+  {
+    src: "/videos/videodasmaquinas1.mp4",
+    poster: escavadeira1,
+    alt: "Vídeo: Video apresentando as maquinas",
+  },
+
+  {
+    src: "/videos/rolocompactadorepipa.mp4",
+    poster: rolocompactador,
+    alt: "Vídeo: Caminhão pipa e rolo compactador",
+  },
+
+  {
+    src: "/videos/videodas3maquinas.mp4",
+    poster: escavadeira1,
+    alt: "Vídeo: Video apresentando as maquinas",
   },
 ];
 
@@ -357,11 +410,11 @@ function VideoSlideshow() {
   return (
     <section id="galeria-videos" className="bg-[#f5f4f0] py-24 sm:py-28 lg:py-32">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <SectionTitle eyebrow="Nossos trabalhos" title="Obras e equipamentos em ação." />
+        <SectionTitle eyebrow="Nossos Trabalhos" title="Equipamentos em ação." />
       </div>
 
       <div className="relative mx-auto mt-12 max-w-7xl px-5 sm:px-8">
-        <div className="relative h-[260px] w-full overflow-hidden rounded-sm bg-zinc-900 sm:h-[420px] lg:h-[560px]">
+        <div className="relative h-[260px] w-full overflow-hidden rounded-sm bg-zinc-900 sm:h-[420px] lg:h-[460px]">
           <AnimatePresence initial={false} custom={direction} mode="wait">
             <motion.video
               key={index}
@@ -470,11 +523,68 @@ function HeroBackgroundSlideshow() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.2, ease: "easeInOut" }}
+          transition={{ duration: 1.0, ease: "easeInOut" }}
           className="absolute inset-0 h-full w-full object-cover"
         />
       </AnimatePresence>
     </div>
+  );
+}
+
+function DiferenciaisSlideshow() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((i) => (i + 1) % diferenciaisImages.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 25 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="relative"
+    >
+      <div className="relative h-[520px] w-full overflow-hidden lg:h-[600px]">
+        <AnimatePresence initial={false}>
+          <motion.img
+            key={index}
+            src={diferenciaisImages[index].src}
+            alt={diferenciaisImages[index].alt}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.0, ease: "easeInOut" }}
+            className="absolute inset-0 h-full w-full object-cover grayscale-[10%]"
+          />
+        </AnimatePresence>
+      </div>
+
+      {diferenciaisImages.length > 1 && (
+        <div className="absolute left-1/2 top-4 z-10 flex -translate-x-1/2 flex-wrap items-center justify-center gap-2 px-4">
+          {diferenciaisImages.map((img, i) => (
+            <button
+              key={img.src}
+              onClick={() => setIndex(i)}
+              aria-label={`Ver imagem ${i + 1}`}
+              aria-current={i === index}
+              className={`h-2 rounded-full transition-all ${
+                i === index ? "w-6 bg-white" : "w-2 bg-white/50 hover:bg-white/70"
+              }`}
+            />
+          ))}
+        </div>
+      )}
+
+      <div className="absolute bottom-0 right-0 w-[90%] bg-red-600 p-6 text-white">
+        <p className="text-2xl font-semibold leading-tight tracking-tight sm:text-2xl">
+          Seu cronograma é o nosso compromisso.
+        </p>
+      </div>
+    </motion.div>
   );
 }
 
@@ -570,7 +680,7 @@ function Index() {
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-zinc-950/70 backdrop-blur-xl">
         <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-5 sm:px-8">
           <a href="#inicio" aria-label="MV Construtora - início" className="flex items-center">
-            <img src={logoImg} alt="MV Construtora" className="h-11 w-auto sm:h-12" />
+            <img src={logomv} alt="MV Construtora" className="h-11 w-auto sm:h-12" />
           </a>
           <nav className="hidden items-center gap-8 lg:flex" aria-label="Navegação principal">
             {["Frota", "Serviços", "Sobre", "Diferenciais", "Contato"].map((item) => (
@@ -619,12 +729,12 @@ function Index() {
         {/* HERO */}
         <section
           id="inicio"
-          className="relative overflow-hidden bg-zinc-950 pb-16 pt-22 sm:pb-20 lg:pb-24"
+          className="relative overflow-hidden bg-zinc-950 pb-16 pt-19 sm:pb-20 lg:pb-4"
         >
-          <div className="mx-auto max-w-5xl px-5 sm:px-12">
+          <div className="mx-auto max-w-4xl px-5 sm:px-1">
             <div className="relative flex h-[480px] items-end overflow-hidden rounded-sm bg-zinc-900 sm:h-[560px] lg:h-[680px] xl:h-[700px]">
               <HeroBackgroundSlideshow />
-              <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,9,11,.95)_0%,rgba(9,9,11,.7)_44%,rgba(9,9,11,.15)_75%),linear-gradient(0deg,rgba(9,9,11,.8)_0%,transparent_50%)]" />
+              <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(21, 21, 255, 0.95)_0%,rgba(9,9,11,.7)_44%,rgba(9,9,11,.15)_75%),linear-gradient(0deg,rgba(9,9,11,.8)_0%,transparent_50%)]" />
               <motion.div
                 className="absolute right-[8%] top-[18%] h-40 w-40 rounded-full bg-red-600/20 blur-3xl"
                 animate={{ y: [0, -25, 0], scale: [1, 1.2, 1] }}
@@ -645,10 +755,10 @@ function Index() {
                   </motion.div>
                   <motion.h1
                     variants={reveal}
-                    className="max-w-3xl text-4xl font-semibold leading-[0.98] tracking-[-0.055em] text-white sm:text-5xl lg:text-[64px]"
+                    className="max-w-3xl text-4xl font-semibold leading-[120%] tracking-[-0.055em] text-white sm:text-5xl lg:text-[88px]"
                   >
                     Força para executar.{" "}
-                    <span className="text-white/45">Precisão para entregar.</span>
+                    <span className="text-white/60">Precisão para entregar.</span>
                   </motion.h1>
                   <motion.p
                     variants={reveal}
@@ -989,6 +1099,7 @@ function Index() {
                 <br /> MV Construtora — Movendo a terra, construindo o futuro e deixando um legado
                 de confiança, excelência e compromisso em cada projeto.
               </p>
+
               {/* Edite os números abaixo pelos dados reais da empresa */}
               <div className="mt-10 grid grid-cols-3 gap-6 border-t border-white/20 pt-7">
                 {[
@@ -1012,9 +1123,9 @@ function Index() {
               className="relative"
             >
               <img
-                src={andamentodaobra}
+                src={alaneasmaquinas1}
                 alt="Obra em andamento conduzida pela MV Construtora"
-                className="h-[420px] w-full object-cover grayscale-[1%] lg:h-[520px]"
+                className="h-[420px] w-full object-cover grayscale-[1%] lg:h-[700px]"
               />
             </motion.div>
           </div>
@@ -1025,23 +1136,7 @@ function Index() {
           id="diferenciais"
           className="mx-auto grid max-w-7xl gap-14 px-5 py-24 sm:px-8 lg:grid-cols-2 lg:items-center lg:py-32"
         >
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="relative"
-          >
-            <img
-              src={diferenciaisImg}
-              alt="Equipe da MV Construtora em obra"
-              className="h-[520px] w-full object-cover grayscale-[10%] lg:h-[600px]"
-            />
-            <div className="absolute bottom-0 right-0 w-[90%] bg-red-600 p-6 text-white">
-              <p className="text-2xl font-semibold leading-tight tracking-tight sm:text-2xl">
-                Seu cronograma é o nosso compromisso.
-              </p>
-            </div>
-          </motion.div>
+          <DiferenciaisSlideshow />
           <div className="lg:pl-12">
             <SectionTitle
               eyebrow="Por que escolher a MV"
