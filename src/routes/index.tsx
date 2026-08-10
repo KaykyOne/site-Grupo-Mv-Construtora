@@ -664,7 +664,7 @@ function Index() {
   }, [lightboxIndex, frotaFiltrada]);
 
   const onSubmit = (data: ContactForm) => {
-    const msg = `Olá, sou ${data.nome}. Telefone: ${data.telefone}.\n\n${data.mensagem}`;
+    const msg = `Olá, me chamo ${data.nome}. Telefone: ${data.telefone}.\n\n${data.mensagem}`;
     window.open(waLink(msg), "_blank", "noopener,noreferrer");
     setSent(true);
     reset();
