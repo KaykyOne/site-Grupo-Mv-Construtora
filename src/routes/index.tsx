@@ -59,12 +59,12 @@ import fotodas3escavadeiras from "@/assets/fotodas3escavadeiras.png";
 import fotodosmaquinarios from "@/assets/fotodosmaquinarios.png";
 import placapedrafundamental from "@/assets/placapedrafundamental.png";
 
-// --- Company constants (edite aqui para atualizar contato/endereço) ---
-const WHATSAPP_NUMBER = "5598992368928"; // DDI+DDD+numero, sem símbolos
+// --- Aqui atualiza contato/endereço) ---
+const WHATSAPP_NUMBER = "5598992368928";
 const CNPJ_NUMBER = "14.299.029/0001-20";
 const WHATSAPP_DISPLAY = "(98) 99236-8928";
 const COMPANY_ADDRESS = "Próximo ao Condomínio OASIS - Pitombeira, Pindaré-Mirim/MA-320, 65370-000";
-const COMPANY_EMAIL = "grupomvconstrutora@gmail.com.br";
+const COMPANY_EMAIL = "atendimento@grupomvconstrutora.com.br";
 const MAPS_QUERY = encodeURIComponent("MV Construtora " + COMPANY_ADDRESS);
 const MAPS_EMBED_URL = `https://www.google.com/maps?q=${MAPS_QUERY}&z=15&output=embed`;
 const MAPS_OPEN_URL = "https://maps.app.goo.gl/6hsdYDJWft6A9H6G6";
