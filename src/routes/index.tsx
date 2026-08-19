@@ -698,7 +698,7 @@ function Index() {
             <img src={logomv} alt="MV Construtora" className="h-11 w-auto sm:h-12" />
           </a>
           <nav className="hidden items-center gap-8 lg:flex" aria-label="Navegação principal">
-            {["Frota", "Serviços", "Sobre", "Diferenciais", "Contato"].map((item) => (
+            {["Frota", "Serviços", "Quem somos", "Diferenciais", "Contato"].map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
@@ -1459,7 +1459,7 @@ function Index() {
           </div>
           <div>
             <p className="mb-5 text-xs font-bold uppercase tracking-[.2em] text-white">Navegação</p>
-            {["Frota", "Serviços", "Quem Somos", "Diferenciais", "Localizacao"].map((x) => (
+            {["Frota", "Serviços", "", "Diferenciais", "Localizacao"].map((x) => (
               <a
                 key={x}
                 href={`#${x.toLowerCase()}`}
