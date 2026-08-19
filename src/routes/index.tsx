@@ -726,7 +726,7 @@ function Index() {
             animate={{ opacity: 1, y: 0 }}
             className="border-t border-white/10 bg-zinc-950 px-5 py-6 lg:hidden"
           >
-            {["Frota", "Serviços", "Sobre", "Diferenciais", "FAQ", "Contato"].map((item) => (
+            {["Frota", "Serviços", "Quem somos", "Diferenciais", "FAQ", "Contato"].map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
@@ -1459,7 +1459,7 @@ function Index() {
           </div>
           <div>
             <p className="mb-5 text-xs font-bold uppercase tracking-[.2em] text-white">Navegação</p>
-            {["Frota", "Serviços", "Sobre", "Diferenciais", "Localizacao"].map((x) => (
+            {["Frota", "Serviços", "Quem Somos", "Diferenciais", "Localizacao"].map((x) => (
               <a
                 key={x}
                 href={`#${x.toLowerCase()}`}
