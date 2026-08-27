@@ -701,7 +701,7 @@ function Index() {
             {["Frota", "Serviços", "Quem somos", "Diferenciais", "Contato"].map((item) => (
               <a
                 key={item}
-                href={`#${item.toLowerCase()}`}
+                href={item === "Quem somos" ? "#quem-somos" : `#${item.toLowerCase()}`}
                 className="text-sm font-medium text-white/70 transition-colors hover:text-white"
               >
                 {item}
@@ -729,7 +729,7 @@ function Index() {
             {["Frota", "Serviços", "Quem somos", "Diferenciais", "FAQ", "Contato"].map((item) => (
               <a
                 key={item}
-                href={`#${item.toLowerCase()}`}
+                href={item === "Quem somos" ? "#quem-somos" : `#${item.toLowerCase()}`}
                 onClick={() => setMenuOpen(false)}
                 className="block border-b border-white/10 py-4 text-lg font-semibold text-white"
               >
@@ -1068,7 +1068,7 @@ function Index() {
         </section>
 
         {/* SOBRE */}
-        <section id="sobre" className="bg-zinc-950 py-24 text-white lg:py-32">
+        <section id="quem-somos" className="bg-zinc-950 py-24 text-white lg:py-32">
           <div className="mx-auto grid max-w-7xl gap-14 px-5 sm:px-8 lg:grid-cols-2 lg:items-center">
             <div>
               <SectionTitle
