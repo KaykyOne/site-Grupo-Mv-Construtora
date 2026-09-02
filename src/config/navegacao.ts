@@ -9,6 +9,9 @@
 
 export type ItemMenu = { rotulo: string; href: string };
 
+/** Caminho público deste projeto no GitHub Pages. */
+export const SITE_BASE_PATH = "/site-Grupo-Mv-Construtora/";
+
 /** Menu completo — usado no menu mobile (que rola) e no rodapé. */
 export const MENU_COMPLETO: ItemMenu[] = [
   { rotulo: "Serviços", href: "#servicos" },
@@ -32,5 +35,5 @@ export const MENU_PRINCIPAL: ItemMenu[] = MENU_COMPLETO.filter((item) =>
  */
 export function hrefAbsoluto(href: string, naHome: boolean): string {
   if (naHome) return href;
-  return href.startsWith("#") ? `/${href}` : href;
+  return href.startsWith("#") ? `${SITE_BASE_PATH}${href}` : href;
 }

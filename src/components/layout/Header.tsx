@@ -5,7 +5,7 @@ import { useState } from "react";
 
 import logomv from "@/assets/otimizadas/logomv.webp";
 import { CTAButton } from "@/components/site/CTAButton";
-import { MENU_COMPLETO, MENU_PRINCIPAL, hrefAbsoluto } from "@/config/navegacao";
+import { MENU_COMPLETO, MENU_PRINCIPAL, SITE_BASE_PATH, hrefAbsoluto } from "@/config/navegacao";
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -17,7 +17,7 @@ export function Header() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-zinc-950/70 backdrop-blur-xl">
       <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-5 sm:px-8">
         <a
-          href={naHome ? "#inicio" : "/"}
+          href={naHome ? "#inicio" : SITE_BASE_PATH}
           aria-label="MV Construtora - início"
           className="flex items-center"
         >
