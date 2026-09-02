@@ -10,33 +10,102 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
+import { Route as FrotaIndexRouteImport } from './routes/frota/index'
+import { Route as FrotaSlugRouteImport } from './routes/frota/$slug'
+import { Route as ServicosIndexRouteImport } from './routes/servicos/index'
+import { Route as ServicosSlugRouteImport } from './routes/servicos/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PoliticaDePrivacidadeRoute = PoliticaDePrivacidadeRouteImport.update({
+  id: '/politica-de-privacidade',
+  path: '/politica-de-privacidade',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrotaIndexRoute = FrotaIndexRouteImport.update({
+  id: '/frota/',
+  path: '/frota/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrotaSlugRoute = FrotaSlugRouteImport.update({
+  id: '/frota/$slug',
+  path: '/frota/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicosIndexRoute = ServicosIndexRouteImport.update({
+  id: '/servicos/',
+  path: '/servicos/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicosSlugRoute = ServicosSlugRouteImport.update({
+  id: '/servicos/$slug',
+  path: '/servicos/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
+  '/frota/$slug': typeof FrotaSlugRoute
+  '/servicos/$slug': typeof ServicosSlugRoute
+  '/frota/': typeof FrotaIndexRoute
+  '/servicos/': typeof ServicosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
+  '/frota/$slug': typeof FrotaSlugRoute
+  '/servicos/$slug': typeof ServicosSlugRoute
+  '/frota': typeof FrotaIndexRoute
+  '/servicos': typeof ServicosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
+  '/frota/$slug': typeof FrotaSlugRoute
+  '/servicos/$slug': typeof ServicosSlugRoute
+  '/frota/': typeof FrotaIndexRoute
+  '/servicos/': typeof ServicosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/politica-de-privacidade'
+    | '/frota/$slug'
+    | '/servicos/$slug'
+    | '/frota/'
+    | '/servicos/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/politica-de-privacidade'
+    | '/frota/$slug'
+    | '/servicos/$slug'
+    | '/frota'
+    | '/servicos'
+  id:
+    | '__root__'
+    | '/'
+    | '/politica-de-privacidade'
+    | '/frota/$slug'
+    | '/servicos/$slug'
+    | '/frota/'
+    | '/servicos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
+  FrotaSlugRoute: typeof FrotaSlugRoute
+  ServicosSlugRoute: typeof ServicosSlugRoute
+  FrotaIndexRoute: typeof FrotaIndexRoute
+  ServicosIndexRoute: typeof ServicosIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +117,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/politica-de-privacidade': {
+      id: '/politica-de-privacidade'
+      path: '/politica-de-privacidade'
+      fullPath: '/politica-de-privacidade'
+      preLoaderRoute: typeof PoliticaDePrivacidadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/frota/': {
+      id: '/frota/'
+      path: '/frota'
+      fullPath: '/frota/'
+      preLoaderRoute: typeof FrotaIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/frota/$slug': {
+      id: '/frota/$slug'
+      path: '/frota/$slug'
+      fullPath: '/frota/$slug'
+      preLoaderRoute: typeof FrotaSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/': {
+      id: '/servicos/'
+      path: '/servicos'
+      fullPath: '/servicos/'
+      preLoaderRoute: typeof ServicosIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/$slug': {
+      id: '/servicos/$slug'
+      path: '/servicos/$slug'
+      fullPath: '/servicos/$slug'
+      preLoaderRoute: typeof ServicosSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
+  FrotaSlugRoute: FrotaSlugRoute,
+  ServicosSlugRoute: ServicosSlugRoute,
+  FrotaIndexRoute: FrotaIndexRoute,
+  ServicosIndexRoute: ServicosIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
