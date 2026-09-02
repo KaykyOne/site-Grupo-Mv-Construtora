@@ -4,13 +4,7 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { SERVICOS, DESTAQUES, CIDADES_ATENDIDAS } from "@/data/servicos";
 import { VIDEOS } from "@/data/videos";
 import { CATEGORIAS_FROTA, FROTA } from "@/data/frota";
-import {
-  organizacaoSchema,
-  websiteSchema,
-  faqSchema,
-  videosSchema,
-  SITE_URL,
-} from "@/lib/schema";
+import { organizacaoSchema, websiteSchema, faqSchema, videosSchema, SITE_URL } from "@/lib/schema";
 import { CTAButton } from "@/components/site/CTAButton";
 import { SectionTitle } from "@/components/site/SectionTitle";
 import { VideoPlayer } from "@/components/site/VideoPlayer";
@@ -63,7 +57,6 @@ import fotodas3escavadeiras from "@/assets/otimizadas/fotodas3escavadeiras.webp"
 import fotodosmaquinarios from "@/assets/otimizadas/fotodosmaquinarios.webp";
 import placapedrafundamental from "@/assets/otimizadas/placapedrafundamental.webp";
 
-
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -104,7 +97,6 @@ export const Route = createFileRoute("/")({
   }),
   component: Index,
 });
-
 
 // --- Slide de fotos (logo após o Hero) ---
 // Este array não tem limite de quantidade: para adicionar uma nova foto, basta

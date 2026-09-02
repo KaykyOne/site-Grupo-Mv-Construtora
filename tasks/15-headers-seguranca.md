@@ -1,6 +1,6 @@
 # 15 — Headers de segurança HTTP
 
-- [ ] Concluída em: ____/____/______
+- [ ] Concluída em: ****/****/______
 - **Prioridade:** P3
 - **Esforço:** 30 min
 - **Impacto:** 🟢 Baixo em ranking, relevante como sinal de qualidade
@@ -21,13 +21,13 @@ curl -sI https://www.grupomvconstrutora.com.br/ | grep -iE "content-security|x-f
 
 Ausentes:
 
-| Header | Protege contra |
-|---|---|
-| `X-Content-Type-Options` | MIME sniffing |
-| `Referrer-Policy` | vazamento de URL para terceiros |
-| `X-Frame-Options` / `frame-ancestors` | clickjacking |
-| `Permissions-Policy` | acesso indevido a câmera, microfone, geolocalização |
-| `Content-Security-Policy` | XSS |
+| Header                                | Protege contra                                      |
+| ------------------------------------- | --------------------------------------------------- |
+| `X-Content-Type-Options`              | MIME sniffing                                       |
+| `Referrer-Policy`                     | vazamento de URL para terceiros                     |
+| `X-Frame-Options` / `frame-ancestors` | clickjacking                                        |
+| `Permissions-Policy`                  | acesso indevido a câmera, microfone, geolocalização |
+| `Content-Security-Policy`             | XSS                                                 |
 
 O HSTS (único presente) vem por padrão da Vercel.
 
@@ -82,14 +82,14 @@ Rodar assim por 1-2 semanas, monitorando o console do navegador.
 
 Levantadas do código:
 
-| Origem | Uso | Onde |
-|---|---|---|
-| `fonts.googleapis.com` | CSS da fonte Manrope | `__root.tsx:97` |
-| `fonts.gstatic.com` | arquivos da fonte | `__root.tsx:94` |
-| `www.google.com/maps` | iframe do mapa | `index.tsx:1266` |
-| `api.whatsapp.com` | links de WhatsApp | `index.tsx:73` |
-| `www.googletagmanager.com` | GA4 (após task 12) | task 12 |
-| `www.google-analytics.com` | GA4 (após task 12) | task 12 |
+| Origem                     | Uso                  | Onde             |
+| -------------------------- | -------------------- | ---------------- |
+| `fonts.googleapis.com`     | CSS da fonte Manrope | `__root.tsx:97`  |
+| `fonts.gstatic.com`        | arquivos da fonte    | `__root.tsx:94`  |
+| `www.google.com/maps`      | iframe do mapa       | `index.tsx:1266` |
+| `api.whatsapp.com`         | links de WhatsApp    | `index.tsx:73`   |
+| `www.googletagmanager.com` | GA4 (após task 12)   | task 12          |
+| `www.google-analytics.com` | GA4 (após task 12)   | task 12          |
 
 > `'unsafe-inline'` em `script-src` é necessário porque o TanStack Start injeta
 > scripts inline de hidratação. Remover isso exigiria nonce por requisição —

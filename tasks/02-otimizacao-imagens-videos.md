@@ -1,6 +1,6 @@
 # 02 — Comprimir imagens e vídeos (WebP/AVIF + lazy + preload correto)
 
-- [ ] Concluída em: ____/____/______
+- [ ] Concluída em: ****/****/______
 - **Prioridade:** P0
 - **Esforço:** 2-3 h
 - **Impacto:** 🔴 Altíssimo — sozinha leva o Performance mobile de 65 para ~95
@@ -11,7 +11,7 @@
 > ✅ Imports apontando para `src/assets/otimizadas/`; 2 imports mortos removidos.
 > ✅ `loading="lazy"` + `width`/`height` + `decoding="async"` em 9 das 11 imagens; as 2 acima da dobra com `fetchPriority="high"`.
 > ✅ Vídeos **migrados para o YouTube** (canal @GrupoMVConstrutora) com player em padrão
-> *facade*: a página mostra a capa e só monta o iframe no clique. `public/videos/` (19 MB)
+> _facade_: a página mostra a capa e só monta o iframe no clique. `public/videos/` (19 MB)
 > removido do repositório. Zero request ao YouTube antes do play.
 > ✅ Preloads automáticos do React caíram de 10 para 2.
 > 📊 Imagens carregadas de imediato: **12.966 KB → 137 KB**.
@@ -26,29 +26,29 @@ No mobile o LCP é de **35,5 segundos** — nota **0/100** nesse item.
 
 ### Evidência medida (Lighthouse 12.8.2, 02/09/2026, mobile)
 
-| Métrica | Valor | Meta |
-|---|---|---|
-| LCP | **35,5 s** | < 2,5 s |
-| FCP | 3,5 s | < 1,8 s |
-| Peso total | 15,4 MB | < 1,5 MB |
-| Imagens | 12,7 MB em 12 arquivos | — |
-| "Serve images in next-gen formats" | economia de **11,8 MB** | — |
-| "Properly size images" | economia de **7,6 MB** | — |
+| Métrica                            | Valor                   | Meta     |
+| ---------------------------------- | ----------------------- | -------- |
+| LCP                                | **35,5 s**              | < 2,5 s  |
+| FCP                                | 3,5 s                   | < 1,8 s  |
+| Peso total                         | 15,4 MB                 | < 1,5 MB |
+| Imagens                            | 12,7 MB em 12 arquivos  | —        |
+| "Serve images in next-gen formats" | economia de **11,8 MB** | —        |
+| "Properly size images"             | economia de **7,6 MB**  | —        |
 
 Elemento LCP identificado:
 `<img src="/assets/colaboradores-*.png">` — a primeira foto do slideshow do hero.
 
 ### Piores ofensores (arquivo original em `src/assets/`)
 
-| Arquivo | Tamanho | Onde aparece |
-|---|---|---|
-| `fotodaobra.png` | **12,7 MB** | slideshow do hero |
-| `fotodasplacas.png` | 8,6 MB | (importado, não usado) |
-| `fotodaplacatigd.png` | 8,6 MB | slideshow do hero |
-| `andamentodaobra.png` | 8,5 MB | slideshow do hero |
-| `eventoinauguracao.png` | 2,5 MB | slideshow do hero |
-| `caminhao.png` | 1,77 MB | galeria da frota |
-| `logomv.png` | **916 KB** | cabeçalho, renderizado a **44px de altura** |
+| Arquivo                 | Tamanho     | Onde aparece                                |
+| ----------------------- | ----------- | ------------------------------------------- |
+| `fotodaobra.png`        | **12,7 MB** | slideshow do hero                           |
+| `fotodasplacas.png`     | 8,6 MB      | (importado, não usado)                      |
+| `fotodaplacatigd.png`   | 8,6 MB      | slideshow do hero                           |
+| `andamentodaobra.png`   | 8,5 MB      | slideshow do hero                           |
+| `eventoinauguracao.png` | 2,5 MB      | slideshow do hero                           |
+| `caminhao.png`          | 1,77 MB     | galeria da frota                            |
+| `logomv.png`            | **916 KB**  | cabeçalho, renderizado a **44px de altura** |
 
 Total de `src/assets/`: **77 MB**. Total de `public/videos/`: **19 MB**.
 
@@ -91,7 +91,8 @@ const LARGURA_LOGO = 240;
 
 await mkdir(SAIDA, { recursive: true });
 
-let antes = 0, depois = 0;
+let antes = 0,
+  depois = 0;
 
 for (const arquivo of await readdir(ENTRADA)) {
   if (!/\.(png|jpe?g)$/i.test(arquivo)) continue;
@@ -112,7 +113,9 @@ for (const arquivo of await readdir(ENTRADA)) {
 }
 
 const mb = (b) => (b / 1024 / 1024).toFixed(1);
-console.log(`\n${mb(antes)} MB → ${mb(depois)} MB  (−${(100 - depois / antes * 100).toFixed(0)}%)`);
+console.log(
+  `\n${mb(antes)} MB → ${mb(depois)} MB  (−${(100 - (depois / antes) * 100).toFixed(0)}%)`,
+);
 ```
 
 Rodar:
@@ -146,6 +149,7 @@ Estes são importados mas nunca usados — removê-los tira peso do bundle:
 - `alanemaquinas` — importado na linha 52, verificar uso
 
 Conferir com:
+
 ```bash
 for f in src/assets/*.png; do n=$(basename "$f" .png); grep -q "$n" src/routes/index.tsx || echo "NÃO USADO: $f"; done
 ```
@@ -162,6 +166,7 @@ height={1067}
 ```
 
 Aplicar em:
+
 - `HeroBackgroundSlideshow` — linha ~523: **exceto a primeira**. A imagem inicial
   deve ter `fetchPriority="high"` e **não** ter `loading="lazy"` (é o LCP).
 - `diferenciaisImages` — linha ~557: todas com `lazy`.

@@ -12,11 +12,14 @@ type Variante = "primaria" | "escura" | "clara";
 
 const VARIANTES: Record<Variante, string> = {
   // Vermelho sobre fundo claro — padrão do site.
-  primaria: "border-black bg-red-600 text-white shadow-[0.1em_0.1em_0px_#000] hover:shadow-[0.15em_0.15em_0px_#000] active:shadow-[0.05em_0.05em_0px_#000]",
+  primaria:
+    "border-black bg-red-600 text-white shadow-[0.1em_0.1em_0px_#000] hover:shadow-[0.15em_0.15em_0px_#000] active:shadow-[0.05em_0.05em_0px_#000]",
   // Preto com borda branca — para usar sobre o vermelho.
-  escura: "border-white bg-zinc-950 text-white shadow-[0.1em_0.1em_0px_#fff] hover:shadow-[0.15em_0.15em_0px_#fff] active:shadow-[0.05em_0.05em_0px_#fff]",
+  escura:
+    "border-white bg-zinc-950 text-white shadow-[0.1em_0.1em_0px_#fff] hover:shadow-[0.15em_0.15em_0px_#fff] active:shadow-[0.05em_0.05em_0px_#fff]",
   // Branco com texto vermelho — para usar sobre o vermelho.
-  clara: "border-white bg-white text-red-700 shadow-[0.1em_0.1em_0px_#7f1d1d] hover:shadow-[0.15em_0.15em_0px_#7f1d1d] active:shadow-[0.05em_0.05em_0px_#7f1d1d]",
+  clara:
+    "border-white bg-white text-red-700 shadow-[0.1em_0.1em_0px_#7f1d1d] hover:shadow-[0.15em_0.15em_0px_#7f1d1d] active:shadow-[0.05em_0.05em_0px_#7f1d1d]",
 };
 
 const BASE =

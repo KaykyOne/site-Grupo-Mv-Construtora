@@ -1,6 +1,6 @@
 # 06 — Google Meu Negócio + Search Console + Bing
 
-- [ ] Concluída em: ____/____/______
+- [ ] Concluída em: ****/****/______
 - **Prioridade:** P0 — **fazer HOJE, antes de mexer no código**
 - **Esforço:** 1-2 h (+ 5 a 14 dias de espera pela verificação por carta)
 - **Impacto:** 🔴 Altíssimo
@@ -41,17 +41,17 @@ criar duplicada (ficha duplicada divide o sinal e prejudica as duas).
 
 Em [business.google.com](https://business.google.com):
 
-| Campo | Valor |
-|---|---|
-| Nome | MV Construtora |
-| Categoria principal | Empreiteira de terraplenagem |
+| Campo                  | Valor                                                                                         |
+| ---------------------- | --------------------------------------------------------------------------------------------- |
+| Nome                   | MV Construtora                                                                                |
+| Categoria principal    | Empreiteira de terraplenagem                                                                  |
 | Categorias secundárias | Serviço de aluguel de equipamentos de construção; Empreiteira de obras; Empresa de construção |
-| Endereço | **exatamente** igual ao do site (ver task 04, passo 7) |
-| Área de atendimento | as mesmas cidades da task 04 |
-| Telefone | (98) 99236-8928 |
-| Site | https://www.grupomvconstrutora.com.br/ |
-| Horário | Seg-Sex, 07h-18h (confirmar — ver task 10) |
-| Data de abertura | 14/09/2011 |
+| Endereço               | **exatamente** igual ao do site (ver task 04, passo 7)                                        |
+| Área de atendimento    | as mesmas cidades da task 04                                                                  |
+| Telefone               | (98) 99236-8928                                                                               |
+| Site                   | https://www.grupomvconstrutora.com.br/                                                        |
+| Horário                | Seg-Sex, 07h-18h (confirmar — ver task 10)                                                    |
+| Data de abertura       | 14/09/2011                                                                                    |
 
 > **Consistência de NAP** (Name, Address, Phone) é o principal fator de ranking
 > local. Nome, endereço e telefone precisam ser idênticos, caractere por
@@ -104,13 +104,13 @@ perfil ativo, o que é sinal positivo de ranking local.
 
 ### O que monitorar depois
 
-| Relatório | Para quê |
-|---|---|
-| Desempenho | Impressões, cliques, CTR, posição média — o "antes vs depois" comercial |
-| Cobertura / Indexação | Páginas indexadas (hoje: 1; meta após task 08: 6+) |
-| Core Web Vitals | Dados de campo reais (complementa o Lighthouse, que é laboratório) |
-| Melhorias | Se o Google reconheceu o schema da task 03 |
-| Links | Backlinks recebidos |
+| Relatório             | Para quê                                                                |
+| --------------------- | ----------------------------------------------------------------------- |
+| Desempenho            | Impressões, cliques, CTR, posição média — o "antes vs depois" comercial |
+| Cobertura / Indexação | Páginas indexadas (hoje: 1; meta após task 08: 6+)                      |
+| Core Web Vitals       | Dados de campo reais (complementa o Lighthouse, que é laboratório)      |
+| Melhorias             | Se o Google reconheceu o schema da task 03                              |
+| Links                 | Backlinks recebidos                                                     |
 
 > Os dados de campo dos Core Web Vitals levam ~28 dias para estabilizar. Não se
 > assuste se o relatório continuar vermelho logo após a task 02.

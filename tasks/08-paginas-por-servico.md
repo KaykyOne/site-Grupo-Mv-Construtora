@@ -1,6 +1,6 @@
 # 08 — Criar páginas separadas por serviço
 
-- [ ] Concluída em: ____/____/______
+- [ ] Concluída em: ****/****/______
 - **Prioridade:** P1
 - **Esforço:** 2-4 dias (10 categorias)
 - **Impacto:** 🟠 Alto — é o que quebra o teto de crescimento do site
@@ -25,6 +25,7 @@
 > ⏳ **PENDENTE:** caminhão Munck e caminhão basculante sem foto — o Munck é o único
 > serviço com 0 máquinas vinculadas. Assim que houver foto, basta criar a entrada em
 > `src/data/frota.ts` e o vínculo passa a existir nos dois sentidos automaticamente.
+
 ---
 
 ## Problema
@@ -41,19 +42,19 @@ sendo empresas menores.
 O site anuncia **5 serviços** (`src/routes/index.tsx:100-131`), mas a empresa
 executa **10 categorias**. Metade do que a MV vende não está no site.
 
-| No site hoje | Na lista oficial |
-|---|---|
-| Terraplanagem | Terraplanagem |
-| Transportes | Transporte de máquinas e equipamentos |
-| Locação de máquinas | Locação de máquinas e equipamentos |
-| Estradas Vicinais | Infraestrutura viária |
-| Gestão de obras | absorvida por "Apoio e gestão de grandes obras" |
-| — | **Obras civis** ❌ ausente |
-| — | **Drenagem e infraestrutura** ❌ ausente |
-| — | **Preparação e limpeza de áreas** ❌ ausente |
-| — | **Serviços com caminhão Munck** ❌ ausente |
-| — | **Apoio e gestão de grandes obras** ❌ ausente |
-| — | **Serviços para propriedades rurais** ❌ ausente |
+| No site hoje        | Na lista oficial                                 |
+| ------------------- | ------------------------------------------------ |
+| Terraplanagem       | Terraplanagem                                    |
+| Transportes         | Transporte de máquinas e equipamentos            |
+| Locação de máquinas | Locação de máquinas e equipamentos               |
+| Estradas Vicinais   | Infraestrutura viária                            |
+| Gestão de obras     | absorvida por "Apoio e gestão de grandes obras"  |
+| —                   | **Obras civis** ❌ ausente                       |
+| —                   | **Drenagem e infraestrutura** ❌ ausente         |
+| —                   | **Preparação e limpeza de áreas** ❌ ausente     |
+| —                   | **Serviços com caminhão Munck** ❌ ausente       |
+| —                   | **Apoio e gestão de grandes obras** ❌ ausente   |
+| —                   | **Serviços para propriedades rurais** ❌ ausente |
 
 Cada serviço ausente é uma busca inteira que a empresa não disputa. "Caminhão
 Munck em Pindaré-Mirim" hoje não tem como levar ninguém a este site.
@@ -89,9 +90,14 @@ export const SERVICOS = [
     descricao:
       "Escavação, corte e aterro, nivelamento, compactação de solo, regularização de terrenos, movimentação de terra, conformação de plataformas, pavimentação e preparação de áreas para construção.",
     itens: [
-      "Escavação", "Corte e aterro", "Nivelamento", "Compactação de solo",
-      "Regularização de terrenos", "Movimentação de terra",
-      "Conformação de plataformas", "Pavimentação",
+      "Escavação",
+      "Corte e aterro",
+      "Nivelamento",
+      "Compactação de solo",
+      "Regularização de terrenos",
+      "Movimentação de terra",
+      "Conformação de plataformas",
+      "Pavimentação",
       "Preparação de áreas para construção",
     ],
   },
@@ -102,9 +108,14 @@ export const SERVICOS = [
     descricao:
       "Abertura e recuperação de estradas vicinais, patrolamento, cascalhamento, compactação, abertura de acessos e preparação de subleito, base e sub-base.",
     itens: [
-      "Abertura de estradas vicinais", "Recuperação de estradas vicinais",
-      "Patrolamento", "Cascalhamento", "Compactação", "Abertura de acessos",
-      "Preparação de subleito", "Base e sub-base",
+      "Abertura de estradas vicinais",
+      "Recuperação de estradas vicinais",
+      "Patrolamento",
+      "Cascalhamento",
+      "Compactação",
+      "Abertura de acessos",
+      "Preparação de subleito",
+      "Base e sub-base",
     ],
   },
   {
@@ -114,9 +125,14 @@ export const SERVICOS = [
     descricao:
       "Construção e reforma de edificações, galpões, estruturas comerciais e industriais, fundações, pisos e pavimentações, muros, calçadas e serviços complementares.",
     itens: [
-      "Construção e reforma de edificações", "Galpões",
-      "Estruturas comerciais e industriais", "Fundações",
-      "Pisos e pavimentações", "Muros", "Calçadas", "Serviços complementares",
+      "Construção e reforma de edificações",
+      "Galpões",
+      "Estruturas comerciais e industriais",
+      "Fundações",
+      "Pisos e pavimentações",
+      "Muros",
+      "Calçadas",
+      "Serviços complementares",
     ],
   },
   {
@@ -126,8 +142,12 @@ export const SERVICOS = [
     descricao:
       "Execução de valas, drenagem pluvial, instalação de tubos e bueiros, canais, caixas de drenagem e preparação para redes de água e esgoto.",
     itens: [
-      "Execução de valas", "Drenagem pluvial", "Instalação de tubos e bueiros",
-      "Canais", "Caixas de drenagem", "Preparação para redes de água e esgoto",
+      "Execução de valas",
+      "Drenagem pluvial",
+      "Instalação de tubos e bueiros",
+      "Canais",
+      "Caixas de drenagem",
+      "Preparação para redes de água e esgoto",
     ],
   },
   {
@@ -137,8 +157,11 @@ export const SERVICOS = [
     descricao:
       "Limpeza mecanizada de terrenos, destocamento, remoção de material, demolições, carga e transporte de resíduos e preparação de áreas para implantação de empreendimentos.",
     itens: [
-      "Limpeza mecanizada de terrenos", "Destocamento", "Remoção de material",
-      "Demolições", "Carga e transporte de resíduos",
+      "Limpeza mecanizada de terrenos",
+      "Destocamento",
+      "Remoção de material",
+      "Demolições",
+      "Carga e transporte de resíduos",
       "Preparação de áreas para empreendimentos",
     ],
   },
@@ -149,9 +172,13 @@ export const SERVICOS = [
     descricao:
       "Escavadeiras hidráulicas, motoniveladoras (patrol), pás carregadeiras, rolos compactadores, caminhões-pipa, caminhões basculantes e demais equipamentos pesados, com ou sem operador.",
     itens: [
-      "Escavadeiras hidráulicas", "Motoniveladoras (patrol)",
-      "Pás carregadeiras", "Rolos compactadores", "Caminhões-pipa",
-      "Caminhões basculantes / caçambas", "Com ou sem operador",
+      "Escavadeiras hidráulicas",
+      "Motoniveladoras (patrol)",
+      "Pás carregadeiras",
+      "Rolos compactadores",
+      "Caminhões-pipa",
+      "Caminhões basculantes / caçambas",
+      "Com ou sem operador",
     ],
   },
   {
@@ -161,8 +188,10 @@ export const SERVICOS = [
     descricao:
       "Transporte com caminhão prancha, mobilização e desmobilização de máquinas pesadas e apoio logístico para obras.",
     itens: [
-      "Transporte com caminhão prancha", "Mobilização de máquinas",
-      "Desmobilização de máquinas", "Apoio logístico",
+      "Transporte com caminhão prancha",
+      "Mobilização de máquinas",
+      "Desmobilização de máquinas",
+      "Apoio logístico",
     ],
   },
   {
@@ -171,8 +200,12 @@ export const SERVICOS = [
     h1: "Caminhão Munck no Maranhão: Içamento e Movimentação",
     descricao:
       "Içamento, movimentação, carga, descarga e transporte de equipamentos e materiais com caminhão Munck.",
-    itens: ["Içamento", "Movimentação de cargas", "Carga e descarga",
-            "Transporte de equipamentos e materiais"],
+    itens: [
+      "Içamento",
+      "Movimentação de cargas",
+      "Carga e descarga",
+      "Transporte de equipamentos e materiais",
+    ],
   },
   {
     slug: "apoio-a-grandes-obras",
@@ -181,9 +214,14 @@ export const SERVICOS = [
     descricao:
       "Fornecimento de máquinas, equipamentos e mão de obra operacional para obras industriais, loteamentos, terminais, rodovias e empreendimentos públicos e privados, incluindo planejamento e administração da obra com controle de custos, qualidade e cronograma.",
     itens: [
-      "Obras industriais", "Loteamentos", "Terminais", "Rodovias",
-      "Empreendimentos públicos e privados", "Mão de obra operacional",
-      "Gestão e administração de obras", "Planejamento e controle de cronograma",
+      "Obras industriais",
+      "Loteamentos",
+      "Terminais",
+      "Rodovias",
+      "Empreendimentos públicos e privados",
+      "Mão de obra operacional",
+      "Gestão e administração de obras",
+      "Planejamento e controle de cronograma",
     ],
   },
   {
@@ -193,8 +231,11 @@ export const SERVICOS = [
     descricao:
       "Abertura e recuperação de estradas internas, construção de açudes e reservatórios, limpeza e nivelamento de áreas, abertura de valas e preparação de terrenos para produção.",
     itens: [
-      "Estradas internas", "Construção de açudes", "Reservatórios",
-      "Limpeza e nivelamento de áreas", "Abertura de valas",
+      "Estradas internas",
+      "Construção de açudes",
+      "Reservatórios",
+      "Limpeza e nivelamento de áreas",
+      "Abertura de valas",
       "Preparação de terrenos para plantio",
     ],
   },
@@ -271,18 +312,18 @@ site inteiro.
 
 ### FAQs por serviço (exemplos que a IA extrai bem)
 
-| Serviço | Pergunta |
-|---|---|
-| Terraplanagem | Quanto custa terraplenagem por hora no Maranhão? |
-| Terraplanagem | Qual a diferença entre corte e aterro? |
-| Infraestrutura viária | O que é patrolamento e cascalhamento? |
+| Serviço               | Pergunta                                                  |
+| --------------------- | --------------------------------------------------------- |
+| Terraplanagem         | Quanto custa terraplenagem por hora no Maranhão?          |
+| Terraplanagem         | Qual a diferença entre corte e aterro?                    |
+| Infraestrutura viária | O que é patrolamento e cascalhamento?                     |
 | Infraestrutura viária | Quanto tempo leva para recuperar 1 km de estrada vicinal? |
-| Drenagem | Que diâmetro de tubo usar em drenagem pluvial? |
-| Caminhão Munck | Qual a capacidade de içamento do Munck? |
-| Locação | Locação com ou sem operador: o que compensa? |
-| Serviços rurais | Quanto custa construir um açude? |
-| Obras civis | Qual o prazo para construir um galpão? |
-| Limpeza de áreas | O que é destocamento? |
+| Drenagem              | Que diâmetro de tubo usar em drenagem pluvial?            |
+| Caminhão Munck        | Qual a capacidade de içamento do Munck?                   |
+| Locação               | Locação com ou sem operador: o que compensa?              |
+| Serviços rurais       | Quanto custa construir um açude?                          |
+| Obras civis           | Qual o prazo para construir um galpão?                    |
+| Limpeza de áreas      | O que é destocamento?                                     |
 
 Pergunta real + número real = fonte citada pelo Gemini.
 
@@ -330,19 +371,23 @@ no HTML e resume a empresa em uma linha — bom para leitor humano e para extrat
 ## Cuidados
 
 ### Canonical por página
+
 Cada página com canonical **próprio**. Todas apontando para a home = todas
 desindexadas menos a home. Erro comum e caro.
 
 ### `vercel.json`
+
 O `rewrites` (`/(.*)` → `/`) pode interferir nas rotas novas. Ver task 05, passo 5.
 **Testar em preview deploy antes de produção.**
 
 ### Conteúdo único
+
 Não copiar e colar trocando o nome do serviço. Duplicado = canibalização, e
 nenhuma página ranqueia bem. As 10 descrições enviadas pelo cliente são o ponto
 de partida, não o texto final — cada uma precisa virar 800+ palavras próprias.
 
 ### Páginas por cidade
+
 `/terraplanagem-em-santa-ines` funciona **só com conteúdo genuinamente diferente**
 (obras feitas lá, solo local, distância de mobilização). Gerar 20 páginas iguais
 trocando o nome da cidade é doorway page, penalizada pelo Google. Começar com 2-3

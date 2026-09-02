@@ -1,6 +1,6 @@
 # 04 — SEO local: colocar "Maranhão" e as cidades no site
 
-- [ ] Concluída em: ____/____/______
+- [ ] Concluída em: ****/****/______
 - **Prioridade:** P0
 - **Esforço:** 1-2 h
 - **Impacto:** 🔴 Altíssimo — é o motivo nº 1 de perder para as homônimas
@@ -23,15 +23,15 @@
 
 ### Evidência (contagem no HTML servido em produção)
 
-| Termo | Ocorrências |
-|---|---|
-| Maranhão | **0** |
-| Pindaré | 1 (só dentro do endereço) |
-| Açailândia | 0 |
-| Santa Inês | 0 |
-| Bacabal | 0 |
-| Imperatriz | 0 |
-| São Luís | 0 |
+| Termo      | Ocorrências               |
+| ---------- | ------------------------- |
+| Maranhão   | **0**                     |
+| Pindaré    | 1 (só dentro do endereço) |
+| Açailândia | 0                         |
+| Santa Inês | 0                         |
+| Bacabal    | 0                         |
+| Imperatriz | 0                         |
+| São Luís   | 0                         |
 
 Existem outras empresas chamadas "MV Construtora" no Brasil. Para o algoritmo do
 Google, sem nenhum marcador geográfico, todas são a mesma entidade genérica — e
@@ -108,9 +108,19 @@ respostas de IA do tipo "empresa de terraplenagem perto de mim".
 
 ```jsx
 const cidadesAtendidas = [
-  "Pindaré-Mirim", "Santa Inês", "Bacabal", "Zé Doca", "Santa Luzia",
-  "Monção", "Tufilândia", "Alto Alegre do Pindaré", "Bom Jardim",
-  "Governador Newton Bello", "Açailândia", "Imperatriz", "São Luís",
+  "Pindaré-Mirim",
+  "Santa Inês",
+  "Bacabal",
+  "Zé Doca",
+  "Santa Luzia",
+  "Monção",
+  "Tufilândia",
+  "Alto Alegre do Pindaré",
+  "Bom Jardim",
+  "Governador Newton Bello",
+  "Açailândia",
+  "Imperatriz",
+  "São Luís",
 ];
 
 <section id="area-de-atuacao" className="...">
@@ -119,9 +129,8 @@ const cidadesAtendidas = [
     title="Terraplenagem e locação de máquinas em todo o Maranhão."
   />
   <p className="mt-7 max-w-2xl leading-7 text-zinc-600">
-    Com base em Pindaré-Mirim, na região do Vale do Pindaré, a MV Construtora
-    mobiliza máquinas e equipes para obras urbanas, rurais, industriais e
-    comerciais em todo o estado do Maranhão.
+    Com base em Pindaré-Mirim, na região do Vale do Pindaré, a MV Construtora mobiliza máquinas e
+    equipes para obras urbanas, rurais, industriais e comerciais em todo o estado do Maranhão.
   </p>
   <ul className="mt-8 flex flex-wrap gap-2">
     {cidadesAtendidas.map((cidade) => (
@@ -130,7 +139,7 @@ const cidadesAtendidas = [
       </li>
     ))}
   </ul>
-</section>
+</section>;
 ```
 
 > **Confirmar a lista com o cliente.** Só listar cidades onde a empresa
@@ -187,9 +196,9 @@ diretamente, logo abaixo do hero:
 Densa em palavra-chave, aparece cedo no HTML e resume a empresa em uma linha.
 
 Termos técnicos que valem entrar no texto (são busca real e hoje somam zero
-ocorrências): *patrolamento*, *cascalhamento*, *destocamento*, *corte e aterro*,
-*sub-base*, *drenagem pluvial*, *bueiro*, *içamento*, *açude*, *caminhão Munck*,
-*caminhão basculante*, *caçamba*.
+ocorrências): _patrolamento_, _cascalhamento_, _destocamento_, _corte e aterro_,
+_sub-base_, _drenagem pluvial_, _bueiro_, _içamento_, _açude_, _caminhão Munck_,
+_caminhão basculante_, _caçamba_.
 
 ### 9. Padronizar "terraplanagem" vs "terraplenagem"
 

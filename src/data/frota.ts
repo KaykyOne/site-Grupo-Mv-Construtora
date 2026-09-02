@@ -20,11 +20,7 @@ import rolocompactador from "@/assets/otimizadas/rolocompactador.webp";
 import tresescavadeiras1 from "@/assets/otimizadas/tresescavadeiras1.webp";
 
 export type FrotaCategoria =
-  | "Escavação"
-  | "Carregamento"
-  | "Transporte"
-  | "Nivelamento"
-  | "Compactação";
+  "Escavação" | "Carregamento" | "Transporte" | "Nivelamento" | "Compactação";
 
 export type Maquina = {
   slug: string;
@@ -102,12 +98,7 @@ export const FROTA: Maquina[] = [
       "Alimentação de frentes de aterro",
     ],
     imgs: [pacarregadeira],
-    servicos: [
-      "terraplanagem",
-      "infraestrutura-viaria",
-      "limpeza-de-areas",
-      "locacao-de-maquinas",
-    ],
+    servicos: ["terraplanagem", "infraestrutura-viaria", "limpeza-de-areas", "locacao-de-maquinas"],
     faqs: [
       [
         "Qual a diferença entre pá-carregadeira e escavadeira?",
@@ -140,12 +131,7 @@ export const FROTA: Maquina[] = [
       "Manutenção de estradas internas de propriedades rurais",
     ],
     imgs: [patrol, fotodapatrol],
-    servicos: [
-      "infraestrutura-viaria",
-      "terraplanagem",
-      "servicos-rurais",
-      "locacao-de-maquinas",
-    ],
+    servicos: ["infraestrutura-viaria", "terraplanagem", "servicos-rurais", "locacao-de-maquinas"],
     faqs: [
       [
         "O que é patrolamento?",
@@ -177,12 +163,7 @@ export const FROTA: Maquina[] = [
       "Consolidação de plataformas industriais",
     ],
     imgs: [rolocompactador],
-    servicos: [
-      "terraplanagem",
-      "infraestrutura-viaria",
-      "obras-civis",
-      "locacao-de-maquinas",
-    ],
+    servicos: ["terraplanagem", "infraestrutura-viaria", "obras-civis", "locacao-de-maquinas"],
     faqs: [
       [
         "Por que a compactação é tão importante?",
@@ -246,11 +227,7 @@ export const FROTA: Maquina[] = [
       "Apoio logístico entre frentes de serviço",
     ],
     imgs: [caminhao, caminhaotraseira, caminhaoprancha],
-    servicos: [
-      "transporte-de-maquinas",
-      "locacao-de-maquinas",
-      "apoio-a-grandes-obras",
-    ],
+    servicos: ["transporte-de-maquinas", "locacao-de-maquinas", "apoio-a-grandes-obras"],
     faqs: [
       [
         "Vocês transportam máquinas de terceiros?",

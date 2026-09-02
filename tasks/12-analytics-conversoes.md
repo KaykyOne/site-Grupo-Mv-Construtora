@@ -1,6 +1,6 @@
 # 12 — Analytics e rastreio de conversão
 
-- [ ] Concluída em: ____/____/______
+- [ ] Concluída em: ****/****/______
 - **Prioridade:** P1 — fazer **antes** das melhorias de conteúdo
 - **Esforço:** 1-2 h
 - **Impacto:** 🟠 Alto (é o que transforma o trabalho em número defensável)
@@ -30,11 +30,11 @@ Consequências:
 
 ## Parte A — Escolha da ferramenta
 
-| Opção | Prós | Contras |
-|---|---|---|
-| **GA4** | Grátis, integra com Search Console e Google Ads, padrão de mercado | Exige banner de cookies, interface complexa |
-| **Vercel Analytics** | 1 linha para instalar, sem cookies, sem banner | Pago acima do plano free, menos detalhado |
-| **Plausible / Umami** | Sem cookies, leve, simples | Pago ou exige auto-hospedagem |
+| Opção                 | Prós                                                               | Contras                                     |
+| --------------------- | ------------------------------------------------------------------ | ------------------------------------------- |
+| **GA4**               | Grátis, integra com Search Console e Google Ads, padrão de mercado | Exige banner de cookies, interface complexa |
+| **Vercel Analytics**  | 1 linha para instalar, sem cookies, sem banner                     | Pago acima do plano free, menos detalhado   |
+| **Plausible / Umami** | Sem cookies, leve, simples                                         | Pago ou exige auto-hospedagem               |
 
 **Recomendação:** GA4 + Vercel Speed Insights.
 
@@ -81,16 +81,16 @@ Pageview sozinho não diz nada. O que interessa é **quantos orçamentos o site 
 
 ### Eventos a rastrear
 
-| Evento | Onde | Por quê |
-|---|---|---|
-| `clique_whatsapp` | botão flutuante (linha 322), CTA do contato (linha 1324), rodapé (linha 1472) | canal principal de venda |
-| `envio_formulario` | `onSubmit` (linha 667) | lead qualificado |
-| `erro_formulario` | catch do `onSubmit` (linha 685) | detectar formulário quebrado |
-| `clique_telefone` | link `tel:` (task 10, A5) | conversão mobile |
-| `abriu_maps` | "Abrir no Google Maps" (linha 1292) | intenção de visita |
-| `play_video` | slideshow de vídeos | engajamento |
-| `abriu_frota` | lightbox da galeria | interesse em equipamento |
-| `scroll_90` | rolagem até o fim | qualidade do tráfego |
+| Evento             | Onde                                                                          | Por quê                      |
+| ------------------ | ----------------------------------------------------------------------------- | ---------------------------- |
+| `clique_whatsapp`  | botão flutuante (linha 322), CTA do contato (linha 1324), rodapé (linha 1472) | canal principal de venda     |
+| `envio_formulario` | `onSubmit` (linha 667)                                                        | lead qualificado             |
+| `erro_formulario`  | catch do `onSubmit` (linha 685)                                               | detectar formulário quebrado |
+| `clique_telefone`  | link `tel:` (task 10, A5)                                                     | conversão mobile             |
+| `abriu_maps`       | "Abrir no Google Maps" (linha 1292)                                           | intenção de visita           |
+| `play_video`       | slideshow de vídeos                                                           | engajamento                  |
+| `abriu_frota`      | lightbox da galeria                                                           | interesse em equipamento     |
+| `scroll_90`        | rolagem até o fim                                                             | qualidade do tráfego         |
 
 ### Helper
 
@@ -140,7 +140,7 @@ npm i @vercel/speed-insights
 ```jsx
 import { SpeedInsights } from "@vercel/speed-insights/react";
 // dentro do RootShell, antes de </body>
-<SpeedInsights />
+<SpeedInsights />;
 ```
 
 Dá o Core Web Vitals de usuários reais — inclusive dos clientes no 4G do interior

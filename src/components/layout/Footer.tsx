@@ -53,7 +53,11 @@ export function Footer() {
             Frota completa
           </Link>
           {MENU_COMPLETO.map((item) => (
-            <a key={item.href} href={href(item.href)} className="mb-3 block text-sm hover:text-red-400">
+            <a
+              key={item.href}
+              href={href(item.href)}
+              className="mb-3 block text-sm hover:text-red-400"
+            >
               {item.rotulo}
             </a>
           ))}

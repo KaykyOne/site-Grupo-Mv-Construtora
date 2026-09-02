@@ -132,8 +132,8 @@ function PoliticaPrivacidade() {
               <h2 className="text-xl font-semibold text-zinc-950">6. Por quanto tempo guardamos</h2>
               <p className="mt-3">
                 Mantemos os dados pelo tempo necessário ao atendimento da solicitação e ao
-                relacionamento comercial decorrente, ou até que você solicite a exclusão, ressalvadas
-                as hipóteses de guarda obrigatória previstas em lei.
+                relacionamento comercial decorrente, ou até que você solicite a exclusão,
+                ressalvadas as hipóteses de guarda obrigatória previstas em lei.
               </p>
             </section>
 
@@ -169,8 +169,8 @@ function PoliticaPrivacidade() {
             <section>
               <h2 className="text-xl font-semibold text-zinc-950">9. Alterações</h2>
               <p className="mt-3">
-                Esta política pode ser atualizada. A data da última revisão é sempre indicada no topo
-                da página.
+                Esta política pode ser atualizada. A data da última revisão é sempre indicada no
+                topo da página.
               </p>
             </section>
           </div>

@@ -1,6 +1,6 @@
 # 09 — Depoimentos, cases e números reais
 
-- [ ] Concluída em: ____/____/______
+- [ ] Concluída em: ****/****/______
 - **Prioridade:** P1
 - **Esforço:** depende do cliente (a coleta é o gargalo, não o código)
 - **Impacto:** 🟠 Alto — é o que faz a IA **recomendar** em vez de só citar
@@ -37,16 +37,16 @@ um superlativo redondo.
 
 Preencher com dados verdadeiros. **Nunca inventar.**
 
-| Dado | Valor | Onde usar |
-|---|---|---|
-| Obras entregues desde 2011 | ______ | contador, JSON-LD |
-| Máquinas próprias na frota | ______ | contador, `/frota` |
-| Colaboradores diretos | ______ | "Quem somos" |
-| m³ de terra movimentados (ano ou total) | ______ | contador |
-| Km de estradas vicinais recuperados | ______ | página de estradas vicinais |
-| Prazo médio de mobilização | ______ dias | FAQ, diferenciais |
-| Cidades atendidas | ______ | área de atuação |
-| Maior obra executada (nome/porte) | ______ | case |
+| Dado                                    | Valor       | Onde usar                   |
+| --------------------------------------- | ----------- | --------------------------- |
+| Obras entregues desde 2011              | ______      | contador, JSON-LD           |
+| Máquinas próprias na frota              | ______      | contador, `/frota`          |
+| Colaboradores diretos                   | ______      | "Quem somos"                |
+| m³ de terra movimentados (ano ou total) | ______      | contador                    |
+| Km de estradas vicinais recuperados     | ______      | página de estradas vicinais |
+| Prazo médio de mobilização              | ______ dias | FAQ, diferenciais           |
+| Cidades atendidas                       | ______      | área de atuação             |
+| Maior obra executada (nome/porte)       | ______      | case                        |
 
 Números concretos são exatamente o tipo de fato que o Gemini extrai e cita.
 
@@ -110,12 +110,12 @@ Depois de publicados, adicionar `Review` ao schema (task 03):
 
 O repositório já tem material fotográfico para pelo menos 3 cases:
 
-| Foto disponível | Case provável |
-|---|---|
-| `fotodaplacatigd.png` | Terminal Intermodal Gonçalves Dias |
-| `placapedrafundamental.png` | Obra com pedra fundamental |
-| `eventoinauguracao.png` | Obra inaugurada |
-| `fotodaplacaalan.png` / `fotodasplacas.png` | Obras identificadas |
+| Foto disponível                             | Case provável                      |
+| ------------------------------------------- | ---------------------------------- |
+| `fotodaplacatigd.png`                       | Terminal Intermodal Gonçalves Dias |
+| `placapedrafundamental.png`                 | Obra com pedra fundamental         |
+| `eventoinauguracao.png`                     | Obra inaugurada                    |
+| `fotodaplacaalan.png` / `fotodasplacas.png` | Obras identificadas                |
 
 ### Estrutura de cada case (vira `/obras/[slug]` na task 08)
 

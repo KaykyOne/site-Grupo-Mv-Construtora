@@ -1,6 +1,6 @@
 # 01 — Rotacionar a chave da Resend e proteger o .gitignore
 
-- [ ] Concluída em: ____/____/______
+- [ ] Concluída em: ****/****/______
 - **Prioridade:** P0 (risco ativo)
 - **Esforço:** 15 min
 - **Impacto:** 🔴 Segurança

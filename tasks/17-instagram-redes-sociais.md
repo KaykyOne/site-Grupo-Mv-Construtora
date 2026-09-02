@@ -1,6 +1,6 @@
 # 17 — Instagram: vincular, indexar e usar como sinal de entidade
 
-- [ ] Concluída em: ____/____/______
+- [ ] Concluída em: ****/****/______
 - **Prioridade:** P1
 - **Esforço:** 1-2 h (+ ação contínua no perfil)
 - **Impacto:** 🟠 Alto — é um dos sinais mais fortes para separar a MV das homônimas
@@ -19,12 +19,12 @@
 
 ## Dados confirmados
 
-| Campo | Valor |
-|---|---|
-| Instagram | `https://www.instagram.com/grupoconstrutoramv/` |
-| Handle Instagram | `@grupoconstrutoramv` |
-| YouTube | `https://www.youtube.com/@GrupoMVConstrutora` |
-| Nome no YouTube | `MV CONSTRUTORA` (confirmado via og:title) |
+| Campo            | Valor                                           |
+| ---------------- | ----------------------------------------------- |
+| Instagram        | `https://www.instagram.com/grupoconstrutoramv/` |
+| Handle Instagram | `@grupoconstrutoramv`                           |
+| YouTube          | `https://www.youtube.com/@GrupoMVConstrutora`   |
+| Nome no YouTube  | `MV CONSTRUTORA` (confirmado via og:title)      |
 
 > **Usar a URL limpa, sem `?utm_source=qr`.** O parâmetro veio do QR code e não
 > deve entrar no `sameAs` nem nos links do site — parâmetro de campanha em link
@@ -45,13 +45,13 @@ perfil. Conferir manualmente os itens da Parte B antes de dar a task por conclu�
 
 ## ⚠️ Inconsistência de nome detectada
 
-| Onde | Nome |
-|---|---|
-| Domínio | grupo**mv**construtora.com.br |
-| E-mail | atendimento@grupo**mv**construtora.com.br |
-| Instagram | @grupo**constructora**mv → `grupoconstrutoramv` |
-| YouTube | @Grupo**MV**Construtora ✅ consistente |
-| Site (H1, logo, footer) | MV Construtora |
+| Onde                    | Nome                                            |
+| ----------------------- | ----------------------------------------------- |
+| Domínio                 | grupo**mv**construtora.com.br                   |
+| E-mail                  | atendimento@grupo**mv**construtora.com.br       |
+| Instagram               | @grupo**constructora**mv → `grupoconstrutoramv` |
+| YouTube                 | @Grupo**MV**Construtora ✅ consistente          |
+| Site (H1, logo, footer) | MV Construtora                                  |
 
 O handle inverte a ordem: **MV Construtora** vs **Construtora MV**.
 
@@ -143,13 +143,12 @@ Conferir e ajustar manualmente:
 - [ ] **Nome de exibição**: `MV Construtora` (não o handle)
 - [ ] **Categoria**: Empresa de construção / Empreiteira
 - [ ] **Bio** com palavra-chave e local. Sugestão:
-      ```
-      MV Construtora
-      Terraplenagem • Obras Civis • Locação de Máquinas Pesadas
-      📍 Pindaré-Mirim - MA | Atendemos todo o Maranhão
-      🏗️ Desde 2011
-      👇 Orçamento pelo site
-      ```
+      `     MV Construtora
+    Terraplenagem • Obras Civis • Locação de Máquinas Pesadas
+    📍 Pindaré-Mirim - MA | Atendemos todo o Maranhão
+    🏗️ Desde 2011
+    👇 Orçamento pelo site
+    `
 - [ ] **Link na bio** → site (usar Linktree só se houver mais de um destino)
 - [ ] **Conta comercial** (Instagram Business), não pessoal — libera métricas,
       botão de contato e endereço no perfil

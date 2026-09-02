@@ -255,8 +255,7 @@ export const SERVICOS: Servico[] = [
     slug: "transporte-de-maquinas",
     nome: "Transporte de máquinas e equipamentos",
     h1: "Transporte de Máquinas Pesadas com Caminhão Prancha",
-    resumo:
-      "Transporte com caminhão prancha, mobilização e desmobilização de máquinas pesadas.",
+    resumo: "Transporte com caminhão prancha, mobilização e desmobilização de máquinas pesadas.",
     descricao:
       "Transporte com caminhão prancha, mobilização e desmobilização de máquinas pesadas e apoio logístico para obras.",
     itens: [

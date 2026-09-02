@@ -1,6 +1,6 @@
 # 11 — Acessibilidade: 86 → 100
 
-- [ ] Concluída em: ____/____/______
+- [ ] Concluída em: ****/****/______
 - **Prioridade:** P2
 - **Esforço:** 1-2 h
 - **Impacto:** 🟡 Médio (+ conformidade e argumento de qualidade)

@@ -1,6 +1,6 @@
 # 10 — Correção de bugs + política de privacidade (LGPD)
 
-- [ ] Concluída em: ____/____/______
+- [ ] Concluída em: ****/****/______
 - **Prioridade:** P2 (o item LGPD é P1 por risco jurídico)
 - **Esforço:** 2-3 h
 - **Impacto:** 🟡 Médio (+ conformidade legal)
@@ -63,10 +63,10 @@ Note que o rótulo também estava escrito sem acento ("Localizacao").
 
 ### A2. Horário divergente 🔴 (afeta SEO local)
 
-| Local | Valor |
-|---|---|
+| Local                                           | Valor                      |
+| ----------------------------------------------- | -------------------------- |
 | `src/routes/index.tsx:1288` (seção Localização) | Seg a Sex · **07h** às 18h |
-| `src/routes/index.tsx:1483` (rodapé) | Seg a Sex · **08h** às 18h |
+| `src/routes/index.tsx:1483` (rodapé)            | Seg a Sex · **08h** às 18h |
 
 Confirmar o correto com o cliente e **unificar numa constante**, junto das outras
 no topo do arquivo:
@@ -143,7 +143,9 @@ Ver task 02, passo 4. `fotodasplacas` (8,6 MB) é importado e nunca usado.
 `src/routes/index.tsx:1494`:
 
 ```jsx
-<a href="#" className="hover:text-white">Política de privacidade</a>
+<a href="#" className="hover:text-white">
+  Política de privacidade
+</a>
 ```
 
 Link morto. E o formulário de contato coleta **nome, e-mail, telefone e mensagem**
@@ -177,7 +179,10 @@ está em não conformidade — exposto a notificação da ANPD e a reclamação 
   <input type="checkbox" required {...register("consentimento")} />
   <span>
     Concordo com o tratamento dos meus dados para retorno deste contato, conforme a{" "}
-    <a href="/politica-de-privacidade" className="underline">Política de Privacidade</a>.
+    <a href="/politica-de-privacidade" className="underline">
+      Política de Privacidade
+    </a>
+    .
   </span>
 </label>
 ```

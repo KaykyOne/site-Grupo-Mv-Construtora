@@ -1,6 +1,6 @@
 # 16 — Conteúdo recorrente (blog / central de conhecimento)
 
-- [ ] Concluída em: ____/____/______
+- [ ] Concluída em: ****/****/______
 - **Prioridade:** P3 (começar depois que 01-12 estiverem prontas)
 - **Esforço:** contínuo — 1 artigo a cada 2 semanas
 - **Impacto:** 🟠 Alto no longo prazo — é o que sustenta a liderança
@@ -25,20 +25,20 @@ exatamente o tipo de conteúdo que o Gemini usa e credita.
 
 Ordenados por potencial de busca e facilidade de escrita.
 
-| # | Título | Intenção | Por que funciona |
-|---|---|---|---|
-| 1 | Quanto custa terraplenagem por hora no Maranhão? | comercial | busca de altíssima intenção; quase ninguém responde com honestidade |
-| 2 | Terraplenagem ou terraplanagem? Qual a grafia correta | informacional | captura as duas grafias de uma vez |
-| 3 | Qual máquina usar em cada etapa da terraplenagem | informacional | usa as fotos da frota que já existem |
-| 4 | Escavadeira, pá-carregadeira ou retroescavadeira? | comparativo | dúvida real de quem vai alugar |
-| 5 | Quanto tempo leva para terraplanar um terreno de 1.000 m²? | comercial | pergunta literal digitada no Google |
-| 6 | Documentação e licenças para terraplenagem no Maranhão | informacional | ninguém local cobre; posiciona como autoridade |
-| 7 | Como preparar solo para plantio: guia para produtor rural | segmento | público agrícola, já citado na seção Quem somos |
-| 8 | Recuperação de estradas vicinais: como funciona | institucional | serviço com forte demanda de prefeitura |
-| 9 | Locação com ou sem operador: o que compensa | comercial | ligado direto ao serviço 03 |
-| 10 | Erros que encarecem uma obra de terraplenagem | informacional | conteúdo de autoridade |
-| 11 | Corte e aterro: entenda a diferença | informacional | termo técnico muito buscado |
-| 12 | Época de chuva no Maranhão: como planejar movimentação de terra | sazonal | específico da região, alto valor |
+| #   | Título                                                          | Intenção      | Por que funciona                                                    |
+| --- | --------------------------------------------------------------- | ------------- | ------------------------------------------------------------------- |
+| 1   | Quanto custa terraplenagem por hora no Maranhão?                | comercial     | busca de altíssima intenção; quase ninguém responde com honestidade |
+| 2   | Terraplenagem ou terraplanagem? Qual a grafia correta           | informacional | captura as duas grafias de uma vez                                  |
+| 3   | Qual máquina usar em cada etapa da terraplenagem                | informacional | usa as fotos da frota que já existem                                |
+| 4   | Escavadeira, pá-carregadeira ou retroescavadeira?               | comparativo   | dúvida real de quem vai alugar                                      |
+| 5   | Quanto tempo leva para terraplanar um terreno de 1.000 m²?      | comercial     | pergunta literal digitada no Google                                 |
+| 6   | Documentação e licenças para terraplenagem no Maranhão          | informacional | ninguém local cobre; posiciona como autoridade                      |
+| 7   | Como preparar solo para plantio: guia para produtor rural       | segmento      | público agrícola, já citado na seção Quem somos                     |
+| 8   | Recuperação de estradas vicinais: como funciona                 | institucional | serviço com forte demanda de prefeitura                             |
+| 9   | Locação com ou sem operador: o que compensa                     | comercial     | ligado direto ao serviço 03                                         |
+| 10  | Erros que encarecem uma obra de terraplenagem                   | informacional | conteúdo de autoridade                                              |
+| 11  | Corte e aterro: entenda a diferença                             | informacional | termo técnico muito buscado                                         |
+| 12  | Época de chuva no Maranhão: como planejar movimentação de terra | sazonal       | específico da região, alto valor                                    |
 
 O item 12 é o tipo de conteúdo que **nenhuma concorrente de fora do estado
 consegue escrever com propriedade**. É vantagem estrutural.
@@ -113,10 +113,10 @@ Publicar não basta. Para cada artigo:
 
 ## Metas de acompanhamento
 
-| Prazo | Meta |
-|---|---|
-| 3 meses | 6 artigos publicados; 20+ páginas indexadas |
-| 6 meses | 12 artigos; primeiras posições de cauda longa |
+| Prazo    | Meta                                            |
+| -------- | ----------------------------------------------- |
+| 3 meses  | 6 artigos publicados; 20+ páginas indexadas     |
+| 6 meses  | 12 artigos; primeiras posições de cauda longa   |
 | 12 meses | tráfego orgânico como principal origem de leads |
 
 Acompanhar no Search Console (task 06): impressões, cliques e posição média por

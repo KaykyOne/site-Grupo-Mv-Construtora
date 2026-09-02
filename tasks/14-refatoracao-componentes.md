@@ -1,6 +1,6 @@
 # 14 — Refatorar index.tsx (1.500 linhas) em componentes
 
-- [ ] Concluída em: ____/____/______
+- [ ] Concluída em: ****/****/______
 - **Prioridade:** P2
 - **Esforço:** 3-4 h
 - **Impacto:** 🟡 Médio direto — mas é **pré-requisito** da task 08

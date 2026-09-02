@@ -25,18 +25,10 @@ export function CtaFinal({ servico }: { servico?: string }) {
           transparente para a sua obra.
         </p>
         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-          <CTAButton
-            href={waLink(assunto)}
-            target="_blank"
-            rel="noreferrer"
-            variante="escura"
-          >
+          <CTAButton href={waLink(assunto)} target="_blank" rel="noreferrer" variante="escura">
             <MessageCircle size={18} /> Chamar no WhatsApp
           </CTAButton>
-          <CTAButton
-            href="/#contato"
-            variante="clara"
-          >
+          <CTAButton href="/#contato" variante="clara">
             Solicitar orçamento pelo site
           </CTAButton>
         </div>

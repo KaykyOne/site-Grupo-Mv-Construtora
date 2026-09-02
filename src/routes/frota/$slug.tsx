@@ -124,7 +124,9 @@ function PaginaMaquina() {
                       aria-label={`Ver foto ${i + 1} de ${maquina.nome}`}
                       aria-current={i === foto}
                       className={`h-16 w-20 overflow-hidden rounded-sm border-2 transition-opacity ${
-                        i === foto ? "border-red-600" : "border-transparent opacity-60 hover:opacity-100"
+                        i === foto
+                          ? "border-red-600"
+                          : "border-transparent opacity-60 hover:opacity-100"
                       }`}
                     >
                       <img src={img} alt="" loading="lazy" className="h-full w-full object-cover" />

@@ -1,6 +1,6 @@
 # 03 — Dados estruturados JSON-LD (schema.org)
 
-- [ ] Concluída em: ____/____/______
+- [ ] Concluída em: ****/****/______
 - **Prioridade:** P0
 - **Esforço:** 1-2 h
 - **Impacto:** 🔴 Altíssimo — é o principal item para IA (Gemini / AI Overviews)
@@ -36,21 +36,21 @@ precisa inferir tudo do texto corrido — e, quando existem várias empresas cha
 
 Extraídos do próprio código (`src/routes/index.tsx:64-72` e seção "Quem somos"):
 
-| Campo | Valor |
-|---|---|
-| Nome | MV Construtora |
-| CNPJ | 14.299.029/0001-20 |
-| Fundador | Alan Robson Leite Pereira |
-| Fundação | 14/09/2011 |
-| Endereço | Próximo ao Condomínio OASIS - Pitombeira, Pindaré-Mirim - MA, 65370-000 |
-| Telefone/WhatsApp | +55 98 99236-8928 |
-| E-mail | atendimento@grupomvconstrutora.com.br |
-| Horário | Seg-Sex (ver task 10 — há divergência 07h vs 08h no site) |
+| Campo             | Valor                                                                   |
+| ----------------- | ----------------------------------------------------------------------- |
+| Nome              | MV Construtora                                                          |
+| CNPJ              | 14.299.029/0001-20                                                      |
+| Fundador          | Alan Robson Leite Pereira                                               |
+| Fundação          | 14/09/2011                                                              |
+| Endereço          | Próximo ao Condomínio OASIS - Pitombeira, Pindaré-Mirim - MA, 65370-000 |
+| Telefone/WhatsApp | +55 98 99236-8928                                                       |
+| E-mail            | atendimento@grupomvconstrutora.com.br                                   |
+| Horário           | Seg-Sex (ver task 10 — há divergência 07h vs 08h no site)               |
 
 ### Redes sociais (confirmado pelo cliente)
 
-| Rede | URL |
-|---|---|
+| Rede      | URL                                             |
+| --------- | ----------------------------------------------- |
 | Instagram | `https://www.instagram.com/grupoconstrutoramv/` |
 
 Usar sempre a URL **limpa**, sem `?utm_source=qr`. Ver **task 17** para o
@@ -110,7 +110,7 @@ export const organizacaoSchema = {
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: -3.6089,   // CONFIRMAR no Google Maps
+    latitude: -3.6089, // CONFIRMAR no Google Maps
     longitude: -45.3419, // CONFIRMAR no Google Maps
   },
   telephone: "+5598992368928",
@@ -126,9 +126,18 @@ export const organizacaoSchema = {
     },
   ],
   areaServed: [
-    "Pindaré-Mirim", "Santa Inês", "Bacabal", "Zé Doca", "Santa Luzia",
-    "Monção", "Tufilândia", "Alto Alegre do Pindaré", "Bom Jardim",
-    "Açailândia", "Imperatriz", "São Luís",
+    "Pindaré-Mirim",
+    "Santa Inês",
+    "Bacabal",
+    "Zé Doca",
+    "Santa Luzia",
+    "Monção",
+    "Tufilândia",
+    "Alto Alegre do Pindaré",
+    "Bom Jardim",
+    "Açailândia",
+    "Imperatriz",
+    "São Luís",
   ].map((cidade) => ({
     "@type": "City",
     name: cidade,
@@ -183,7 +192,7 @@ export const faqSchema = (faqs: [string, string][]) => ({
 ```ts
 export const Route = createFileRoute("/")({
   head: () => ({
-    meta: [ /* ... */ ],
+    meta: [/* ... */],
     scripts: [
       {
         type: "application/ld+json",

@@ -1,6 +1,6 @@
 # 13 — Anti-spam e UX do formulário de contato
 
-- [ ] Concluída em: ____/____/______
+- [ ] Concluída em: ****/****/______
 - **Prioridade:** P2
 - **Esforço:** 1-2 h
 - **Impacto:** 🟡 Médio (protege o canal de leads e a reputação do domínio)
@@ -52,7 +52,12 @@ import { z } from "zod";
 export const contactSchema = z.object({
   nome: z.string().trim().min(2).max(100),
   email: z.string().trim().email().max(150),
-  telefone: z.string().trim().min(10).max(20).regex(/^[\d\s()+-]+$/),
+  telefone: z
+    .string()
+    .trim()
+    .min(10)
+    .max(20)
+    .regex(/^[\d\s()+-]+$/),
   mensagem: z.string().trim().min(10).max(1000),
   // honeypot: precisa chegar vazio
   website: z.string().max(0).optional(),

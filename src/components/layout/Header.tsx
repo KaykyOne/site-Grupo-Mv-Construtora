@@ -16,7 +16,11 @@ export function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-zinc-950/70 backdrop-blur-xl">
       <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-5 sm:px-8">
-        <a href={naHome ? "#inicio" : "/"} aria-label="MV Construtora - início" className="flex items-center">
+        <a
+          href={naHome ? "#inicio" : "/"}
+          aria-label="MV Construtora - início"
+          className="flex items-center"
+        >
           <img
             src={logomv}
             alt="MV Construtora"

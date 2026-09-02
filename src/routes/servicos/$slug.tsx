@@ -50,10 +50,19 @@ export const Route = createFileRoute("/servicos/$slug")({
 /** Passos da contratação. O texto muda por serviço para as páginas não ficarem iguais. */
 const etapas: [string, string][] = [
   ["Contato", "Você descreve a necessidade por WhatsApp, telefone ou pelo formulário do site."],
-  ["Visita técnica", "Avaliamos o local, o volume, as condições de acesso e as particularidades do terreno."],
-  ["Proposta", "Enviamos o orçamento com escopo, equipamentos, prazo e condições, sem surpresa depois."],
+  [
+    "Visita técnica",
+    "Avaliamos o local, o volume, as condições de acesso e as particularidades do terreno.",
+  ],
+  [
+    "Proposta",
+    "Enviamos o orçamento com escopo, equipamentos, prazo e condições, sem surpresa depois.",
+  ],
   ["Mobilização", "Levamos máquinas, equipamentos e equipe até o canteiro na data combinada."],
-  ["Execução e entrega", "Acompanhamento técnico durante toda a obra até a entrega e a desmobilização."],
+  [
+    "Execução e entrega",
+    "Acompanhamento técnico durante toda a obra até a entrega e a desmobilização.",
+  ],
 ];
 
 function PaginaServico() {

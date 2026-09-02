@@ -1,6 +1,6 @@
 # 05 — robots.txt, sitemap.xml, canonical e og:image
 
-- [ ] Concluída em: ____/____/______
+- [ ] Concluída em: ****/****/______
 - **Prioridade:** P1
 - **Esforço:** 1-2 h
 - **Impacto:** 🟠 Alto (o `robots.txt` tem impacto direto sobre IA)
@@ -27,6 +27,7 @@ curl -sI https://www.grupomvconstrutora.com.br/sitemap.xml  # 404
 ```
 
 No `<head>` servido em produção **não existe**:
+
 - `<link rel="canonical">`
 - `<meta property="og:image">`
 - `<meta property="og:url">`

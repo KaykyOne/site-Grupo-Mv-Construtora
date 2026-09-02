@@ -164,9 +164,7 @@ export const videosSchema = (
       "@type": "VideoObject",
       name: video.titulo,
       description: video.descricao,
-      thumbnailUrl: video.poster.startsWith("http")
-        ? video.poster
-        : `${SITE_URL}${video.poster}`,
+      thumbnailUrl: video.poster.startsWith("http") ? video.poster : `${SITE_URL}${video.poster}`,
       uploadDate: video.publicadoEm,
       duration: video.duracao,
       publisher: { "@id": `${SITE_URL}/#organizacao` },
