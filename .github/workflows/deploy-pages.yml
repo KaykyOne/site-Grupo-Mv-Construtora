@@ -35,11 +35,11 @@ jobs:
         id: pages
         uses: actions/configure-pages@v5
 
-      - name: Lint
-        run: npm run lint
+      - name: Verificar tipos
+        run: npx tsc --noEmit
 
       - name: Build static site
-        run: npm run build
+        run: npm run build:pages
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

@@ -18,6 +18,15 @@ const BASE_PATH = process.env.BASE_PATH ?? "/site-Grupo-Mv-Construtora/";
 
 console.log(`\n[preview] build estático sob ${BASE_PATH}\n`);
 
+const sitemap = spawnSync(process.execPath, ["scripts/gerar-sitemap.mjs"], {
+  stdio: "inherit",
+  env: process.env,
+});
+
+if (sitemap.status !== 0) {
+  process.exit(sitemap.status ?? 1);
+}
+
 const resultado = spawnSync("npx", ["vite", "build"], {
   stdio: "inherit",
   shell: true,
@@ -34,14 +43,16 @@ const candidatos = [".output/public", "dist", "dist/client"];
 const robots = `# Build de PREVIEW. Não deve ser indexado.
 # A versão pública e indexável está em https://www.grupomvconstrutora.com.br
 User-agent: *
-Disallow: /
+Allow: /
+
+Sitemap: https://www.grupomvconstrutora.com.br/sitemap.xml
 `;
 
 for (const dir of candidatos) {
   try {
     await mkdir(dir, { recursive: true });
     await writeFile(path.join(dir, "robots.txt"), robots, "utf8");
-    console.log(`[preview] robots.txt (noindex) escrito em ${dir}`);
+    console.log(`[pages] robots.txt escrito em ${dir}`);
   } catch {
     // diretório inexistente nesta versão do build — segue
   }

@@ -17,7 +17,7 @@
 export const SITE_URL = "https://www.grupomvconstrutora.com.br";
 
 /** true no build estático de preview (GitHub Pages). Ver vite.config.ts. */
-export const E_PREVIEW = import.meta.env.VITE_BUILD_TARGET === "static";
+export const E_PREVIEW = import.meta.env.VITE_BUILD_TARGET === "preview";
 
 export const EMPRESA = {
   nome: "MV Construtora",
