@@ -280,17 +280,27 @@ function HeroBackgroundSlideshow() {
 
   return (
     <div className="absolute inset-0">
-      <AnimatePresence initial={false} mode="wait">
+      {/* A foto inicial é HTML estático: o navegador a pinta antes de baixar e hidratar o React. */}
+      <img
+        src={slideshowImages[0].src}
+        alt={slideshowImages[0].alt}
+        width={1600}
+        height={1067}
+        loading="eager"
+        fetchPriority="high"
+        decoding="async"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+      {index !== 0 && (
+        <AnimatePresence initial={false} mode="wait">
         <motion.img
           key={index}
           src={slideshowImages[index].src}
           alt={slideshowImages[index].alt}
           width={1600}
           height={1067}
-          // A primeira foto é o elemento LCP da página: precisa ser eager e
-          // prioritária. As seguintes só entram depois de 5s, então podem ser lazy.
-          loading={index === 0 ? "eager" : "lazy"}
-          fetchPriority={index === 0 ? "high" : "low"}
+          loading="lazy"
+          fetchPriority="low"
           decoding="async"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -298,7 +308,8 @@ function HeroBackgroundSlideshow() {
           transition={{ duration: 0.6, ease: "easeInOut" }}
           className="absolute inset-0 h-full w-full object-cover"
         />
-      </AnimatePresence>
+        </AnimatePresence>
+      )}
     </div>
   );
 }
@@ -803,22 +814,6 @@ function Index() {
                 ))}
               </div>
             </div>
-            <motion.div
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="hidden"
-            >
-              <img
-                src={alaneasmaquinas1}
-                alt="Fundador da MV Construtora ao lado das máquinas da frota, em Pindaré-Mirim, Maranhão"
-                width={1600}
-                height={1067}
-                loading="lazy"
-                decoding="async"
-                className="h-[420px] w-full object-cover grayscale-[1%] lg:h-[700px]"
-              />
-            </motion.div>
           </div>
           </div>
         </section>
