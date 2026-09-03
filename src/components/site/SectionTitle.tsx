@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-import { reveal } from "./animacoes";
+import { useReveal } from "@/hooks/use-reduced-motion";
 
 export function SectionTitle({
   eyebrow,
@@ -14,6 +14,8 @@ export function SectionTitle({
   /** Nas páginas de serviço o título da seção de abertura é o H1 da página. */
   as?: "h1" | "h2";
 }) {
+  const reveal = useReveal();
+
   return (
     <motion.div
       variants={reveal}

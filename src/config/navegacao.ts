@@ -14,6 +14,7 @@ export const SITE_BASE_PATH = "/site-Grupo-Mv-Construtora/";
 
 /** Menu completo — usado no menu mobile (que rola) e no rodapé. */
 export const MENU_COMPLETO: ItemMenu[] = [
+  { rotulo: "Blog", href: "/blog" },
   { rotulo: "Serviços", href: "#servicos" },
   { rotulo: "Frota", href: "#frota" },
   { rotulo: "Quem somos", href: "#quem-somos" },

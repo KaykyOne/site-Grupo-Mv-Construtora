@@ -6,25 +6,47 @@
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
-// GitHub Pages serves this project below the repository path on kayky.dev.br.
-const basePath = "/site-Grupo-Mv-Construtora/";
+// ---------------------------------------------------------------------------
+// Dois alvos de build
+//
+//   npm run build        -> PRODUÇÃO na Vercel, com SSR, em www.grupomvconstrutora.com.br
+//   npm run build:pages  -> PREVIEW estático no GitHub Pages, sob /site-Grupo-Mv-Construtora/
+//
+// A diferença é só de variável de ambiente: BUILD_TARGET=static e BASE_PATH.
+//
+// O preview sai com noindex (ver src/routes/__root.tsx). Isso é proposital: se o
+// Google indexar a cópia do GitHub Pages, ela vira conteúdo duplicado e disputa
+// posição com a produção — o oposto do que queremos.
+// ---------------------------------------------------------------------------
+const estatico = process.env.BUILD_TARGET === "static";
+const basePath = estatico ? (process.env.BASE_PATH ?? "/site-Grupo-Mv-Construtora/") : "/";
+const routerBasepath = basePath === "/" ? "" : basePath.replace(/\/$/, "");
 
 export default defineConfig({
-  nitro: false,
+  // Na Vercel queremos o nitro (SSR). No GitHub Pages não existe servidor,
+  // então o build vira prerender estático.
+  ...(estatico ? { nitro: false } : {}),
   vite: {
     base: basePath,
+    define: {
+      "import.meta.env.VITE_BUILD_TARGET": JSON.stringify(estatico ? "static" : "server"),
+    },
   },
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
     router: {
-      basepath: basePath === "/" ? "" : basePath.replace(/\/$/, ""),
+      basepath: routerBasepath,
     },
-    prerender: {
-      enabled: true,
-      crawlLinks: true,
-      failOnError: true,
-    },
+    ...(estatico
+      ? {
+          prerender: {
+            enabled: true,
+            crawlLinks: true,
+            failOnError: true,
+          },
+        }
+      : {}),
   },
 });

@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
+import { Route as BlogIndexRouteImport } from './routes/blog/index'
+import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 import { Route as FrotaIndexRouteImport } from './routes/frota/index'
 import { Route as FrotaSlugRouteImport } from './routes/frota/$slug'
 import { Route as ServicosIndexRouteImport } from './routes/servicos/index'
@@ -24,6 +26,16 @@ const IndexRoute = IndexRouteImport.update({
 const PoliticaDePrivacidadeRoute = PoliticaDePrivacidadeRouteImport.update({
   id: '/politica-de-privacidade',
   path: '/politica-de-privacidade',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FrotaIndexRoute = FrotaIndexRouteImport.update({
@@ -50,16 +62,20 @@ const ServicosSlugRoute = ServicosSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/frota/$slug': typeof FrotaSlugRoute
   '/servicos/$slug': typeof ServicosSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/frota/': typeof FrotaIndexRoute
   '/servicos/': typeof ServicosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/frota/$slug': typeof FrotaSlugRoute
   '/servicos/$slug': typeof ServicosSlugRoute
+  '/blog': typeof BlogIndexRoute
   '/frota': typeof FrotaIndexRoute
   '/servicos': typeof ServicosIndexRoute
 }
@@ -67,8 +83,10 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/frota/$slug': typeof FrotaSlugRoute
   '/servicos/$slug': typeof ServicosSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/frota/': typeof FrotaIndexRoute
   '/servicos/': typeof ServicosIndexRoute
 }
@@ -77,24 +95,30 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/politica-de-privacidade'
+    | '/blog/$slug'
     | '/frota/$slug'
     | '/servicos/$slug'
+    | '/blog/'
     | '/frota/'
     | '/servicos/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/politica-de-privacidade'
+    | '/blog/$slug'
     | '/frota/$slug'
     | '/servicos/$slug'
+    | '/blog'
     | '/frota'
     | '/servicos'
   id:
     | '__root__'
     | '/'
     | '/politica-de-privacidade'
+    | '/blog/$slug'
     | '/frota/$slug'
     | '/servicos/$slug'
+    | '/blog/'
     | '/frota/'
     | '/servicos/'
   fileRoutesById: FileRoutesById
@@ -102,8 +126,10 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
+  BlogSlugRoute: typeof BlogSlugRoute
   FrotaSlugRoute: typeof FrotaSlugRoute
   ServicosSlugRoute: typeof ServicosSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
   FrotaIndexRoute: typeof FrotaIndexRoute
   ServicosIndexRoute: typeof ServicosIndexRoute
 }
@@ -122,6 +148,20 @@ declare module '@tanstack/react-router' {
       path: '/politica-de-privacidade'
       fullPath: '/politica-de-privacidade'
       preLoaderRoute: typeof PoliticaDePrivacidadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/frota/': {
@@ -158,8 +198,10 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
+  BlogSlugRoute: BlogSlugRoute,
   FrotaSlugRoute: FrotaSlugRoute,
   ServicosSlugRoute: ServicosSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
   FrotaIndexRoute: FrotaIndexRoute,
   ServicosIndexRoute: ServicosIndexRoute,
 }

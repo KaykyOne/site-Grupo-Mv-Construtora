@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { sendEmail } from "@/lib/send-email";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { SERVICOS, DESTAQUES, CIDADES_ATENDIDAS } from "@/data/servicos";
 import { VIDEOS } from "@/data/videos";
@@ -8,9 +7,9 @@ import { organizacaoSchema, websiteSchema, faqSchema, videosSchema, SITE_URL } f
 import { CTAButton } from "@/components/site/CTAButton";
 import { SectionTitle } from "@/components/site/SectionTitle";
 import { VideoPlayer } from "@/components/site/VideoPlayer";
-import { reveal } from "@/components/site/animacoes";
+import { useReveal } from "@/hooks/use-reduced-motion";
 import { EMPRESA, MAPS_EMBED_URL, MAPS_OPEN_URL, telLink, waLink } from "@/config/empresa";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -150,6 +149,14 @@ const diferenciaisImages: { src: string; alt: string }[] = [
   { src: colaboradores, alt: "Equipe da MV Construtora ao lado das máquinas em obra" },
 ];
 
+// Classes compartilhadas dos campos do formulário.
+const rotuloForm = "mb-2 block text-xs font-bold uppercase tracking-[.18em] text-zinc-600";
+const erroForm = "mt-2 text-xs font-medium text-red-600";
+const campoForm = (temErro: boolean) =>
+  `w-full border-2 bg-transparent p-3 text-base outline-none transition-colors placeholder:text-zinc-400 ${
+    temErro ? "border-red-500" : "border-zinc-200 focus:border-red-500"
+  }`;
+
 const faqs: [string, string][] = [
   [
     "Quais cidades do Maranhão a MV Construtora atende?",
@@ -174,19 +181,32 @@ const faqs: [string, string][] = [
 ];
 
 // --- Validação do formulário ---
+// O formulário não envia e-mail: monta uma mensagem estruturada e abre o
+// WhatsApp da empresa. Quem envia já se identifica pelo próprio número, então o
+// campo telefone virou opcional — cada campo obrigatório a menos é conversão a mais.
 const contactSchema = z.object({
-  nome: z.string().trim().min(2, "Informe seu nome completo").max(100),
+  nome: z.string().trim().min(2, "Informe seu nome").max(100),
 
-  email: z.string().trim().email("Informe um e-mail válido"),
+  // Só o essencial é obrigatório. Cada campo obrigatório a mais é conversão a menos,
+  // e o WhatsApp já entrega o número de quem enviou.
+  servico: z.string().trim().max(80).optional().or(z.literal("")),
+  cidade: z.string().trim().max(80).optional().or(z.literal("")),
 
   telefone: z
     .string()
     .trim()
-    .min(10, "Telefone com DDD (mín. 10 dígitos)")
     .max(20, "Telefone muito longo")
-    .regex(/^[\d\s()+-]+$/, "Use apenas números e ( ) + -"),
+    .regex(/^[\d\s()+-]*$/, "Use apenas números e ( ) + -")
+    .optional()
+    .or(z.literal("")),
 
-  mensagem: z.string().trim().min(10, "Descreva sua necessidade").max(1000, "Mensagem muito longa"),
+  email: z.string().trim().email("Informe um e-mail válido").optional().or(z.literal("")),
+
+  mensagem: z
+    .string()
+    .trim()
+    .min(10, "Descreva o que você precisa")
+    .max(1000, "Mensagem muito longa"),
 });
 type ContactForm = z.infer<typeof contactSchema>;
 function VideoSlideshow() {
@@ -247,13 +267,16 @@ function VideoSlideshow() {
 
 function HeroBackgroundSlideshow() {
   const [index, setIndex] = useState(0);
+  const reduzirMovimento = useReducedMotion();
 
   useEffect(() => {
+    // Quem pediu menos movimento no sistema fica com a primeira foto fixa.
+    if (reduzirMovimento) return;
     const timer = setInterval(() => {
       setIndex((i) => (i + 1) % slideshowImages.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [reduzirMovimento]);
 
   return (
     <div className="absolute inset-0">
@@ -282,13 +305,16 @@ function HeroBackgroundSlideshow() {
 
 function DiferenciaisSlideshow() {
   const [index, setIndex] = useState(0);
+  const reduzirMovimento = useReducedMotion();
 
   useEffect(() => {
+    // Mantém a primeira imagem fixa quando o sistema pede menos movimento.
+    if (reduzirMovimento) return;
     const timer = setInterval(() => {
       setIndex((i) => (i + 1) % diferenciaisImages.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [reduzirMovimento]);
 
   return (
     <motion.div
@@ -324,10 +350,14 @@ function DiferenciaisSlideshow() {
               onClick={() => setIndex(i)}
               aria-label={`Ver imagem ${i + 1}`}
               aria-current={i === index}
-              className={`h-2 rounded-full transition-all ${
-                i === index ? "w-6 bg-white" : "w-2 bg-white/50 hover:bg-white/70"
-              }`}
-            />
+              className="grid h-11 w-11 place-items-center"
+            >
+              <span
+                className={`block h-2 rounded-full transition-all ${
+                  i === index ? "w-6 bg-white" : "w-2 bg-white/50 hover:bg-white/70"
+                }`}
+              />
+            </button>
           ))}
         </div>
       )}
@@ -342,6 +372,7 @@ function DiferenciaisSlideshow() {
 }
 
 function Index() {
+  const reveal = useReveal();
   const [openFaq, setOpenFaq] = useState(0);
   const [ativa, setAtiva] = useState<(typeof CATEGORIAS_FROTA)[number]>("Todos");
   const [sent, setSent] = useState(false);
@@ -358,28 +389,30 @@ function Index() {
     reset,
   } = useForm<ContactForm>({ resolver: zodResolver(contactSchema), mode: "onBlur" });
 
-  const onSubmit = async (data: ContactForm) => {
-    try {
-      await sendEmail({
-        data: {
-          nome: data.nome,
-          email: data.email,
-          telefone: data.telefone,
-          mensagem: data.mensagem,
-        },
-      });
+  const onSubmit = (data: ContactForm) => {
+    // Monta a mensagem já formatada para a equipe ler no WhatsApp sem precisar
+    // perguntar o básico de novo.
+    const linhas = [
+      "*Solicitação de orçamento — site MV Construtora*",
+      "",
+      `*Nome:* ${data.nome}`,
+      data.email ? `*E-mail:* ${data.email}` : null,
+      data.telefone ? `*Telefone:* ${data.telefone}` : null,
+      data.servico ? `*Serviço:* ${data.servico}` : null,
+      data.cidade ? `*Cidade da obra:* ${data.cidade}` : null,
+      "",
+      "*Necessidade:*",
+      data.mensagem,
+      // filter(Boolean) removeria também as linhas em branco propositais
+    ].filter((linha) => linha !== null);
 
-      setSent(true);
-      reset();
+    window.open(waLink(linhas.join("\n")), "_blank", "noopener,noreferrer");
 
-      setTimeout(() => {
-        setSent(false);
-      }, 5000);
-    } catch (error) {
-      console.error(error);
-      alert("Erro ao enviar mensagem.");
-    }
+    setSent(true);
+    reset();
+    setTimeout(() => setSent(false), 8000);
   };
+
   return (
     <>
       {/* Dados estruturados (schema.org). JSON-LD no <body> é igualmente válido
@@ -657,55 +690,105 @@ function Index() {
         </section>
 
         {/* SOBRE */}
-        <section id="quem-somos" className="bg-zinc-950 py-24 text-white lg:py-32">
-          <div className="mx-auto grid max-w-7xl gap-14 px-5 sm:px-8 lg:grid-cols-2 lg:items-center">
+        <section id="quem-somos" className="relative isolate overflow-hidden py-20 text-white sm:py-24 lg:py-32">
+          <img
+            src={alaneasmaquinas1}
+            alt=""
+            aria-hidden="true"
+            width={1600}
+            height={1067}
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 -z-20 h-full w-full object-cover"
+          />
+          <div aria-hidden="true" className="absolute inset-0 -z-10 bg-black/20" />
+          <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-r from-zinc-950/80 via-zinc-950/65 to-zinc-950/35" />
+          <div className="mx-auto max-w-7xl px-5 sm:px-8">
+            <div className="max-w-3xl border-l-2 border-red-500 pl-5 sm:pl-7">
             <div>
               <SectionTitle
                 eyebrow="Quem somos"
                 title="Construção que nasce da experiência de campo."
                 light
               />
-              <p className="mt-7 max-w-lg leading-7 text-white/70">
-                Nossa História A MV Construtora nasceu do sonho, da determinação e da visão
-                empreendedora de Alan Robson Leite Pereira, fundador da empresa em 14 de setembro de
-                2011.
-                <br />
-                Filho de Maria Aparecida e de José de Anchieta (in memoriam), Alan sempre acreditou
-                que o trabalho realizado com honestidade, dedicação e compromisso é capaz de
-                transformar vidas e construir um legado. Corretor de imóveis por formação,
-                empreendedor por vocação, é casado com Talita Mendes e pai de Miguel Ângelo e Alan
-                Vinícius.
-                <br />
-                <br /> Foi justamente do maior patrimônio de sua vida — sua família — que surgiu o
-                nome da empresa. A união das iniciais de seus filhos, Miguel e Vinícius, deu origem
-                à MV Construtora, simbolizando que cada obra executada carrega os mesmos valores
-                cultivados dentro de casa: responsabilidade, confiança, respeito e compromisso com o
-                futuro.
-                <br /> <br /> Ao longo de sua trajetória, a empresa atuou na construção de edifícios
-                e residências, adquirindo sólida experiência no setor da construção civil. Com o
-                passar dos anos, acompanhando as necessidades do mercado e investindo continuamente
-                em pessoas, equipamentos e tecnologia, a MV Construtora expandiu sua atuação e
-                especializou-se em obras de terraplenagem e infraestrutura.
-                <br /> <br />
-                Hoje, a empresa é referência na execução de serviços como: <br />* Terraplenagem; *
-                Construção e recuperação de estradas vicinais; <br />* Escavação, corte e aterro; *
-                Regularização e nivelamento de terrenos; <br />* Preparação de solo para plantio e
-                empreendimentos agrícolas; <br />* Limpeza e conformação de áreas; * Movimentação de
-                terra para obras públicas e privadas.
-                <br /> <br /> Cada projeto é conduzido com planejamento, segurança, qualidade
-                técnica e respeito aos prazos estabelecidos, buscando sempre superar as expectativas
-                de clientes e parceiros.
-                <br />
-                {/* Mais do que executar obras, a MV Construtora constrói relacionamentos
-                duradouros, gera desenvolvimento para as comunidades onde atua e contribui para o
-                crescimento da infraestrutura do Brasil.*/}
-                <br />
-                <br /> MV Construtora — Movendo a terra, construindo o futuro e deixando um legado
-                de confiança, excelência e compromisso em cada projeto.
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-white/80">
+                De PindarÃ©-Mirim para obras em todo o MaranhÃ£o, a MV Construtora une experiÃªncia
+                de campo, planejamento e relaÃ§Ãµes de confianÃ§a.
               </p>
+              <div className="mt-10 max-w-3xl space-y-0 leading-7 text-white/80 [&>h3]:mt-5 [&>h3]:border-l-2 [&>h3]:border-red-500 [&>h3]:bg-zinc-950/75 [&>h3]:px-5 [&>h3]:py-4 [&>h3]:text-lg [&>h3]:font-semibold [&>h3]:text-white [&>p]:bg-zinc-950/75 [&>p]:px-5 [&>p]:pb-5 [&>p]:text-sm [&>ul]:bg-zinc-950/75 [&>ul]:px-5 [&>ul]:pb-5 [&>ul]:pt-1 [&>ul]:text-sm">
+                <h3 className="text-xl font-semibold text-white">Nossa história</h3>
+                <p>
+                  A MV Construtora nasceu do sonho, da determinação e da visão empreendedora de{" "}
+                  <strong className="font-semibold text-white">Alan Robson Leite Pereira</strong>,
+                  que fundou a empresa em{" "}
+                  <time dateTime="2011-09-14">14 de setembro de 2011</time>, em Pindaré-Mirim, no
+                  Maranhão.
+                </p>
+                <p>
+                  Filho de Maria Aparecida e de José de Anchieta (in memoriam), Alan sempre
+                  acreditou que o trabalho realizado com honestidade, dedicação e compromisso é
+                  capaz de transformar vidas e construir um legado. Corretor de imóveis por
+                  formação e empreendedor por vocação, é casado com Talita Mendes e pai de Miguel
+                  Ângelo e Alan Vinícius.
+                </p>
 
-              {/* Edite os números abaixo pelos dados reais da empresa */}
-              <div className="mt-10 grid grid-cols-3 gap-6 border-t border-white/20 pt-7">
+                <h3 className="pt-2 text-xl font-semibold text-white">A origem do nome</h3>
+                <p>
+                  Foi justamente do maior patrimônio de sua vida — sua família — que surgiu o nome
+                  da empresa. A união das iniciais de seus filhos,{" "}
+                  <strong className="font-semibold text-white">M</strong>iguel e{" "}
+                  <strong className="font-semibold text-white">V</strong>inícius, deu origem à MV
+                  Construtora, simbolizando que cada obra carrega os mesmos valores cultivados
+                  dentro de casa: responsabilidade, confiança, respeito e compromisso com o futuro.
+                </p>
+
+                <h3 className="pt-2 text-xl font-semibold text-white">Nossa trajetória</h3>
+                <p>
+                  Ao longo de sua trajetória, a empresa atuou na construção de edifícios e
+                  residências, adquirindo sólida experiência no setor da construção civil. Com o
+                  passar dos anos, acompanhando as necessidades do mercado e investindo
+                  continuamente em pessoas, equipamentos e tecnologia, a MV Construtora expandiu
+                  sua atuação e especializou-se em obras de terraplenagem e infraestrutura no
+                  Maranhão.
+                </p>
+                <p>
+                  Mais do que executar obras, a MV Construtora constrói relacionamentos duradouros,
+                  gera desenvolvimento para as comunidades onde atua e contribui para o crescimento
+                  da infraestrutura do estado.
+                </p>
+
+                <h3 className="pt-2 text-xl font-semibold text-white">
+                  Serviços em que somos referência
+                </h3>
+                <ul className="list-disc space-y-2 pl-5 marker:text-red-500">
+                  <li>Terraplenagem</li>
+                  <li>Construção e recuperação de estradas vicinais</li>
+                  <li>Escavação, corte e aterro</li>
+                  <li>Regularização e nivelamento de terrenos</li>
+                  <li>Preparação de solo para plantio e empreendimentos agrícolas</li>
+                  <li>Limpeza e conformação de áreas</li>
+                  <li>Movimentação de terra para obras públicas e privadas</li>
+                </ul>
+
+                <p>
+                  Cada projeto é conduzido com planejamento, segurança, qualidade técnica e
+                  respeito aos prazos estabelecidos, buscando sempre superar as expectativas de
+                  clientes e parceiros.
+                </p>
+                <p className="font-medium text-white">
+                  MV Construtora — movendo a terra, construindo o futuro e deixando um legado de
+                  confiança, excelência e compromisso em cada projeto.
+                </p>
+              </div>
+
+              {/*
+                PENDENTE: trocar por números reais da empresa (task 09).
+                "100% compromisso com prazos" é alegação genérica e não verificável —
+                sistemas de IA descartam esse tipo de afirmação. Substituir por algo
+                aferível: obras entregues, máquinas próprias, m³ movimentados.
+                Ao acrescentar o terceiro número, voltar o grid para grid-cols-3.
+              */}
+              <div className="mt-8 grid grid-cols-2 gap-6 border-t border-white/20 pt-7">
                 {[
                   ["+11", "anos de atuação"],
                   //["+50", "obras entregues"],
@@ -724,7 +807,7 @@ function Index() {
               initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="relative"
+              className="hidden"
             >
               <img
                 src={alaneasmaquinas1}
@@ -736,6 +819,7 @@ function Index() {
                 className="h-[420px] w-full object-cover grayscale-[1%] lg:h-[700px]"
               />
             </motion.div>
+          </div>
           </div>
         </section>
 
@@ -924,12 +1008,13 @@ function Index() {
           </div>
         </section>
 
-        {/* CONTATO — formulário validado */}
+        {/* CONTATO — o formulário monta a mensagem e abre o WhatsApp */}
         <section
           id="contato"
           className="relative overflow-hidden bg-zinc-950 py-24 text-white lg:py-32"
         >
           <motion.div
+            aria-hidden="true"
             className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-red-600/15 blur-[90px]"
             animate={{ scale: [1, 1.15, 1] }}
             transition={{ duration: 6, repeat: Infinity }}
@@ -940,14 +1025,27 @@ function Index() {
                 Vamos tirar seu projeto do papel
               </p>
               <h2 className="max-w-2xl text-4xl font-semibold leading-[1.02] tracking-[-.04em] sm:text-5xl lg:text-6xl">
-                Sua obra precisa avançar rápido? Solicite um orçamento conosco.
+                Peça seu orçamento agora pelo WhatsApp.
               </h2>
-              <p className="mt-6 max-w-md text-white/60">
-                Preencha o formulário e nossa equipe entrará em contato com você o mais rápido
-                possível. Ou se preferir, clique no botão abaixo para falar diretamente conosco pelo
-                WhatsApp.
+              <p className="mt-6 max-w-md leading-7 text-white/70">
+                Preencha os campos e a conversa abre já com tudo preenchido — você só aperta enviar.
+                Respondemos de segunda a sexta, das 07h às 18h.
               </p>
-              <div className="mt-8 inline-block">
+
+              <ul className="mt-8 space-y-3 text-sm text-white/70">
+                {[
+                  "Resposta direto no WhatsApp, sem esperar e-mail",
+                  "Visita técnica para avaliar o local e o volume",
+                  "Proposta com escopo, prazo e equipamentos definidos",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <BadgeCheck size={18} className="mt-0.5 shrink-0 text-red-400" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <CTAButton
                   href={waLink(
                     "Olá! Gostaria de solicitar um orçamento à MV Construtora e saber mais sobre os serviços.",
@@ -955,21 +1053,25 @@ function Index() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <MessageCircle size={18} /> Prefiro chamar no WhatsApp
+                  <MessageCircle size={18} /> Chamar direto no WhatsApp
                 </CTAButton>
+                <a
+                  href={telLink}
+                  className="inline-flex items-center justify-center gap-2 rounded-[0.4em] border-[3px] border-white/25 px-[1.3em] py-[0.6em] font-bold text-white transition-colors hover:border-white/50"
+                >
+                  <Phone size={18} /> {EMPRESA.whatsappExibicao}
+                </a>
               </div>
             </div>
+
             <form
               onSubmit={handleSubmit(onSubmit)}
               noValidate
               className="space-y-5 bg-white p-6 text-zinc-950 sm:p-8"
             >
               <div>
-                <label
-                  htmlFor="nome"
-                  className="mb-2 block text-xs font-bold uppercase tracking-[.18em] text-zinc-600"
-                >
-                  Nome
+                <label htmlFor="nome" className={rotuloForm}>
+                  Nome <span className="text-red-600">*</span>
                 </label>
                 <input
                   id="nome"
@@ -977,100 +1079,134 @@ function Index() {
                   autoComplete="name"
                   {...register("nome")}
                   aria-invalid={!!errors.nome}
-                  className={`w-full border-b-2 bg-transparent py-3 text-base outline-none transition-colors placeholder:text-zinc-400 ${errors.nome ? "border-red-500" : "border-zinc-300 focus:border-red-500"}`}
-                  placeholder="Seu nome completo"
+                  className={campoForm(!!errors.nome)}
+                  placeholder="Como podemos te chamar"
                 />
                 {errors.nome && (
-                  <p role="alert" className="mt-2 text-xs font-medium text-red-600">
+                  <p role="alert" className={erroForm}>
                     {errors.nome.message}
                   </p>
                 )}
               </div>
-              {/* EMAIL */}
-              <div>
-                <label
-                  htmlFor="email"
-                  className="mb-2 block text-xs font-bold uppercase tracking-[.18em] text-zinc-600"
-                >
-                  E-mail
-                </label>
 
-                <input
-                  id="email"
-                  type="email"
-                  autoComplete="email"
-                  {...register("email")}
-                  aria-invalid={!!errors.email}
-                  className={`w-full border-b-2 bg-transparent py-3 text-base outline-none transition-colors placeholder:text-zinc-400 ${
-                    errors.email ? "border-red-500" : "border-zinc-300 focus:border-red-500"
-                  }`}
-                  placeholder="seuemail@exemplo.com"
-                />
-
-                {errors.email && (
-                  <p role="alert" className="mt-2 text-xs font-medium text-red-600">
-                    {errors.email.message}
-                  </p>
-                )}
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="servico" className={rotuloForm}>
+                    Serviço
+                  </label>
+                  <select
+                    id="servico"
+                    {...register("servico")}
+                    className={campoForm(false)}
+                    defaultValue=""
+                  >
+                    <option value="">Não sei ainda / outro</option>
+                    {SERVICOS.map((servico) => (
+                      <option key={servico.slug} value={servico.nome}>
+                        {servico.nome}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label htmlFor="cidade" className={rotuloForm}>
+                    Cidade da obra
+                  </label>
+                  <input
+                    id="cidade"
+                    type="text"
+                    {...register("cidade")}
+                    className={campoForm(false)}
+                    placeholder="Ex.: Santa Inês - MA"
+                  />
+                </div>
               </div>
 
-              {/* TELEFONE */}
               <div>
-                <label
-                  htmlFor="telefone"
-                  className="mb-2 block text-xs font-bold uppercase tracking-[.18em] text-zinc-600"
-                >
-                  Telefone
-                </label>
-                <input
-                  id="telefone"
-                  type="tel"
-                  autoComplete="tel"
-                  inputMode="tel"
-                  {...register("telefone")}
-                  aria-invalid={!!errors.telefone}
-                  className={`w-full border-b-2 bg-transparent py-3 text-base outline-none transition-colors placeholder:text-zinc-400 ${errors.telefone ? "border-red-500" : "border-zinc-300 focus:border-red-500"}`}
-                  placeholder="(11) 99999-8888"
-                />
-                {errors.telefone && (
-                  <p role="alert" className="mt-2 text-xs font-medium text-red-600">
-                    {errors.telefone.message}
-                  </p>
-                )}
-              </div>
-              <div>
-                <label
-                  htmlFor="mensagem"
-                  className="mb-2 block text-xs font-bold uppercase tracking-[.18em] text-zinc-600"
-                >
-                  Mensagem
+                <label htmlFor="mensagem" className={rotuloForm}>
+                  O que você precisa <span className="text-red-600">*</span>
                 </label>
                 <textarea
                   id="mensagem"
-                  rows={5}
+                  rows={4}
                   {...register("mensagem")}
                   aria-invalid={!!errors.mensagem}
-                  className={`w-full resize-none border-2 bg-transparent p-3 text-base outline-none transition-colors placeholder:text-zinc-400 ${errors.mensagem ? "border-red-500" : "border-zinc-200 focus:border-red-500"}`}
-                  placeholder="Conte sobre sua obra: local, prazos, máquinas ou serviços necessários."
+                  className={`${campoForm(!!errors.mensagem)} resize-none`}
+                  placeholder="Conte sobre a obra: tamanho da área, prazo, máquinas ou serviços necessários."
                 />
                 {errors.mensagem && (
-                  <p role="alert" className="mt-2 text-xs font-medium text-red-600">
+                  <p role="alert" className={erroForm}>
                     {errors.mensagem.message}
                   </p>
                 )}
               </div>
+
+              <details className="text-sm">
+                <summary className="cursor-pointer font-semibold text-zinc-600 hover:text-zinc-950">
+                  Prefere que a gente retorne por telefone ou e-mail?
+                </summary>
+                <div className="mt-4 grid gap-5 sm:grid-cols-2">
+                  <div>
+                    <label htmlFor="telefone" className={rotuloForm}>
+                      Telefone
+                    </label>
+                    <input
+                      id="telefone"
+                      type="tel"
+                      autoComplete="tel"
+                      {...register("telefone")}
+                      aria-invalid={!!errors.telefone}
+                      className={campoForm(!!errors.telefone)}
+                      placeholder="(98) 90000-0000"
+                    />
+                    {errors.telefone && (
+                      <p role="alert" className={erroForm}>
+                        {errors.telefone.message}
+                      </p>
+                    )}
+                  </div>
+                  <div>
+                    <label htmlFor="email" className={rotuloForm}>
+                      E-mail
+                    </label>
+                    <input
+                      id="email"
+                      type="email"
+                      autoComplete="email"
+                      {...register("email")}
+                      aria-invalid={!!errors.email}
+                      className={campoForm(!!errors.email)}
+                      placeholder="voce@empresa.com.br"
+                    />
+                    {errors.email && (
+                      <p role="alert" className={erroForm}>
+                        {errors.email.message}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </details>
+
               <CTAButton type="submit" disabled={isSubmitting} className="w-full">
-                Enviar solicitação
+                <MessageCircle size={18} /> Abrir conversa no WhatsApp
               </CTAButton>
-              {sent && (
-                <p className="text-center text-sm font-semibold text-green-600">
-                  Seu orçamento foi enviado com sucesso!! Entraremos em contato em breve por
-                  WhatsApp ou e-mail, aguarde!
-                </p>
-              )}
-              <p className="text-center text-[11px] text-zinc-500">
-                Ao enviar, pedimos que aguarde nosso retorno. <br /> Não compartilhamos seus dados
-                com terceiros e respeitamos sua privacidade.
+
+              <div role="status" aria-live="polite">
+                {sent && (
+                  <p className="text-center text-sm font-semibold text-green-700">
+                    Conversa aberta no WhatsApp. Se a janela não abrir, verifique o bloqueador de
+                    pop-ups ou use o botão ao lado.
+                  </p>
+                )}
+              </div>
+
+              <p className="text-center text-[11px] leading-5 text-zinc-500">
+                Ao enviar, seus dados vão direto para o nosso WhatsApp — não passam por nenhum
+                servidor nosso.{" "}
+                <Link to="/politica-de-privacidade" className="underline hover:text-zinc-700">
+                  Política de Privacidade
+                </Link>
+                .
               </p>
             </form>
           </div>

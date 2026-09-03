@@ -1,3 +1,18 @@
+// ⚠️ NÃO ESTÁ MAIS EM USO (03/09/2026).
+//
+// O formulário de contato passou a montar a mensagem e abrir o WhatsApp da
+// empresa, em vez de enviar e-mail. Isso eliminou o endpoint HTTP aberto (que
+// não tinha honeypot nem rate limiting) e faz o lead cair onde a equipe
+// realmente responde.
+//
+// Este arquivo ficou aqui só para não apagar a integração sem sua decisão.
+// Se não for voltar a usar:
+//   1. apague este arquivo
+//   2. rode `npm uninstall resend`
+//   3. revogue a RESEND_API_KEY no painel — ela não precisa ser substituída
+//
+// Enquanto o arquivo existir, o endpoint continua exposto no build.
+
 import { createServerFn } from "@tanstack/react-start";
 import { Resend } from "resend";
 

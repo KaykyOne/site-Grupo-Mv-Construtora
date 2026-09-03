@@ -40,7 +40,7 @@ export type Maquina = {
   faqs: [string, string][];
 };
 
-export const FROTA: Maquina[] = [
+const FROTA_BASE: Maquina[] = [
   {
     slug: "escavadeira-hidraulica",
     nome: "Escavadeira hidráulica",
@@ -244,6 +244,21 @@ export const FROTA: Maquina[] = [
     ],
   },
 ];
+
+/** Perguntas complementares específicas de cada equipamento, mantidas na fonte única da frota. */
+const FAQS_COMPLEMENTARES: Record<string, [string, string][]> = {
+  "escavadeira-hidraulica": [["A escavadeira consegue carregar caminhão?", "Sim. Depois da escavação ou do corte, ela pode carregar o material em caminhões, desde que a frente tenha posição segura para o equipamento e o veículo."], ["O acesso da prancha precisa ser avaliado?", "Sim. A máquina chega ao local por transporte apropriado, então acesso, espaço de manobra e condição do solo são verificados antes da mobilização."], ["Escavadeira e pá-carregadeira fazem o mesmo trabalho?", "Elas se complementam. A escavadeira é muito eficiente para escavar, abrir valas e trabalhar abaixo do nível do solo; a pá-carregadeira é voltada a carregar e espalhar volume no nível da pista."]],
+  "pa-carregadeira": [["A pá-carregadeira trabalha em obra rural?", "Sim. Ela pode carregar cascalho, movimentar material, apoiar limpeza e espalhar material em acessos, conforme as condições do terreno."], ["Ela precisa trabalhar junto com caminhões?", "Frequentemente, sim. A pá mantém a alimentação dos caminhões em operações de terra, areia, brita ou cascalho."], ["A máquina faz o acabamento final da pista?", "Ela espalha e movimenta o material. Para definir caimento e acabamento preciso, a motoniveladora é o equipamento mais indicado."]],
+  motoniveladora: [["A patrol pode trabalhar em estrada molhada?", "A decisão depende do estado da pista e do solo. Quando o material está saturado, o acabamento não se mantém e a operação pode ser reprogramada para evitar desperdício."], ["Patrolamento inclui compactação?", "São etapas diferentes. A motoniveladora regulariza e conforma; quando o escopo pede, o rolo compactador entra para consolidar a camada."], ["A motoniveladora serve para pátio?", "Sim. Ela pode regularizar plataformas, pátios e acessos, especialmente quando é necessário controlar níveis e caimento."]],
+  "rolo-compactador": [["Todo tipo de solo compacta igual?", "Não. Tipo de solo, umidade, espessura da camada e exigência do projeto influenciam a estratégia de compactação."], ["O rolo entra depois da patrol?", "Em muitas frentes, sim. A patrol conforma a camada e o rolo consolida o material, mas a sequência depende do serviço executado."], ["Por que compactar antes de pavimentar?", "A camada compactada forma uma base mais estável. Sem ela, o revestimento acima pode sofrer deformação e exigir correção precoce."]],
+  "caminhao-pipa": [["O pipa ajuda em estrada de terra?", "Pode ajudar a controlar poeira e ajustar a umidade do material durante serviços de base e compactação, conforme o escopo."], ["Água demais melhora a compactação?", "Não. Solo encharcado perde condição de trabalho. O objetivo é atingir uma umidade adequada, definida conforme o material e a etapa."], ["Ele pode atender uma frente isolada?", "A viabilidade depende do local, acesso, prazo e planejamento da mobilização. Essas informações entram no orçamento."]],
+  "caminhao-prancha": [["A prancha leva qualquer máquina?", "O transporte é avaliado conforme o tipo, peso e dimensões do equipamento, além das condições da rota e dos pontos de embarque."], ["Precisa ter alguém no local de carga?", "É importante haver um responsável para liberar o acesso e alinhar as condições de embarque ou desembarque no horário programado."], ["A prancha atende obras fora de Pindaré-Mirim?", "Sim, o atendimento é planejado conforme origem, destino, rota e disponibilidade da operação no Maranhão."]],
+};
+
+export const FROTA: Maquina[] = FROTA_BASE.map((maquina) => ({
+  ...maquina,
+  faqs: [...maquina.faqs, ...FAQS_COMPLEMENTARES[maquina.slug]],
+}));
 
 export const CATEGORIAS_FROTA: ("Todos" | FrotaCategoria)[] = [
   "Todos",

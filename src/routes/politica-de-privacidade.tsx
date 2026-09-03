@@ -67,14 +67,21 @@ function PoliticaPrivacidade() {
             <section>
               <h2 className="text-xl font-semibold text-zinc-950">2. Quais dados coletamos</h2>
               <p className="mt-3">
-                Coletamos apenas os dados que você informa voluntariamente no formulário de contato:
+                O formulário do site <strong>não envia dados para nenhum servidor nosso</strong>.
+                Ele apenas monta uma mensagem com o que você digitou e abre o WhatsApp da empresa —
+                o envio é seu, pelo seu próprio aplicativo. Os campos são:
               </p>
               <ul className="mt-3 list-disc space-y-1 pl-5 marker:text-red-600">
-                <li>Nome</li>
-                <li>E-mail</li>
-                <li>Telefone</li>
-                <li>Mensagem com a descrição da sua necessidade</li>
+                <li>Nome (obrigatório)</li>
+                <li>Descrição da necessidade (obrigatório)</li>
+                <li>Serviço e cidade da obra (opcionais)</li>
+                <li>Telefone e e-mail (opcionais, apenas se você preferir outro canal de retorno)</li>
               </ul>
+              <p className="mt-3">
+                A partir do momento em que você envia a mensagem, o tratamento passa a ocorrer na
+                nossa conta de WhatsApp e no aplicativo da Meta, conforme a política de privacidade
+                dela.
+              </p>
               <p className="mt-3">
                 Não coletamos dados sensíveis nem dados de crianças e adolescentes.
               </p>
@@ -107,8 +114,7 @@ function PoliticaPrivacidade() {
               </p>
               <ul className="mt-3 list-disc space-y-2 pl-5 marker:text-red-600">
                 <li>
-                  <strong>Resend</strong> — serviço de envio de e-mail que entrega a mensagem do
-                  formulário à nossa caixa de atendimento.
+                  <strong>WhatsApp / Meta</strong> — canal por onde a sua mensagem chega até nós.
                 </li>
                 <li>
                   <strong>Vercel</strong> — hospedagem do site.

@@ -7,7 +7,17 @@
 // IMPORTANTE: nome, endereço e telefone precisam ser idênticos aos do Google
 // Meu Negócio. Divergência de NAP derruba a confiança no ranking local.
 
+/**
+ * URL canônica do site em produção.
+ *
+ * Alimenta canonical, og:url, sitemap e JSON-LD. Fica fixa de propósito: mesmo
+ * no build de preview (GitHub Pages) o canonical deve apontar para a produção,
+ * e o preview inteiro sai com noindex — ver scripts/build-pages.mjs.
+ */
 export const SITE_URL = "https://www.grupomvconstrutora.com.br";
+
+/** true no build estático de preview (GitHub Pages). Ver vite.config.ts. */
+export const E_PREVIEW = import.meta.env.VITE_BUILD_TARGET === "static";
 
 export const EMPRESA = {
   nome: "MV Construtora",

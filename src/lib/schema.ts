@@ -137,6 +137,28 @@ export const breadcrumbSchema = (itens: [string, string][]) => ({
   })),
 });
 
+/** Dados estruturados dos artigos do blog, mantidos sem métricas ou avaliações inventadas. */
+export const articleSchema = (post: {
+  slug: string;
+  titulo: string;
+  descricao: string;
+  publicadoEm: string;
+  atualizadoEm: string;
+  autor: string;
+}) => ({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": `${SITE_URL}/blog/${post.slug}#artigo`,
+  headline: post.titulo,
+  description: post.descricao,
+  datePublished: post.publicadoEm,
+  dateModified: post.atualizadoEm,
+  author: { "@type": "Organization", name: post.autor, url: SITE_URL },
+  publisher: { "@id": `${SITE_URL}/#organizacao` },
+  mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
+  inLanguage: "pt-BR",
+});
+
 /**
  * VideoObject para a galeria de vídeos.
  *

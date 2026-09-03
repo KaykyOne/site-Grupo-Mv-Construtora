@@ -47,24 +47,6 @@ export const Route = createFileRoute("/servicos/$slug")({
   component: PaginaServico,
 });
 
-/** Passos da contratação. O texto muda por serviço para as páginas não ficarem iguais. */
-const etapas: [string, string][] = [
-  ["Contato", "Você descreve a necessidade por WhatsApp, telefone ou pelo formulário do site."],
-  [
-    "Visita técnica",
-    "Avaliamos o local, o volume, as condições de acesso e as particularidades do terreno.",
-  ],
-  [
-    "Proposta",
-    "Enviamos o orçamento com escopo, equipamentos, prazo e condições, sem surpresa depois.",
-  ],
-  ["Mobilização", "Levamos máquinas, equipamentos e equipe até o canteiro na data combinada."],
-  [
-    "Execução e entrega",
-    "Acompanhamento técnico durante toda a obra até a entrega e a desmobilização.",
-  ],
-];
-
 function PaginaServico() {
   const { slug } = Route.useParams();
   const servico = SERVICOS.find((s) => s.slug === slug);
@@ -139,7 +121,7 @@ function PaginaServico() {
             Como funciona a contratação
           </h2>
           <ol className="mt-10 grid gap-8 border-t border-zinc-300 pt-10 lg:grid-cols-5">
-            {etapas.map(([titulo, texto], i) => (
+            {servico.etapas.map(([titulo, texto], i) => (
               <li key={titulo}>
                 <span className="font-mono text-xs text-zinc-400">
                   {String(i + 1).padStart(2, "0")}
@@ -149,6 +131,25 @@ function PaginaServico() {
               </li>
             ))}
           </ol>
+        </section>
+
+        <section className="border-y border-zinc-300 bg-white/40 py-16 lg:py-20">
+          <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-[1.1fr_.9fr]">
+            <div>
+              <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+                O que considerar em {servico.nome.toLowerCase()} no Maranhão
+              </h2>
+              <p className="mt-5 leading-8 text-zinc-700">{servico.contexto}</p>
+            </div>
+            <div className="border-l-2 border-red-600 pl-6">
+              <h2 className="text-xl font-semibold tracking-tight">Erros que encarecem a obra</h2>
+              <ul className="mt-5 space-y-4 text-zinc-700">
+                {servico.erros.map((erro) => (
+                  <li key={erro} className="leading-7">{erro}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </section>
 
         {/* EQUIPAMENTOS USADOS — vínculo serviço -> máquina */}

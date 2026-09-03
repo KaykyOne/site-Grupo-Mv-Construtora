@@ -35,11 +35,17 @@ export type Servico = {
    * texto igual entre páginas gera canibalização e nenhuma ranqueia bem.
    */
   intro: string;
+  /** Contexto local que explica decisões de obra sem repetir o texto de outros serviços. */
+  contexto: string;
+  /** Situações que costumam aumentar o custo quando não entram no planejamento. */
+  erros: string[];
+  /** Etapas específicas da contratação deste serviço. */
+  etapas: [string, string][];
   /** Perguntas específicas deste serviço. Alimentam o FAQPage da página. */
   faqs: [string, string][];
 };
 
-export const SERVICOS: Servico[] = [
+const SERVICOS_BASE: Omit<Servico, "contexto" | "erros" | "etapas">[] = [
   {
     slug: "terraplanagem",
     nome: "Terraplenagem",
@@ -384,6 +390,92 @@ export const SERVICOS: Servico[] = [
     icon: Sprout,
   },
 ];
+
+/**
+ * Complementos editoriais por serviço. Permanecem na mesma fonte dos serviços
+ * para que página, sitemap, schema e links internos não possam divergir.
+ */
+const CONTEUDO_POR_SERVICO: Record<
+  string,
+  Pick<Servico, "contexto" | "erros" | "etapas" | "faqs">
+> = {
+  terraplanagem: {
+    contexto:
+      "No Maranhão, o planejamento da terraplenagem começa antes da primeira máquina entrar. A chuva muda a umidade do material e o acesso ao terreno; já um solo muito fraco ou uma área distante da base muda a logística. Por isso avaliamos desníveis, acesso para prancha, destino ou aproveitamento do material e a sequência entre corte, aterro e compactação. Esse levantamento evita movimentar terra duas vezes e ajuda a manter a frente de serviço preparada para a próxima etapa da obra.",
+    erros: ["Começar sem conferir níveis e volumes de corte e aterro.", "Aterrar em camada alta demais ou sem compactação adequada.", "Deixar a água correr sobre o terreno já regularizado."],
+    etapas: [["Levantamento", "Entendemos o uso futuro da área, os níveis necessários e a condição de acesso."], ["Visita ao terreno", "Conferimos solo, desníveis, volumes e como a água se comporta no local."], ["Plano de execução", "Definimos máquinas, sequência de corte e aterro, compactação e mobilização."], ["Movimentação de terra", "Executamos o serviço por frentes, acompanhando níveis e condições do material."], ["Liberação da base", "Entregamos a área regularizada para a próxima etapa prevista no escopo."]],
+    faqs: [["A terraplenagem pode ser feita na chuva?", "Depende da condição do solo e da segurança do acesso. Chuva forte pode encharcar o material e impedir a compactação correta; nesse caso, o planejamento ajusta a frente de serviço para não desperdiçar operação."], ["Por que a compactação é feita em camadas?", "Porque uma camada muito espessa pode parecer firme por cima e ficar solta por baixo. Trabalhar por camadas permite que o rolo atue de forma uniforme antes da próxima camada."], ["É possível aproveitar a terra do próprio terreno?", "Em muitos casos, sim. A possibilidade depende das características do material e da necessidade do projeto. Avaliar isso na visita pode reduzir transporte e compra de material externo."]],
+  },
+  "infraestrutura-viaria": {
+    contexto:
+      "Uma estrada vicinal no Maranhão precisa ser pensada para continuar transitável quando a chuva chega, não apenas para parecer nivelada no dia da entrega. O caimento da pista, as saídas de água, o tipo de material de revestimento e a distância da jazida influenciam diretamente a durabilidade. Em acessos rurais e trechos produtivos, também consideramos o tráfego esperado: o caminho de um carro leve não recebe o mesmo tratamento de uma rota usada por caminhões e máquinas.",
+    erros: ["Patrolar sem corrigir o caimento e as saídas de água.", "Espalhar cascalho sobre pista saturada ou sem preparo.", "Tratar atoleiros só na superfície, sem investigar a drenagem."],
+    etapas: [["Trecho e uso", "Identificamos extensão, largura, tráfego e os pontos críticos do acesso."], ["Diagnóstico de campo", "Verificamos atoleiros, drenagem, material disponível e condições de entrada."], ["Solução por trecho", "Separamos o que pede patrolamento, reforço de base, cascalho ou drenagem."], ["Execução", "Regularizamos a pista, espalhamos material quando previsto e compactamos."], ["Conferência", "Revisamos caimento, acabamento e escoamento antes de liberar a via."]],
+    faqs: [["Patrolamento resolve atoleiro?", "Só quando o problema está na irregularidade superficial. Se a água fica presa ou o solo não suporta o tráfego, é preciso combinar drenagem, material de reforço e compactação."], ["A estrada precisa de drenagem lateral?", "Em muitos trechos, sim. Valetas e pontos de passagem de água evitam que ela permaneça sobre a pista e enfraqueça a base."], ["O cascalho pode ser aplicado em toda a estrada?", "A definição depende do diagnóstico e do escopo. Há trechos que pedem reforço maior e outros que precisam apenas de regularização e manutenção." ]],
+  },
+  "obras-civis": {
+    contexto:
+      "Em obra civil, fundação, piso e acesso precisam conversar com o terreno onde serão construídos. No Maranhão, uma chuva mal direcionada pode atingir escavações, bases e áreas de circulação; por isso, a preparação do terreno e a drenagem entram cedo na conversa. Para galpões e estruturas de uso comercial ou industrial, o planejamento também considera a entrada de materiais, o pátio e a sequência entre serviços para que uma etapa não desfaça a outra.",
+    erros: ["Iniciar fundação sem preparar e conferir a plataforma.", "Deixar drenagem e acessos para depois da edificação.", "Alterar escopo em campo sem registrar impacto em prazo e materiais."],
+    etapas: [["Necessidade da obra", "Alinhamos uso da estrutura, projeto disponível, terreno e prazo esperado."], ["Vistoria", "Conferimos acesso, implantação, preparo do solo e interfaces com drenagem."], ["Proposta de escopo", "Organizamos as frentes de construção e os serviços complementares previstos."], ["Execução coordenada", "Acompanhamos a sequência entre base, estrutura, pisos e acabamentos contratados."], ["Entrega", "Conferimos o escopo executado e liberamos a área para uso ou próxima fase."]],
+    faqs: [["A terraplenagem pode entrar no mesmo contrato da obra civil?", "Sim. Quando o escopo pede, a preparação do terreno, a drenagem e a construção podem ser organizadas como frentes conectadas."], ["O que precisa estar definido antes de começar?", "Uso da estrutura, área de implantação, acesso e o escopo contratado. Projetos e autorizações aplicáveis também devem ser conferidos antes da mobilização."], ["Vocês executam piso e pátio de acesso?", "Executamos pisos, pavimentações e serviços complementares dentro do escopo acordado para a obra."]],
+  },
+  drenagem: {
+    contexto:
+      "A drenagem precisa ser definida pelo caminho que a água faz no terreno, e não apenas pelo ponto onde ela aparece. Em períodos de chuva intensa, valas, bueiros e caixas trabalham juntos para retirar a água da pista, da plataforma ou da área construída sem causar erosão no destino. A visita técnica identifica cotas, pontos de concentração e acessos para as máquinas. Isso ajuda a executar a rede antes que aterros, calçadas ou pavimentos dificultem a intervenção.",
+    erros: ["Instalar tubo sem caimento ou saída segura para a água.", "Fechar vala sem conferir assentamento e reaterro.", "Dimensionar drenagem pela aparência do terreno seco."],
+    etapas: [["Pontos de água", "Mapeamos onde a água chega, por onde deve passar e onde pode ser direcionada."], ["Definição do sistema", "Organizamos valas, tubos, bueiros, caixas e reaterros previstos no escopo."], ["Escavação", "Abrimos as frentes respeitando acesso, profundidade e segurança de trabalho."], ["Instalação e reaterro", "Preparamos o leito, instalamos os componentes e recompomos o solo por etapas."], ["Teste de escoamento", "Conferimos continuidade, acabamento e a proteção dos pontos de saída."]],
+    faqs: [["Drenagem deve ser feita antes da pavimentação?", "Sempre que o projeto permitir, a rede enterrada é planejada antes das camadas finais da pista ou do pátio, evitando cortes e retrabalho depois."], ["O reaterro da vala precisa ser compactado?", "Sim. Sem recomposição e compactação adequadas, o solo pode ceder sobre a tubulação e comprometer o acabamento acima."], ["Como evitar erosão na saída da água?", "O destino e a proteção da descarga precisam entrar no projeto. A solução depende do volume de água, da inclinação e do solo do local."]],
+  },
+  "limpeza-de-areas": {
+    contexto:
+      "Limpar uma área não é simplesmente empurrar vegetação para um canto. Tocos e raízes deixados sob aterros criam vazios depois que se decompõem, enquanto entulho misturado ao solo dificulta a regularização. Em áreas rurais ou distantes, a logística de retirada e o destino definido para os materiais também entram no planejamento. A frente só segue para terraplenagem quando o terreno está livre e a condição de acesso permite operar sem espalhar resíduos para áreas que permanecerão preservadas.",
+    erros: ["Enterrar tocos, raízes ou entulho no aterro.", "Começar supressão ou demolição sem definir destino do material.", "Limpar sem separar a área de circulação das máquinas."],
+    etapas: [["Delimitação", "Confirmamos a área que será limpa e o que deve permanecer preservado."], ["Vistoria", "Identificamos vegetação, tocos, entulho, estruturas e acesso para carga."], ["Plano de retirada", "Definimos frente de trabalho, equipamentos e destino dos materiais conforme o escopo."], ["Limpeza mecanizada", "Executamos remoção, destocamento, carga e transporte quando contratados."], ["Área liberada", "Conferimos o terreno para a próxima etapa de terraplenagem ou implantação."]],
+    faqs: [["Limpeza de área inclui destocamento?", "Inclui quando esse item faz parte do escopo. O destocamento é importante quando a área receberá aterro, piso ou outra estrutura."], ["O material retirado pode ficar no terreno?", "Isso depende do material, do escopo e das condições do local. A destinação é definida antes da execução para evitar acúmulo e retrabalho."], ["É possível limpar e nivelar na mesma mobilização?", "Sim, quando o planejamento e o contrato incluem as duas frentes. Isso reduz a transição entre limpeza e preparo do terreno."]],
+  },
+  "locacao-de-maquinas": {
+    contexto:
+      "Locação de máquina pesada não se resume a escolher um equipamento por nome. A decisão considera o serviço, a condição do solo, o espaço de manobra, o acesso da prancha e a duração da frente de trabalho. Em obras afastadas, mobilização e assistência também pesam no planejamento. Quando a locação é com operador, o equipamento chega integrado a uma rotina de obra; sem operador, é importante que o contratante tenha equipe habilitada e combine responsabilidades de operação, abastecimento e uso.",
+    erros: ["Escolher máquina sem avaliar acesso, espaço de giro e aplicação.", "Contratar diária curta sem considerar mobilização e desmobilização.", "Operar equipamento sem alinhar responsabilidades e condições de uso."],
+    etapas: [["Necessidade", "Você informa o serviço, local, prazo e a máquina desejada ou o resultado esperado."], ["Compatibilidade", "Avaliamos equipamento, acesso, operador e forma de contratação adequados."], ["Proposta", "Detalhamos prazo, mobilização, condições de operação e itens do escopo."], ["Entrega em obra", "Programamos o transporte e a entrada do equipamento na data combinada."], ["Acompanhamento", "Mantemos o alinhamento da locação até a retirada ou renovação do contrato."]],
+    faqs: [["Posso alugar mais de uma máquina para a mesma frente?", "Sim. A combinação é definida pelo serviço: escavadeira, pá-carregadeira, patrol, rolo e pipa podem atuar em etapas complementares."], ["Como é feito o transporte da máquina até a obra?", "A mobilização é planejada conforme o equipamento e o acesso ao local, com transporte apropriado para a máquina contratada."], ["O que informar para pedir orçamento de locação?", "Serviço, cidade ou local da obra, período desejado, condição de acesso e se precisa de operador. Essas informações permitem avaliar a mobilização."]],
+  },
+  "transporte-de-maquinas": {
+    contexto:
+      "O transporte de máquinas pesadas começa pelo peso e pelas dimensões do equipamento, mas não termina aí. A rota precisa comportar o conjunto e o canteiro deve oferecer um ponto seguro para embarque e desembarque. Em deslocamentos no Maranhão, a distância e a condição das estradas de acesso influenciam o planejamento da viagem. Conferir essas informações antes evita uma prancha parada em local sem manobra ou uma máquina chegando quando a frente ainda não está preparada para recebê-la.",
+    erros: ["Informar modelo ou peso da máquina de forma incompleta.", "Deixar carga e descarga para local sem espaço de manobra.", "Programar mobilização sem confirmar as condições do acesso."],
+    etapas: [["Dados do equipamento", "Recebemos tipo de máquina, origem, destino e janela desejada para o transporte."], ["Rota e acesso", "Avaliamos percurso, condições de entrada e ponto de embarque e desembarque."], ["Programação", "Definimos a mobilização e as orientações necessárias para o dia do serviço."], ["Embarque e viagem", "A equipe realiza o transporte conforme o planejamento contratado."], ["Desembarque", "Entregamos a máquina no local combinado e alinhamos a desmobilização, se prevista."]],
+    faqs: [["Quais informações preciso passar para transportar uma máquina?", "Tipo e modelo do equipamento, origem, destino, condições de acesso e a data desejada. Fotos do ponto de carga podem ajudar na avaliação."], ["Posso contratar só a desmobilização ao fim da obra?", "Sim. O transporte pode ser solicitado para uma etapa específica, conforme disponibilidade e planejamento da rota."], ["Por que o acesso da obra é importante?", "A prancha precisa de espaço e piso compatível para entrar, manobrar e operar a carga ou descarga com segurança."]],
+  },
+  "caminhao-munck": {
+    contexto:
+      "No serviço com Munck, peso da carga e alcance necessário são informações inseparáveis. A capacidade do equipamento muda conforme a distância entre o caminhão e o ponto de içamento; por isso, não basta dizer que a peça é pesada. Espaço para estabilizadores, piso firme e interferências como rede elétrica ou estruturas próximas também entram na vistoria. Em obras e montagens no Maranhão, planejar esse acesso antes evita deslocar a carga até o local e descobrir que o caminhão não consegue posicionar com segurança.",
+    erros: ["Informar apenas o peso, sem medidas e ponto de posicionamento.", "Reservar área sem piso firme para estabilizadores.", "Ignorar obstáculos e interferências no caminho da lança."],
+    etapas: [["Dados da carga", "Entendemos peso, dimensões, origem, destino e o que precisa ser içado."], ["Avaliação do local", "Conferimos alcance, acesso, piso, espaço de estabilização e interferências."], ["Planejamento", "Definimos posicionamento do caminhão, sequência e condições do serviço."], ["Içamento e transporte", "Executamos carga, movimentação ou descarga conforme o escopo contratado."], ["Conferência", "Finalizamos a operação no ponto combinado e liberamos a área."]],
+    faqs: [["O Munck precisa de espaço para estabilizadores?", "Sim. O caminhão precisa apoiar os estabilizadores em área firme e livre, conforme a posição necessária para a operação."], ["Vocês avaliam o local antes do içamento?", "A avaliação é importante quando há dúvida sobre acesso, alcance, piso ou interferências. Ela orienta o planejamento seguro da operação."], ["O Munck pode movimentar a carga dentro do canteiro?", "Conforme acesso e condições do local, o equipamento pode fazer carga, descarga e posicionamento dentro do escopo combinado."]],
+  },
+  "apoio-a-grandes-obras": {
+    contexto:
+      "Em uma grande obra, máquina parada, acesso sem manutenção ou frente liberada fora de sequência afetam mais de uma equipe. O apoio operacional organiza recursos de acordo com o cronograma real do canteiro: equipamentos, mão de obra, deslocamento entre frentes e controle do que está pronto para receber a próxima etapa. Para obras espalhadas ou com acesso variável no Maranhão, essa coordenação reduz interrupções e ajuda a ajustar a operação às condições de solo, chuva e logística sem perder de vista o escopo contratado.",
+    erros: ["Mobilizar recursos sem alinhar as frentes críticas do cronograma.", "Deixar acessos e logística fora do planejamento da obra.", "Tratar alteração de escopo como ajuste informal, sem registrar impacto."],
+    etapas: [["Leitura do escopo", "Entendemos as frentes, o cronograma, os recursos existentes e os pontos críticos."], ["Plano de apoio", "Organizamos equipamentos, equipes e mobilização de acordo com a sequência da obra."], ["Integração de campo", "Alinhamos entradas, acessos e prioridades com a rotina do canteiro."], ["Acompanhamento", "Ajustamos a operação dentro do escopo quando as frentes evoluem ou exigem replanejamento."], ["Fechamento", "Conferimos entregas, desmobilização e as informações necessárias para a próxima fase."]],
+    faqs: [["O apoio pode ser contratado só para uma frente da obra?", "Sim. O escopo pode atender uma etapa, uma frente específica ou uma necessidade operacional definida."], ["Vocês fornecem equipe e equipamento juntos?", "Conforme a contratação, podemos fornecer máquinas, mão de obra operacional ou os dois recursos integrados."], ["Como o cronograma influencia a proposta?", "Prazo, sequência de frentes e disponibilidade de acesso ajudam a dimensionar mobilização, equipamentos e equipe necessários."]],
+  },
+  "servicos-rurais": {
+    contexto:
+      "Na propriedade rural, a infraestrutura precisa servir ao calendário de produção e às condições reais de acesso. Uma estrada interna mal drenada pode impedir entrada de insumo ou saída de produção justamente na época de chuva; um açude ou reservatório exige leitura do terreno e planejamento do volume de terra. A visita técnica considera relevo, solo, distância e uso da área para definir uma solução prática. O objetivo é organizar acesso, água e áreas de trabalho sem tratar a fazenda como uma obra urbana genérica.",
+    erros: ["Abrir estrada sem caimento e pontos de saída para água.", "Construir açude sem avaliar solo, relevo e destinação da água.", "Nivelar área produtiva sem considerar acesso e escoamento."],
+    etapas: [["Uso da propriedade", "Você explica a necessidade: estrada, açude, limpeza, área de plantio ou outra frente rural."], ["Visita técnica", "Avaliamos relevo, solo, acesso, água e distância da área de trabalho."], ["Escopo de campo", "Definimos máquinas, sequência de serviços e a mobilização necessária."], ["Execução", "Realizamos a frente contratada com acompanhamento das condições do terreno."], ["Entrega", "Conferimos o resultado e orientamos a próxima etapa prevista no serviço."]],
+    faqs: [["A estrada interna pode receber cascalho?", "Quando o diagnóstico indicar necessidade, o cascalhamento pode ser combinado com regularização, drenagem e compactação para reforçar os trechos críticos."], ["Vocês fazem açude e limpeza da área no mesmo projeto?", "As frentes podem ser organizadas juntas quando o escopo, o acesso e a sequência de obra permitem."], ["O que informar para pedir orçamento na fazenda?", "Local da propriedade, necessidade, condição atual do acesso, período desejado e, se possível, fotos ou referências da área."]],
+  },
+};
+
+export const SERVICOS: Servico[] = SERVICOS_BASE.map((servico) => ({
+  ...servico,
+  ...CONTEUDO_POR_SERVICO[servico.slug],
+  faqs: [...servico.faqs, ...CONTEUDO_POR_SERVICO[servico.slug].faqs],
+}));
 
 // Faixa de destaque exibida logo abaixo do hero.
 // Texto denso em palavra-chave, aparece cedo no HTML.
