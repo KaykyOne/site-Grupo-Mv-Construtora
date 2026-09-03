@@ -75,7 +75,9 @@ function PoliticaPrivacidade() {
                 <li>Nome (obrigatório)</li>
                 <li>Descrição da necessidade (obrigatório)</li>
                 <li>Serviço e cidade da obra (opcionais)</li>
-                <li>Telefone e e-mail (opcionais, apenas se você preferir outro canal de retorno)</li>
+                <li>
+                  Telefone e e-mail (opcionais, apenas se você preferir outro canal de retorno)
+                </li>
               </ul>
               <p className="mt-3">
                 A partir do momento em que você envia a mensagem, o tratamento passa a ocorrer na

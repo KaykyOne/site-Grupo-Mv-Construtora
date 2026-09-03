@@ -21,7 +21,8 @@ const lerPosts = async () => {
       .filter((arquivo) => arquivo.isFile() && arquivo.name.endsWith(".md"))
       .map(async (arquivo) => {
         const conteudo = await readFile(path.join(diretorio, arquivo.name), "utf8");
-        const atualizadoEm = conteudo.match(/^atualizadoEm:\s*(\d{4}-\d{2}-\d{2})\s*$/m)?.[1] ?? hoje;
+        const atualizadoEm =
+          conteudo.match(/^atualizadoEm:\s*(\d{4}-\d{2}-\d{2})\s*$/m)?.[1] ?? hoje;
         return { slug: arquivo.name.replace(/\.md$/, ""), atualizadoEm };
       }),
   );

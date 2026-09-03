@@ -26,8 +26,7 @@ const fundo = await sharp("src/assets/otimizadas/fotodas3escavadeiras.webp")
   .blur(1.5)
   .toBuffer();
 
-const escapar = (s) =>
-  s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const escapar = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
 const texto = `
 <svg width="${LARGURA}" height="${ALTURA}" xmlns="http://www.w3.org/2000/svg">
@@ -67,10 +66,12 @@ await sharp(fundo)
   .jpeg({ quality: 86, progressive: true })
   .toFile(SAIDA);
 
-const { size } = await sharp(SAIDA).metadata().then(async (m) => ({
-  ...m,
-  size: (await readFile(SAIDA)).length,
-}));
+const { size } = await sharp(SAIDA)
+  .metadata()
+  .then(async (m) => ({
+    ...m,
+    size: (await readFile(SAIDA)).length,
+  }));
 
 console.log(`ok ${SAIDA}  ${LARGURA}x${ALTURA}  ${Math.round(size / 1024)} KB`);
 console.log(`   logo aplicada: ${logoMeta.width}x${logoMeta.height}`);

@@ -29,7 +29,9 @@ export const MENU_COMPLETO: ItemMenu[] = [
 
 /** Recorte do header desktop, que tem espaço limitado. */
 export const MENU_PRINCIPAL: ItemMenu[] = MENU_COMPLETO.filter((item) =>
-  ["#servicos", "#frota", "#quem-somos", "#area-de-atuacao", "#contato"].includes(item.href),
+  ["/blog", "#servicos", "#frota", "#quem-somos", "#area-de-atuacao", "#contato"].includes(
+    item.href,
+  ),
 );
 
 /**

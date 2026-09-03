@@ -145,7 +145,9 @@ function PaginaServico() {
               <h2 className="text-xl font-semibold tracking-tight">Erros que encarecem a obra</h2>
               <ul className="mt-5 space-y-4 text-zinc-700">
                 {servico.erros.map((erro) => (
-                  <li key={erro} className="leading-7">{erro}</li>
+                  <li key={erro} className="leading-7">
+                    {erro}
+                  </li>
                 ))}
               </ul>
             </div>

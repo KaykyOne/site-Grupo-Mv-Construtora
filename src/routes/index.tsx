@@ -297,21 +297,21 @@ function HeroBackgroundSlideshow() {
       </picture>
       {index !== 0 && (
         <AnimatePresence initial={false} mode="wait">
-        <motion.img
-          key={index}
-          src={slideshowImages[index].src}
-          alt={slideshowImages[index].alt}
-          width={1600}
-          height={1067}
-          loading="lazy"
-          fetchPriority="low"
-          decoding="async"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.6, ease: "easeInOut" }}
-          className="absolute inset-0 h-full w-full object-cover"
-        />
+          <motion.img
+            key={index}
+            src={slideshowImages[index].src}
+            alt={slideshowImages[index].alt}
+            width={1600}
+            height={1067}
+            loading="lazy"
+            fetchPriority="low"
+            decoding="async"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
         </AnimatePresence>
       )}
     </div>
@@ -705,7 +705,10 @@ function Index() {
         </section>
 
         {/* SOBRE */}
-        <section id="quem-somos" className="relative isolate overflow-hidden py-20 text-white sm:py-24 lg:py-32">
+        <section
+          id="quem-somos"
+          className="relative isolate overflow-hidden py-20 text-white sm:py-24 lg:py-32"
+        >
           <img
             src={alaneasmaquinas1}
             alt=""
@@ -717,108 +720,112 @@ function Index() {
             className="absolute inset-0 -z-20 h-full w-full object-cover"
           />
           <div aria-hidden="true" className="absolute inset-0 -z-10 bg-black/20" />
-          <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-r from-zinc-950/80 via-zinc-950/65 to-zinc-950/35" />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 -z-10 bg-gradient-to-r from-zinc-950/80 via-zinc-950/65 to-zinc-950/35"
+          />
           <div className="mx-auto max-w-7xl px-5 sm:px-8">
             <div className="max-w-3xl border-l-2 border-red-500 pl-5 sm:pl-7">
-            <div>
-              <SectionTitle
-                eyebrow="Quem somos"
-                title="Construção que nasce da experiência de campo."
-                light
-              />
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-white/80">
-                De PindarÃ©-Mirim para obras em todo o MaranhÃ£o, a MV Construtora une experiÃªncia
-                de campo, planejamento e relaÃ§Ãµes de confianÃ§a.
-              </p>
-              <div className="mt-10 max-w-3xl space-y-0 leading-7 text-white/80 [&>h3]:mt-5 [&>h3]:border-l-2 [&>h3]:border-red-500 [&>h3]:bg-zinc-950/75 [&>h3]:px-5 [&>h3]:py-4 [&>h3]:text-lg [&>h3]:font-semibold [&>h3]:text-white [&>p]:bg-zinc-950/75 [&>p]:px-5 [&>p]:pb-5 [&>p]:text-sm [&>ul]:bg-zinc-950/75 [&>ul]:px-5 [&>ul]:pb-5 [&>ul]:pt-1 [&>ul]:text-sm">
-                <h3 className="text-xl font-semibold text-white">Nossa história</h3>
-                <p>
-                  A MV Construtora nasceu do sonho, da determinação e da visão empreendedora de{" "}
-                  <strong className="font-semibold text-white">Alan Robson Leite Pereira</strong>,
-                  que fundou a empresa em{" "}
-                  <time dateTime="2011-09-14">14 de setembro de 2011</time>, em Pindaré-Mirim, no
-                  Maranhão.
+              <div>
+                <SectionTitle
+                  eyebrow="Quem somos"
+                  title="Construção que nasce da experiência de campo."
+                  light
+                />
+                <p className="mt-6 max-w-2xl text-lg leading-8 text-white/80">
+                  De PindarÃ©-Mirim para obras em todo o MaranhÃ£o, a MV Construtora une
+                  experiÃªncia de campo, planejamento e relaÃ§Ãµes de confianÃ§a.
                 </p>
-                <p>
-                  Filho de Maria Aparecida e de José de Anchieta (in memoriam), Alan sempre
-                  acreditou que o trabalho realizado com honestidade, dedicação e compromisso é
-                  capaz de transformar vidas e construir um legado. Corretor de imóveis por
-                  formação e empreendedor por vocação, é casado com Talita Mendes e pai de Miguel
-                  Ângelo e Alan Vinícius.
-                </p>
+                <div className="mt-10 max-w-3xl space-y-0 leading-7 text-white/80 [&>h3]:mt-5 [&>h3]:border-l-2 [&>h3]:border-red-500 [&>h3]:bg-zinc-950/75 [&>h3]:px-5 [&>h3]:py-4 [&>h3]:text-lg [&>h3]:font-semibold [&>h3]:text-white [&>p]:bg-zinc-950/75 [&>p]:px-5 [&>p]:pb-5 [&>p]:text-sm [&>ul]:bg-zinc-950/75 [&>ul]:px-5 [&>ul]:pb-5 [&>ul]:pt-1 [&>ul]:text-sm">
+                  <h3 className="text-xl font-semibold text-white">Nossa história</h3>
+                  <p>
+                    A MV Construtora nasceu do sonho, da determinação e da visão empreendedora de{" "}
+                    <strong className="font-semibold text-white">Alan Robson Leite Pereira</strong>,
+                    que fundou a empresa em{" "}
+                    <time dateTime="2011-09-14">14 de setembro de 2011</time>, em Pindaré-Mirim, no
+                    Maranhão.
+                  </p>
+                  <p>
+                    Filho de Maria Aparecida e de José de Anchieta (in memoriam), Alan sempre
+                    acreditou que o trabalho realizado com honestidade, dedicação e compromisso é
+                    capaz de transformar vidas e construir um legado. Corretor de imóveis por
+                    formação e empreendedor por vocação, é casado com Talita Mendes e pai de Miguel
+                    Ângelo e Alan Vinícius.
+                  </p>
 
-                <h3 className="pt-2 text-xl font-semibold text-white">A origem do nome</h3>
-                <p>
-                  Foi justamente do maior patrimônio de sua vida — sua família — que surgiu o nome
-                  da empresa. A união das iniciais de seus filhos,{" "}
-                  <strong className="font-semibold text-white">M</strong>iguel e{" "}
-                  <strong className="font-semibold text-white">V</strong>inícius, deu origem à MV
-                  Construtora, simbolizando que cada obra carrega os mesmos valores cultivados
-                  dentro de casa: responsabilidade, confiança, respeito e compromisso com o futuro.
-                </p>
+                  <h3 className="pt-2 text-xl font-semibold text-white">A origem do nome</h3>
+                  <p>
+                    Foi justamente do maior patrimônio de sua vida — sua família — que surgiu o nome
+                    da empresa. A união das iniciais de seus filhos,{" "}
+                    <strong className="font-semibold text-white">M</strong>iguel e{" "}
+                    <strong className="font-semibold text-white">V</strong>inícius, deu origem à MV
+                    Construtora, simbolizando que cada obra carrega os mesmos valores cultivados
+                    dentro de casa: responsabilidade, confiança, respeito e compromisso com o
+                    futuro.
+                  </p>
 
-                <h3 className="pt-2 text-xl font-semibold text-white">Nossa trajetória</h3>
-                <p>
-                  Ao longo de sua trajetória, a empresa atuou na construção de edifícios e
-                  residências, adquirindo sólida experiência no setor da construção civil. Com o
-                  passar dos anos, acompanhando as necessidades do mercado e investindo
-                  continuamente em pessoas, equipamentos e tecnologia, a MV Construtora expandiu
-                  sua atuação e especializou-se em obras de terraplenagem e infraestrutura no
-                  Maranhão.
-                </p>
-                <p>
-                  Mais do que executar obras, a MV Construtora constrói relacionamentos duradouros,
-                  gera desenvolvimento para as comunidades onde atua e contribui para o crescimento
-                  da infraestrutura do estado.
-                </p>
+                  <h3 className="pt-2 text-xl font-semibold text-white">Nossa trajetória</h3>
+                  <p>
+                    Ao longo de sua trajetória, a empresa atuou na construção de edifícios e
+                    residências, adquirindo sólida experiência no setor da construção civil. Com o
+                    passar dos anos, acompanhando as necessidades do mercado e investindo
+                    continuamente em pessoas, equipamentos e tecnologia, a MV Construtora expandiu
+                    sua atuação e especializou-se em obras de terraplenagem e infraestrutura no
+                    Maranhão.
+                  </p>
+                  <p>
+                    Mais do que executar obras, a MV Construtora constrói relacionamentos
+                    duradouros, gera desenvolvimento para as comunidades onde atua e contribui para
+                    o crescimento da infraestrutura do estado.
+                  </p>
 
-                <h3 className="pt-2 text-xl font-semibold text-white">
-                  Serviços em que somos referência
-                </h3>
-                <ul className="list-disc space-y-2 pl-5 marker:text-red-500">
-                  <li>Terraplenagem</li>
-                  <li>Construção e recuperação de estradas vicinais</li>
-                  <li>Escavação, corte e aterro</li>
-                  <li>Regularização e nivelamento de terrenos</li>
-                  <li>Preparação de solo para plantio e empreendimentos agrícolas</li>
-                  <li>Limpeza e conformação de áreas</li>
-                  <li>Movimentação de terra para obras públicas e privadas</li>
-                </ul>
+                  <h3 className="pt-2 text-xl font-semibold text-white">
+                    Serviços em que somos referência
+                  </h3>
+                  <ul className="list-disc space-y-2 pl-5 marker:text-red-500">
+                    <li>Terraplenagem</li>
+                    <li>Construção e recuperação de estradas vicinais</li>
+                    <li>Escavação, corte e aterro</li>
+                    <li>Regularização e nivelamento de terrenos</li>
+                    <li>Preparação de solo para plantio e empreendimentos agrícolas</li>
+                    <li>Limpeza e conformação de áreas</li>
+                    <li>Movimentação de terra para obras públicas e privadas</li>
+                  </ul>
 
-                <p>
-                  Cada projeto é conduzido com planejamento, segurança, qualidade técnica e
-                  respeito aos prazos estabelecidos, buscando sempre superar as expectativas de
-                  clientes e parceiros.
-                </p>
-                <p className="font-medium text-white">
-                  MV Construtora — movendo a terra, construindo o futuro e deixando um legado de
-                  confiança, excelência e compromisso em cada projeto.
-                </p>
-              </div>
+                  <p>
+                    Cada projeto é conduzido com planejamento, segurança, qualidade técnica e
+                    respeito aos prazos estabelecidos, buscando sempre superar as expectativas de
+                    clientes e parceiros.
+                  </p>
+                  <p className="font-medium text-white">
+                    MV Construtora — movendo a terra, construindo o futuro e deixando um legado de
+                    confiança, excelência e compromisso em cada projeto.
+                  </p>
+                </div>
 
-              {/*
+                {/*
                 PENDENTE: trocar por números reais da empresa (task 09).
                 "100% compromisso com prazos" é alegação genérica e não verificável —
                 sistemas de IA descartam esse tipo de afirmação. Substituir por algo
                 aferível: obras entregues, máquinas próprias, m³ movimentados.
                 Ao acrescentar o terceiro número, voltar o grid para grid-cols-3.
               */}
-              <div className="mt-8 grid grid-cols-2 gap-6 border-t border-white/20 pt-7">
-                {[
-                  ["+11", "anos de atuação"],
-                  //["+50", "obras entregues"],
-                  ["100%", "compromisso com prazos"],
-                ].map(([value, label]) => (
-                  <div key={label}>
-                    <p className="text-3xl font-semibold tracking-tight text-red-500 sm:text-6xl">
-                      {value}
-                    </p>
-                    <p className="mt-1 text-sm leading-5 text-white/60">{label}</p>
-                  </div>
-                ))}
+                <div className="mt-8 grid grid-cols-2 gap-6 border-t border-white/20 pt-7">
+                  {[
+                    ["+11", "anos de atuação"],
+                    //["+50", "obras entregues"],
+                    ["100%", "compromisso com prazos"],
+                  ].map(([value, label]) => (
+                    <div key={label}>
+                      <p className="text-3xl font-semibold tracking-tight text-red-500 sm:text-6xl">
+                        {value}
+                      </p>
+                      <p className="mt-1 text-sm leading-5 text-white/60">{label}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
           </div>
         </section>
 

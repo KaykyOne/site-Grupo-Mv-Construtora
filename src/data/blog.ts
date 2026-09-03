@@ -41,7 +41,13 @@ function lerPost(caminho: string, arquivo: string): PostBlog {
       .filter(Boolean)
       .map((linha) => {
         const indice = linha.indexOf(":");
-        return [linha.slice(0, indice).trim(), linha.slice(indice + 1).trim().replace(/^"|"$/g, "")];
+        return [
+          linha.slice(0, indice).trim(),
+          linha
+            .slice(indice + 1)
+            .trim()
+            .replace(/^"|"$/g, ""),
+        ];
       }),
   ) as Frontmatter;
 
