@@ -6,6 +6,7 @@ export type PostBlog = {
   atualizadoEm: string;
   autor: string;
   servicos: string[];
+  imagem: string;
   conteudo: string;
 };
 
@@ -16,6 +17,19 @@ const arquivos = import.meta.glob("../content/blog/*.md", {
   query: "?raw",
   import: "default",
 }) as Record<string, string>;
+
+const IMAGENS_POSTS: Record<string, string> = {
+  "quanto-custa-terraplenagem-maranhao": fotodaobra,
+  "terraplenagem-ou-terraplanagem": tresEscavadeiras,
+  "maquina-para-cada-etapa-da-terraplenagem": escavadeira,
+  "escavadeira-pa-carregadeira-ou-retroescavadeira": escavadeira,
+  "quanto-tempo-para-terraplanar-terreno": rolo,
+  "licencas-para-terraplenagem-maranhao": fotodaobra,
+  "como-preparar-solo-para-plantio": patrol,
+  "recuperacao-de-estradas-vicinais": patrol,
+  "locacao-com-ou-sem-operador": caminhao,
+  "erros-que-encarecem-terraplenagem": caminhaopipa,
+};
 
 function lerPost(caminho: string, arquivo: string): PostBlog {
   const encontrado = arquivo.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
@@ -52,6 +66,7 @@ function lerPost(caminho: string, arquivo: string): PostBlog {
     atualizadoEm: campos.atualizadoEm,
     autor: campos.autor,
     servicos: campos.servicos.split(",").map((servico) => servico.trim()),
+    imagem: IMAGENS_POSTS[slug] ?? fotodaobra,
     conteudo: encontrado[2].trim(),
   };
 }
@@ -61,3 +76,10 @@ export const POSTS_BLOG = Object.entries(arquivos)
   .sort((a, b) => b.publicadoEm.localeCompare(a.publicadoEm));
 
 export const postPorSlug = (slug: string) => POSTS_BLOG.find((post) => post.slug === slug);
+import caminhao from "@/assets/otimizadas/caminhao.webp";
+import caminhaopipa from "@/assets/otimizadas/caminhaopipa.webp";
+import escavadeira from "@/assets/otimizadas/escavadeira1.webp";
+import fotodaobra from "@/assets/otimizadas/fotodaobra.webp";
+import patrol from "@/assets/otimizadas/patrol.webp";
+import rolo from "@/assets/otimizadas/rolocompactador.webp";
+import tresEscavadeiras from "@/assets/otimizadas/tresescavadeiras1.webp";

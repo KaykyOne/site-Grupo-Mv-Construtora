@@ -27,6 +27,15 @@ if (sitemap.status !== 0) {
   process.exit(sitemap.status ?? 1);
 }
 
+const imagens = spawnSync(process.execPath, ["scripts/gerar-imagens-responsivas.mjs"], {
+  stdio: "inherit",
+  env: process.env,
+});
+
+if (imagens.status !== 0) {
+  process.exit(imagens.status ?? 1);
+}
+
 const resultado = spawnSync("npx", ["vite", "build"], {
   stdio: "inherit",
   shell: true,

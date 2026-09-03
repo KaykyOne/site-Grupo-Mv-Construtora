@@ -47,6 +47,7 @@ import eventoinauguracao from "@/assets/otimizadas/eventoinauguracao.webp";
 import fotodaplacatigd from "@/assets/otimizadas/fotodaplacatigd.webp";
 import andamentodaobra from "@/assets/otimizadas/andamentodaobra.webp";
 import colaboradores from "@/assets/otimizadas/colaboradores.webp";
+import colaboradoresMobile from "@/assets/otimizadas/colaboradores-mobile.webp";
 import alaneasmaquinas1 from "@/assets/otimizadas/alaneasmaquinas1.webp";
 import caminhaopipa1 from "@/assets/otimizadas/caminhaopipa1.webp";
 import caminhaoprancha from "@/assets/otimizadas/caminhaoprancha.webp";
@@ -281,16 +282,19 @@ function HeroBackgroundSlideshow() {
   return (
     <div className="absolute inset-0">
       {/* A foto inicial é HTML estático: o navegador a pinta antes de baixar e hidratar o React. */}
-      <img
-        src={slideshowImages[0].src}
-        alt={slideshowImages[0].alt}
-        width={1600}
-        height={1067}
-        loading="eager"
-        fetchPriority="high"
-        decoding="async"
-        className="absolute inset-0 h-full w-full object-cover"
-      />
+      <picture>
+        <source media="(max-width: 768px)" srcSet={colaboradoresMobile} />
+        <img
+          src={slideshowImages[0].src}
+          alt={slideshowImages[0].alt}
+          width={1600}
+          height={1067}
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      </picture>
       {index !== 0 && (
         <AnimatePresence initial={false} mode="wait">
         <motion.img
