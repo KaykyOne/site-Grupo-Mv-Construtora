@@ -37,7 +37,10 @@ export function VideoPlayer({ video, ativo }: { video: VideoItem; ativo: boolean
       >
         <img
           src={video.poster}
-          alt={video.titulo}
+          // O título já aparece como texto logo abaixo e no aria-label do botão.
+          // Repetir aqui faz o leitor de tela anunciar a mesma frase três vezes
+          // (auditoria image-redundant-alt). A imagem é decorativa neste contexto.
+          alt=""
           width={1600}
           height={900}
           loading="lazy"

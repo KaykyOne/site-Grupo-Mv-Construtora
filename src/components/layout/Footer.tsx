@@ -80,7 +80,7 @@ export function Footer() {
             href={EMPRESA.instagramUrl}
             target="_blank"
             rel="me noopener noreferrer"
-            aria-label="Instagram da MV Construtora"
+            aria-label={`${EMPRESA.instagramHandle} — Instagram da MV Construtora`}
             className="mb-3 flex items-center gap-2 text-sm hover:text-red-400"
           >
             <Instagram size={16} /> {EMPRESA.instagramHandle}
@@ -89,7 +89,7 @@ export function Footer() {
             href={YOUTUBE_CANAL}
             target="_blank"
             rel="me noopener noreferrer"
-            aria-label="Canal da MV Construtora no YouTube"
+            aria-label="YouTube — canal da MV Construtora"
             className="mb-3 flex items-center gap-2 text-sm hover:text-red-400"
           >
             <Youtube size={16} /> YouTube

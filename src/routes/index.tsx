@@ -282,7 +282,9 @@ function HeroBackgroundSlideshow() {
   return (
     <div className="absolute inset-0">
       {/* A foto inicial é HTML estático: o navegador a pinta antes de baixar e hidratar o React. */}
-      <picture>
+      {/* display:contents — <picture> é inline por padrão e geraria caixa de linha
+          no fluxo, mesmo contendo só um <img> absoluto. */}
+      <picture className="contents">
         <source media="(max-width: 768px)" srcSet={colaboradoresMobile} />
         <img
           src={slideshowImages[0].src}
@@ -585,7 +587,7 @@ function Index() {
                     aria-pressed={active}
                     className={`rounded-full border px-5 py-2 text-sm font-semibold transition-all ${
                       active
-                        ? "border-red-500 bg-red-500 text-white"
+                        ? "border-red-600 bg-red-700 text-white"
                         : "border-white/30 bg-white/10 text-white/90 hover:border-white/50 hover:text-white"
                     }`}
                   >
@@ -661,7 +663,7 @@ function Index() {
               </p>
               <Link
                 to="/servicos"
-                className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-red-600 hover:text-red-700"
+                className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-red-700 hover:text-red-800"
               >
                 Ver todos os serviços em detalhe <MoveUpRight size={16} />
               </Link>
@@ -919,7 +921,7 @@ function Index() {
               </li>
             ))}
           </ul>
-          <p className="mt-7 text-sm text-zinc-500">
+          <p className="mt-7 text-sm text-zinc-600">
             Não encontrou sua cidade? Atendemos todo o Maranhão —{" "}
             <a
               href="#contato"

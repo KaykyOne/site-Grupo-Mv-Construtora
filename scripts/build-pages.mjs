@@ -39,7 +39,10 @@ if (imagens.status !== 0) {
 const resultado = spawnSync("npx", ["vite", "build"], {
   stdio: "inherit",
   shell: true,
-  env: { ...process.env, BUILD_TARGET: "static", BASE_PATH },
+  // VITE_BUILD_TARGET é lido por src/config/empresa.ts (E_PREVIEW) e vira o
+  // <meta name="robots" content="noindex"> das páginas. Precisa ser env var de
+  // verdade: o `define` do vite.config.ts não chegava ao bundle.
+  env: { ...process.env, BUILD_TARGET: "static", VITE_BUILD_TARGET: "static", BASE_PATH },
 });
 
 if (resultado.status !== 0) {
@@ -49,12 +52,12 @@ if (resultado.status !== 0) {
 // O diretório de saída do prerender varia conforme a versão do TanStack Start.
 // Escrevemos o robots.txt nos candidatos mais prováveis.
 const candidatos = [".output/public", "dist", "dist/client"];
+// Bloqueia tudo de propósito. Se o Google indexar a cópia do preview, ela vira
+// conteúdo duplicado e passa a disputar posição com a produção.
 const robots = `# Build de PREVIEW. Não deve ser indexado.
 # A versão pública e indexável está em https://www.grupomvconstrutora.com.br
 User-agent: *
-Allow: /
-
-Sitemap: https://www.grupomvconstrutora.com.br/sitemap.xml
+Disallow: /
 `;
 
 for (const dir of candidatos) {
