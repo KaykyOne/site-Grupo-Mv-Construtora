@@ -1,8 +1,12 @@
 # Tasks — Projeto MV Construtora
 
 Backlog de melhorias para tornar o site `www.grupomvconstrutora.com.br` o resultado
-dominante para "MV Construtora" e para buscas de terraplenagem no Maranhão, e para
-que o Gemini / AI Overviews consigam ler e recomendar a empresa.
+dominante para "MV Construtora" e para buscas de terraplenagem no Maranhão, Piauí e
+Ceará, e para que o Gemini / AI Overviews consigam ler e recomendar a empresa.
+
+> A área de atuação foi ampliada em 04/09/2026 de "Maranhão" para os três estados.
+> A fonte única de estados e cidades é `src/data/regioes.ts` — ver
+> [task 18](18-area-de-atuacao-multiestado.md).
 
 ## Linha de base (02/09/2026)
 
@@ -49,13 +53,14 @@ Detalhamento completo em [BASELINE-2026-09-02.md](BASELINE-2026-09-02.md).
 | 15  | [Headers de segurança HTTP](15-headers-seguranca.md)                           | P3         | 30 min             | 🟢 Baixo              |
 | 16  | [Conteúdo recorrente / blog](16-conteudo-blog.md)                              | P3         | contínuo           | 🟠 Alto (longo prazo) |
 | 17  | [Instagram: vincular e indexar](17-instagram-redes-sociais.md)                 | P1         | 1-2 h              | 🟠 Alto               |
+| 18  | [Área de atuação: MA, PI e CE + CNPJ](18-area-de-atuacao-multiestado.md)       | P0         | 3 h                | 🔴 Altíssimo          |
 
 ## Ordem de execução recomendada
 
 ```
 01 ──▶ (desbloqueio de segurança, independente)
 06 ──▶ (fazer HOJE: Search Console só coleta dados a partir do cadastro)
-02 ──▶ 12 ──▶ 04 ──▶ 03 ──▶ 17 ──▶ 05 ──▶ 07 ──▶ 11 ──▶ 13 ──▶ 10 ──▶ 14 ──▶ 08 ──▶ 09 ──▶ 15 ──▶ 16
+02 ──▶ 12 ──▶ 04 ──▶ 03 ──▶ 18 ──▶ 17 ──▶ 05 ──▶ 07 ──▶ 11 ──▶ 13 ──▶ 10 ──▶ 14 ──▶ 08 ──▶ 09 ──▶ 15 ──▶ 16
 ```
 
 Justificativa da ordem:
@@ -68,6 +73,8 @@ Justificativa da ordem:
 - **17** logo após a **03** porque o `sameAs` do Instagram mora no JSON-LD.
 - **14** antes de **08** porque criar 14 páginas a partir de um arquivo de 1.500
   linhas duplicaria código.
+- **18** depois da **03** e da **04**: ela amplia o que essas duas montaram, trocando
+  a lista de cidades por uma estrutura de três estados.
 
 ## Como medir o resultado
 
@@ -88,9 +95,11 @@ Placar-alvo ao fim do backlog:
 | Blocos JSON-LD válidos               | 0         | 4+        |
 | robots.txt / sitemap.xml             | 404 / 404 | 200 / 200 |
 | Menções a "Maranhão"                 | 0         | 15+       |
+| Estados no `areaServed`              | 0         | 3         |
+| Cidades no `areaServed`              | 0         | 47        |
 | Categorias de serviço no site        | 5         | 10        |
 | Perfis sociais vinculados (`sameAs`) | 0         | 1+        |
-| Páginas indexáveis                   | 1         | 14+       |
+| Páginas indexáveis                   | 1         | 31        |
 
 ## Convenção dos arquivos
 

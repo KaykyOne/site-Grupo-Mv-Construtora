@@ -1,6 +1,6 @@
 # Handoff — site MV Construtora
 
-Contexto para continuar o trabalho. Última atualização: 03/09/2026.
+Contexto para continuar o trabalho. Última atualização: 04/09/2026.
 
 ---
 
@@ -16,7 +16,9 @@ deploy na Vercel · projeto conectado ao **Lovable**.
 ### Objetivo do trabalho
 
 1. Vencer as **outras empresas chamadas "MV Construtora"** no Google — a chave é
-   ancorar a entidade no Maranhão (antes o site não citava o estado nenhuma vez).
+   ancorar a entidade geograficamente (antes o site não citava o estado nenhuma vez).
+   Desde 04/09/2026 a área de atuação é **Maranhão, Piauí e Ceará**, com 47 cidades
+   em `src/data/regioes.ts` (task 18).
 2. Ser **legível por IA** (Gemini / AI Overviews): SSR + JSON-LD + perguntas
    respondidas de forma direta.
 3. Performance: o site carregava **15,4 MB** com **LCP de 35,5 s** no mobile.
@@ -31,6 +33,8 @@ deploy na Vercel · projeto conectado ao **Lovable**.
   - `frota.ts` — 6 máquinas; cada uma declara em `servicos: []` onde atua, e as
     páginas de serviço fazem a busca inversa com `maquinasDoServico()`
   - `videos.ts` — vídeos do YouTube
+  - `regioes.ts` — estados e cidades atendidas (MA, PI, CE). **Não** recriar lista
+    de cidades em outro arquivo: já houve duplicata em `servicos.ts`, removida.
 - **Config** em `src/config/` (`empresa.ts`, `navegacao.ts`).
 - **Layout compartilhado** em `src/components/layout/` (`SiteLayout` aplicado no
   `__root.tsx`) e `src/components/site/` (blocos reutilizáveis).
@@ -46,7 +50,7 @@ deploy na Vercel · projeto conectado ao **Lovable**.
 
 ---
 
-## Estado atual: 20 rotas
+## Estado atual: 31 rotas
 
 ```
 /                                  home (mantém as âncoras de seção)
@@ -54,6 +58,8 @@ deploy na Vercel · projeto conectado ao **Lovable**.
 /servicos/$slug                    10 serviços
 /frota                             índice com filtro por categoria
 /frota/$slug                       6 máquinas
+/blog                              índice
+/blog/$slug                        10 posts (Markdown em src/content/blog/)
 /politica-de-privacidade           LGPD
 ```
 
@@ -78,73 +84,72 @@ Slug inválido devolve 404 real (`notFound()` no loader).
 
 ---
 
+## Mudanças recentes (04/09/2026)
+
+- **Área de atuação ampliada** para Maranhão, Piauí e Ceará — 3 estados e 47
+  cidades, em três níveis (capital, polos regionais, cidades menores). Ver
+  [task 18](18-area-de-atuacao-multiestado.md).
+- **Dados do cartão CNPJ aplicados**: endereço `Rod. Pitombeira, s/n` e razão
+  social `A R LEITE PEREIRA LTDA`, que entrou como `legalName` no schema.
+- **Blog: os 9 posts que eram esboço foram escritos** — os 10 agora estão entre
+  1.208 e 1.751 palavras, dentro da faixa da skill.
+- **Acessibilidade 100** confirmada por Lighthouse no build de produção.
+- **Preview do GitHub Pages voltou a ter `noindex`** — a detecção agora usa
+  `import.meta.env.BASE_URL !== "/"`, que o Vite sempre define. A versão anterior
+  dependia de uma env var `VITE_*` que não chegava ao bundle, e o preview ficou
+  publicável e indexável por um tempo.
+
+### ⚠️ Armadilha: telefone e e-mail NÃO vêm do cartão CNPJ
+
+O cartão traz `(98) 9197-2921` e `mvconstrutoraeimobiliaria@outlook.com` — dados de
+cadastro na Receita. Numa passagem eles foram aplicados no site e **quebraram o
+WhatsApp**: `559891972921` tem 12 dígitos, e celular no WhatsApp exige 13
+(`55 + DDD + 9 + 8`). O botão principal de conversão parou de funcionar.
+
+Os valores comerciais corretos são `(98) 99236-8928` (o mesmo cadastrado como Chat
+no Google Meu Negócio) e `atendimento@grupomvconstrutora.com.br`. O telefone da
+Receita ficou preservado em `EMPRESA.telefoneCadastroCnpj`.
+
 ## O que falta
 
-### 12 — Acessibilidade (parcial, **continue daqui**)
+### Concluído desde a versão anterior deste handoff
 
-Feito: `src/hooks/use-reduced-motion.ts`, `revealSemMovimento` em
-`src/components/site/animacoes.ts`, `SectionTitle` e `index.tsx` usando
-`useReveal()`, e o slideshow do hero parando sob `prefers-reduced-motion`.
+- **Acessibilidade (task 11): 100.** `useReveal()`, `revealSemMovimento`, os dois
+  slideshows respeitando `prefers-reduced-motion`, foco visível global, contraste
+  corrigido em `index.tsx` e em `frota/index.tsx`, `alt=""` no poster do vídeo e
+  `aria-label` dos links sociais contendo o texto visível (WCAG 2.5.3).
+- **Blog (task 16/17): completo.** 10 posts entre 1.208 e 1.751 palavras, rotas
+  `/blog` e `/blog/$slug`, `Article` no JSON-LD, skill documentada em
+  `.claude/skills/novo-post-blog/SKILL.md`, sitemap com 31 URLs.
+- **`etapas` por serviço:** saiu de `servicos/$slug.tsx` (onde era idêntico nas 10
+  páginas) para `src/data/servicos.ts`.
 
-Falta:
+### Ainda aberto
 
-1. **`DiferenciaisSlideshow`** (`src/routes/index.tsx`, ~linha 306) ainda gira
-   sozinho. Aplicar o mesmo padrão do `HeroBackgroundSlideshow`:
-   ```ts
-   const reduzirMovimento = useReducedMotion();
-   useEffect(() => {
-     if (reduzirMovimento) return;
-     const timer = setInterval(...);
-     return () => clearInterval(timer);
-   }, [reduzirMovimento]);
-   ```
-2. **Foco visível global** em `src/styles.css` — o site usa muita classe
-   utilitária sem `focus-visible:`, então quem navega por teclado não vê onde
-   está. Adicionar `:focus-visible { outline: 3px solid #ef4444; outline-offset: 2px; }`
-   e um bloco `@media (prefers-reduced-motion: reduce)` zerando durações.
-3. **Rodar o Lighthouse** e confirmar Acessibilidade **100** (linha de base: 86).
+**Conteúdo das páginas (task 08/14).** Medido em 04/09/2026:
 
-As 3 falhas originais (contraste nos filtros da frota, link vazio no rodapé,
-alvos de toque dos dots) **já foram corrigidas** — confirmar que não voltaram.
+| Página | Palavras | Meta |
+|---|---|---|
+| `/servicos/terraplanagem` | 846 | 800+ ✅ |
+| `/servicos/drenagem` | 726 | ⚠️ |
+| `/servicos/caminhao-munck` | 670 | ⚠️ |
+| `/frota/escavadeira-hidraulica` | 566 | ⚠️ |
+| `/frota/rolo-compactador` | 530 | ⚠️ |
 
-### 14 — Expandir o conteúdo das páginas
+As páginas de frota são as mais curtas. Sugestão de campos que rendem conteúdo
+naturalmente diferenciado, sem encher linguiça: `contexto` (por que importa na
+região — chuva, solo, distância) e `erros` (o que encarece a obra). Também falta
+imagem nas páginas de serviço.
 
-Hoje: ~350-500 palavras por página. **Meta: 800+.** Página fina não ranqueia e
-ainda arrasta o site.
+**Performance.** Última medição em build de produção servido localmente:
+FCP 1,4 s · LCP 1,7 s · TBT 0 ms · 245 KB. O número de Performance sai como 76 por
+causa de um CLS de 0,753 que **é artefato do `vite preview` com emulação mobile**,
+não regressão: o trace tem um único `LayoutShift` com `had_recent_input: true` e
+`cumulative_score: 0`, o CLS no dev server é 0, e a observação direta no navegador
+não registra shift. Não "corrija" isso — meça em produção depois do deploy.
 
-- O bloco **"Como funciona a contratação"** é a constante `etapas` em
-  `src/routes/servicos/$slug.tsx` — **idêntico nas 10 páginas**. É o único
-  conteúdo duplicado que restou. Mover para `src/data/servicos.ts` como campo
-  `etapas` por serviço e escrever texto próprio para cada um.
-- Ampliar `faqs` de 3 para 5-6 por serviço e por máquina.
-- Sugestão de campos novos em `servicos.ts` para engordar com substância real:
-  `contexto` (por que isso importa no Maranhão — chuva, tipo de solo, distância)
-  e `erros` (erros comuns que encarecem a obra). São diferenciados por natureza.
-- Falta imagem nas páginas de serviço.
-
-### 17 — Blog + skill para gerar posts
-
-**Não iniciado.** A pauta com 12 títulos já está escrita em
-[16-conteudo-blog.md](16-conteudo-blog.md).
-
-O pedido do cliente:
-
-1. Criar `/blog` (listagem) e `/blog/$slug` (post), seguindo o padrão das rotas
-   existentes: canonical próprio, `Article` no JSON-LD (`author`,
-   `datePublished`, `dateModified`), breadcrumb, CTA no fim, links internos para
-   as páginas de serviço.
-2. Conteúdo em **Markdown com frontmatter** em `src/content/blog/`, lido no
-   build. Não usar CMS — quem mantém é dev.
-3. Incluir os posts no `sitemap.xml` (hoje ele é gerado por um script inline;
-   vale extrair para `scripts/gerar-sitemap.mjs` e ler as fontes de `src/data/`
-   e os arquivos de blog).
-4. **Documentar uma skill** (`.claude/skills/novo-post-blog/SKILL.md` ou
-   equivalente) para uma IA gerar posts padronizados depois. A skill precisa
-   fixar: frontmatter obrigatório, 1.200-2.000 palavras, H1 = a pergunta que a
-   pessoa digita no Google, resposta direta nos 2 primeiros parágrafos (é o que
-   a IA extrai), tabelas e listas, links internos obrigatórios para serviços,
-   proibição de inventar número, e o tom (direto, linguagem de obra, sem
-   marketês).
+**Oportunidade real que sobrou:** "Reduce unused JavaScript — 271 KB"
+(framer-motion + router).
 
 ### Itens do cliente (não dependem de código)
 
@@ -156,8 +161,13 @@ O pedido do cliente:
    quanto antes, melhor.
 3. **Coordenadas reais da base** — há um valor aproximado com `TODO` em
    `src/lib/schema.ts`.
-4. **Lista de cidades** (`CIDADES_ATENDIDAS` em `src/data/servicos.ts`) — as 12
-   atuais são estimativa pela região, precisam de confirmação.
+4. **Lista de 47 cidades** (`src/data/regioes.ts`) — o cliente definiu os três
+   estados (MA, PI, CE); as cidades foram escolhidas por porte e relevância
+   regional, sem confirmação operacional. Validar antes de tratar como definitiva.
+5. **Google Meu Negócio desalinhado:** a área de cobertura da ficha tem só Santa
+   Inês e Pindaré-Mirim, contra três estados no site. O endereço da ficha
+   ("Estrada p/ Canadá") também diverge do CNPJ ("Rod. Pitombeira"). E o campo
+   Site aponta para `http://grupomvconstrutora.com.br/` — sem https e sem www.
 5. **Números reais** — obras entregues, máquinas na frota, m³/dia. Hoje só há
    "+11 anos" e "100% compromisso com prazos" (essa segunda é alegação genérica
    que sistemas de IA descartam).

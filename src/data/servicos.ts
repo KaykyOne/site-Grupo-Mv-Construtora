@@ -823,20 +823,4 @@ export const DESTAQUES = [
   "Movimentação de Terra",
 ];
 
-// ATENÇÃO: lista pendente de confirmação com o cliente.
-// Só devem constar cidades onde a empresa realmente mobiliza equipe e máquinas.
-// Listar cidade não atendida gera lead ruim e prejudica a reputação local.
-export const CIDADES_ATENDIDAS = [
-  "Pindaré-Mirim",
-  "Santa Inês",
-  "Bacabal",
-  "Zé Doca",
-  "Santa Luzia",
-  "Monção",
-  "Tufilândia",
-  "Alto Alegre do Pindaré",
-  "Bom Jardim",
-  "Açailândia",
-  "Imperatriz",
-  "São Luís",
-];
+// A área de atuação (Maranhão, Piauí e Ceará) vive em src/data/regioes.ts.

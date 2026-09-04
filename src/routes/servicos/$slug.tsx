@@ -8,7 +8,8 @@ import { SectionTitle } from "@/components/site/SectionTitle";
 import { SITE_URL } from "@/config/empresa";
 import { SITE_BASE_PATH } from "@/config/navegacao";
 import { maquinasDoServico } from "@/data/frota";
-import { CIDADES_ATENDIDAS, SERVICOS } from "@/data/servicos";
+import { SERVICOS } from "@/data/servicos";
+import { REGIOES, ESTADOS_TEXTO, cidadesDoEstado } from "@/data/regioes";
 import { breadcrumbSchema, faqSchema, servicoSchema } from "@/lib/schema";
 
 /**
@@ -217,18 +218,20 @@ function PaginaServico() {
               Onde executamos {servico.nome.toLowerCase()}
             </h2>
             <p className="mt-5 max-w-2xl leading-7 text-white/70">
-              Com base em Pindaré-Mirim, no Vale do Pindaré, mobilizamos máquinas e equipes para
-              obras em todo o estado do Maranhão.
+              Com base em Pindaré-Mirim (MA), no Vale do Pindaré, mobilizamos máquinas e equipes
+              para obras no {ESTADOS_TEXTO} — de pequenas cidades do interior às capitais.
             </p>
             <ul className="mt-8 flex flex-wrap gap-2">
-              {CIDADES_ATENDIDAS.map((cidade) => (
-                <li
-                  key={cidade}
-                  className="rounded-full border border-white/25 px-4 py-2 text-sm text-white/85"
-                >
-                  {cidade} - MA
-                </li>
-              ))}
+              {REGIOES.flatMap((regiao) =>
+                cidadesDoEstado(regiao).map((cidade) => (
+                  <li
+                    key={`${regiao.uf}-${cidade}`}
+                    className="rounded-full border border-white/25 px-4 py-2 text-sm text-white/85"
+                  >
+                    {cidade} - {regiao.uf}
+                  </li>
+                )),
+              )}
             </ul>
             <a
               href={`${SITE_BASE_PATH}#area-de-atuacao`}

@@ -18,7 +18,7 @@ export function CtaFinal({ servico }: { servico?: string }) {
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <h2 className="max-w-3xl text-3xl font-semibold leading-[1.05] tracking-[-0.03em] sm:text-4xl lg:text-5xl">
           {servico
-            ? `Precisa de ${servico.toLowerCase()} no Maranhão?`
+            ? `Precisa de ${servico.toLowerCase()} no Maranhão, Piauí ou Ceará?`
             : "Sua obra precisa avançar rápido?"}
         </h2>
         <p className="mt-5 max-w-xl leading-7 text-white/85">

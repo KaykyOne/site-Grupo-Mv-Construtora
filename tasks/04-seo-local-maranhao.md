@@ -15,6 +15,11 @@
 > 📊 "Maranhão": **0 → 42** ocorrências. "terraplenagem": 2 → 29.
 > ⏳ **PENDENTE COM VOCÊ:** confirmar a lista de cidades (`CIDADES_ATENDIDAS` em `src/data/servicos.ts`) e o horário real.
 
+> **ESCOPO AMPLIADO EM 04/09/2026:** esta task tratava só do Maranhão. A área de
+> atuação passou a ser **Maranhão, Piauí e Ceará** — ver
+> [task 18](18-area-de-atuacao-multiestado.md). A lista de cidades saiu daqui e de
+> `servicos.ts` e vive agora em `src/data/regioes.ts`.
+
 ---
 
 ## Problema

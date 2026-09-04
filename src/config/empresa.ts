@@ -31,9 +31,16 @@ export const EMPRESA = {
   nome: "MV Construtora",
   razaoSocial: "A R LEITE PEREIRA LTDA",
   cnpj: "14.299.029/0001-20",
-  whatsapp: "559891972921",
-  whatsappExibicao: "(98) 9197-2921",
-  email: "mvconstrutoraeimobiliaria@outlook.com",
+  // ATENÇÃO: o telefone do cartão CNPJ — (98) 9197-2921 — é o de cadastro na
+  // Receita, não o WhatsApp comercial. Ele tem 8 dígitos e gera link quebrado
+  // (celular no WhatsApp precisa de 55 + DDD + 9 + 8 dígitos = 13).
+  // O número abaixo é o que está cadastrado como Chat no Google Meu Negócio.
+  whatsapp: "5598992368928",
+  whatsappExibicao: "(98) 99236-8928",
+  telefoneCadastroCnpj: "(98) 9197-2921",
+  // E-mail comercial do domínio. O do cartão CNPJ
+  // (mvconstrutoraeimobiliaria@outlook.com) é o de cadastro na Receita.
+  email: "atendimento@grupomvconstrutora.com.br",
   logradouro: "Rod. Pitombeira",
   numero: "s/n",
   bairro: "Pitombeira",

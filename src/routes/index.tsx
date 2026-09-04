@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { SERVICOS, DESTAQUES, CIDADES_ATENDIDAS } from "@/data/servicos";
+import { SERVICOS, DESTAQUES } from "@/data/servicos";
+import { REGIOES, ESTADOS_TEXTO, cidadesDoEstado } from "@/data/regioes";
 import { VIDEOS } from "@/data/videos";
 import { CATEGORIAS_FROTA, FROTA } from "@/data/frota";
 import { organizacaoSchema, websiteSchema, faqSchema, videosSchema, SITE_URL } from "@/lib/schema";
@@ -61,21 +62,21 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       {
-        title: "MV Construtora Pindaré-Mirim MA | Terraplenagem e Locação de Máquinas",
+        title: "MV Construtora | Terraplenagem e Locação de Máquinas — MA, PI e CE",
       },
       {
         name: "description",
         content:
-          "Terraplenagem, obras civis, drenagem e locação de máquinas pesadas no Maranhão. Sede em Pindaré-Mirim, atendendo Santa Inês, Bacabal, Zé Doca e todo o Vale do Pindaré desde 2011.",
+          "Terraplenagem, obras civis, drenagem e locação de máquinas pesadas no Maranhão, Piauí e Ceará. Sede em Pindaré-Mirim (MA), atendendo do interior às capitais desde 2011.",
       },
       {
         property: "og:title",
-        content: "MV Construtora | Terraplenagem e Locação de Máquinas no Maranhão",
+        content: "MV Construtora | Terraplenagem e Locação de Máquinas — MA, PI e CE",
       },
       {
         property: "og:description",
         content:
-          "Terraplenagem, obras civis, infraestrutura viária, drenagem e locação de máquinas pesadas em todo o Maranhão. Desde 2011 em Pindaré-Mirim.",
+          "Terraplenagem, obras civis, infraestrutura viária, drenagem e locação de máquinas pesadas no Maranhão, Piauí e Ceará. Desde 2011 em Pindaré-Mirim.",
       },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "pt_BR" },
@@ -160,8 +161,8 @@ const campoForm = (temErro: boolean) =>
 
 const faqs: [string, string][] = [
   [
-    "Quais cidades do Maranhão a MV Construtora atende?",
-    "A MV Construtora tem sede em Pindaré-Mirim (MA) e atende todo o Maranhão, com presença frequente em Santa Inês, Bacabal, Zé Doca, Santa Luzia, Monção, Alto Alegre do Pindaré, Açailândia, Imperatriz e São Luís. Executamos obras urbanas, rurais, industriais e comerciais.",
+    "Quais cidades a MV Construtora atende?",
+    "A MV Construtora tem sede em Pindaré-Mirim (MA) e atende Maranhão, Piauí e Ceará. No Maranhão, com presença frequente em Santa Inês, Bacabal, Zé Doca, Açailândia, Imperatriz e São Luís; no Piauí, em Teresina, Parnaíba, Picos e Floriano; no Ceará, em Fortaleza, Sobral, Juazeiro do Norte e Crateús. Atendemos de pequenas cidades do interior às capitais, em obras urbanas, rurais, industriais e comerciais.",
   ],
   [
     "Quais serviços a MV Construtora executa?",
@@ -508,7 +509,7 @@ function Index() {
                 className="max-w-3xl text-4xl font-semibold leading-[112%] tracking-[-0.055em] text-white [text-shadow:0_2px_18px_rgb(0_0_0_/_0.65)] sm:text-5xl lg:text-[70px]"
               >
                 Terraplenagem e Locação de Máquinas Pesadas no{" "}
-                <span className="text-white/80">Maranhão</span>
+                <span className="text-white/80">Maranhão, Piauí e Ceará</span>
               </motion.h1>
               <motion.p
                 variants={reveal}
@@ -521,8 +522,8 @@ function Index() {
                 className="mt-5 max-w-xl text-base leading-7 text-white/90 [text-shadow:0_1px_10px_rgb(0_0_0_/_0.7)] sm:text-lg"
               >
                 Terraplenagem, obras civis, infraestrutura viária, drenagem e locação de máquinas
-                pesadas em todo o Maranhão, com segurança, produtividade e compromisso do primeiro
-                movimento de terra até a entrega.
+                pesadas no Maranhão, Piauí e Ceará, com segurança, produtividade e compromisso do
+                primeiro movimento de terra até a entrega.
               </motion.p>
               <motion.div variants={reveal} className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <CTAButton href="#contato">Solicitar orçamento</CTAButton>
@@ -901,28 +902,47 @@ function Index() {
 
         {/* FAQ */}
         {/* ÁREA DE ATUAÇÃO */}
+        {/* ÁREA DE ATUAÇÃO — agrupada por estado. Cada cidade é uma variação de
+            busca real ("terraplenagem em <cidade>"), e as menores são as de
+            menor concorrência. Fonte única: src/data/regioes.ts */}
         <section id="area-de-atuacao" className="mx-auto max-w-7xl px-5 py-24 sm:px-8 lg:py-32">
           <SectionTitle
             eyebrow="Área de atuação"
-            title="Terraplenagem e locação de máquinas em todo o Maranhão."
+            title={`Terraplenagem e locação de máquinas no ${ESTADOS_TEXTO}.`}
           />
           <p className="mt-7 max-w-2xl leading-7 text-zinc-600">
-            Com base em Pindaré-Mirim, na região do Vale do Pindaré, a MV Construtora mobiliza
-            máquinas, equipamentos e equipes para obras urbanas, rurais, industriais e comerciais em
-            todo o estado do Maranhão — para clientes públicos e privados.
+            Com base em {EMPRESA.cidade}, no Vale do Pindaré, a MV Construtora mobiliza máquinas,
+            equipamentos e equipes para obras urbanas, rurais, industriais e comerciais — de
+            pequenas cidades do interior às capitais, para clientes públicos e privados.
           </p>
-          <ul className="mt-9 flex flex-wrap gap-2">
-            {CIDADES_ATENDIDAS.map((cidade) => (
-              <li
-                key={cidade}
-                className="rounded-full border border-zinc-300 bg-white/60 px-4 py-2 text-sm text-zinc-700"
-              >
-                Terraplenagem em {cidade} - MA
-              </li>
+
+          <div className="mt-12 space-y-10">
+            {REGIOES.map((regiao) => (
+              <div key={regiao.uf} className="border-t border-zinc-300 pt-7">
+                <h3 className="text-xl font-semibold tracking-tight">
+                  {regiao.estado}
+                  {regiao.sede && (
+                    <span className="ml-3 rounded-full bg-red-600 px-3 py-1 align-middle text-[10px] font-bold uppercase tracking-[0.18em] text-white">
+                      Sede
+                    </span>
+                  )}
+                </h3>
+                <ul className="mt-5 flex flex-wrap gap-2">
+                  {cidadesDoEstado(regiao).map((cidade) => (
+                    <li
+                      key={`${regiao.uf}-${cidade}`}
+                      className="rounded-full border border-zinc-300 bg-white/60 px-4 py-2 text-sm text-zinc-700"
+                    >
+                      Terraplenagem em {cidade} - {regiao.uf}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ))}
-          </ul>
-          <p className="mt-7 text-sm text-zinc-600">
-            Não encontrou sua cidade? Atendemos todo o Maranhão —{" "}
+          </div>
+
+          <p className="mt-9 text-sm text-zinc-600">
+            Não encontrou sua cidade? Atendemos {ESTADOS_TEXTO} —{" "}
             <a
               href="#contato"
               className="font-semibold text-zinc-950 underline decoration-red-600 underline-offset-4"

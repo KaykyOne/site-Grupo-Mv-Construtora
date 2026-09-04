@@ -14,11 +14,11 @@ const URL_PAGINA = `${SITE_URL}/frota`;
 export const Route = createFileRoute("/frota/")({
   head: () => ({
     meta: [
-      { title: "Frota de Máquinas Pesadas | MV Construtora — Maranhão" },
+      { title: "Frota de Máquinas Pesadas | MV Construtora — MA, PI e CE" },
       {
         name: "description",
         content:
-          "Frota própria da MV Construtora no Maranhão: escavadeiras hidráulicas, pá-carregadeira, motoniveladora (patrol), rolo compactador, caminhão-pipa e caminhão prancha, com ou sem operador.",
+          "Frota própria da MV Construtora, atuando no Maranhão, Piauí e Ceará: escavadeiras hidráulicas, pá-carregadeira, motoniveladora (patrol), rolo compactador, caminhão-pipa e caminhão prancha, com ou sem operador.",
       },
       { property: "og:title", content: "Frota de Máquinas Pesadas | MV Construtora" },
       { property: "og:url", content: URL_PAGINA },
@@ -83,7 +83,7 @@ function FrotaIndex() {
                     aria-pressed={selecionada}
                     className={`rounded-full border px-5 py-2 text-sm font-semibold transition-all ${
                       selecionada
-                        ? "border-red-500 bg-red-500 text-white"
+                        ? "border-red-600 bg-red-700 text-white"
                         : "border-white/30 bg-white/10 text-white/90 hover:border-white/50 hover:text-white"
                     }`}
                   >

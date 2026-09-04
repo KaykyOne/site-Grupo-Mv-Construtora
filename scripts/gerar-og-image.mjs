@@ -44,7 +44,7 @@ const texto = `
 
   <g font-family="Arial, Helvetica, sans-serif">
     <text x="80" y="330" fill="#f87171" font-size="26" font-weight="700" letter-spacing="6">
-      ${escapar("PINDARÉ-MIRIM · MARANHÃO · DESDE 2011")}
+      ${escapar("MARANHÃO · PIAUÍ · CEARÁ · DESDE 2011")}
     </text>
     <text x="80" y="404" fill="#ffffff" font-size="62" font-weight="800">
       ${escapar("Terraplenagem e Locação")}
@@ -53,7 +53,7 @@ const texto = `
       ${escapar("de Máquinas Pesadas")}
     </text>
     <text x="80" y="534" fill="#d4d4d8" font-size="30" font-weight="600">
-      ${escapar("Obras civis · Infraestrutura · Drenagem · Munck")}
+      ${escapar("Sede em Pindaré-Mirim - MA · Do interior às capitais")}
     </text>
   </g>
 </svg>`;

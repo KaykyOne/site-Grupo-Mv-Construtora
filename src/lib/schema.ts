@@ -5,7 +5,8 @@
 // tudo do texto corrido — e, como existem outras empresas chamadas
 // "MV Construtora" no Brasil, a inferência erra ou não cita ninguém.
 
-import { SERVICOS, CIDADES_ATENDIDAS } from "@/data/servicos";
+import { SERVICOS } from "@/data/servicos";
+import { CIDADES_ATENDIDAS, REGIOES } from "@/data/regioes";
 import { YOUTUBE_CANAL } from "@/data/videos";
 import { EMPRESA } from "@/config/empresa";
 
@@ -17,14 +18,20 @@ export const organizacaoSchema = {
   "@id": `${SITE_URL}/#organizacao`,
   name: "MV Construtora",
   legalName: EMPRESA.razaoSocial,
-  alternateName: ["Grupo MV Construtora", "Construtora MV", "MV Construtora Maranhão"],
+  alternateName: [
+    "Grupo MV Construtora",
+    "Construtora MV",
+    "MV Construtora Maranhão",
+    "MV Construtora Piauí",
+    "MV Construtora Ceará",
+  ],
   url: SITE_URL,
   logo: `${SITE_URL}/assets/logomv.png`,
   image: `${SITE_URL}/og-image.jpg`,
   description:
     "Empresa de terraplenagem, obras civis, infraestrutura viária, drenagem e locação de " +
-    "máquinas pesadas sediada em Pindaré-Mirim, Maranhão, com atuação no Vale do Pindaré " +
-    "e em todo o estado desde 2011.",
+    "máquinas pesadas sediada em Pindaré-Mirim, no Maranhão, com atuação em todo o " +
+    "Maranhão, Piauí e Ceará desde 2011 — de pequenas cidades do interior às capitais.",
   taxID: EMPRESA.cnpj,
   vatID: EMPRESA.cnpj,
   foundingDate: EMPRESA.fundacao,
@@ -59,11 +66,17 @@ export const organizacaoSchema = {
       closes: "18:00",
     },
   ],
-  areaServed: CIDADES_ATENDIDAS.map((cidade) => ({
-    "@type": "City",
-    name: cidade,
-    containedInPlace: { "@type": "State", name: "Maranhão" },
-  })),
+  // Os três estados primeiro (sinal amplo), depois cada cidade ancorada no seu
+  // estado. Sem o estado no containedInPlace, cidades homônimas de outras
+  // regiões do país confundem a leitura.
+  areaServed: [
+    ...REGIOES.map((r) => ({ "@type": "State", name: r.estado, addressCountry: "BR" })),
+    ...CIDADES_ATENDIDAS.map(({ cidade, estado }) => ({
+      "@type": "City",
+      name: cidade,
+      containedInPlace: { "@type": "State", name: estado },
+    })),
+  ],
   sameAs: ["https://www.instagram.com/grupoconstrutoramv/", YOUTUBE_CANAL],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
@@ -75,7 +88,7 @@ export const organizacaoSchema = {
         name: nome,
         description: descricao,
         provider: { "@id": `${SITE_URL}/#organizacao` },
-        areaServed: { "@type": "State", name: "Maranhão" },
+        areaServed: REGIOES.map((r) => ({ "@type": "State", name: r.estado })),
       },
     })),
   },
@@ -118,10 +131,10 @@ export const servicoSchema = (servico: {
   description: servico.descricao,
   serviceType: servico.nome,
   provider: { "@id": `${SITE_URL}/#organizacao` },
-  areaServed: CIDADES_ATENDIDAS.map((cidade) => ({
+  areaServed: CIDADES_ATENDIDAS.map(({ cidade, estado }) => ({
     "@type": "City",
     name: cidade,
-    containedInPlace: { "@type": "State", name: "Maranhão" },
+    containedInPlace: { "@type": "State", name: estado },
   })),
   url: `${SITE_URL}/servicos/${servico.slug}`,
 });
@@ -217,6 +230,6 @@ export const maquinaSchema = (maquina: {
   description: maquina.intro,
   serviceType: maquina.categoria,
   provider: { "@id": `${SITE_URL}/#organizacao` },
-  areaServed: { "@type": "State", name: "Maranhão" },
+  areaServed: REGIOES.map((r) => ({ "@type": "State", name: r.estado })),
   url: `${SITE_URL}/frota/${maquina.slug}`,
 });

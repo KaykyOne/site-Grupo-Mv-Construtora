@@ -13,13 +13,13 @@ const URL_PAGINA = `${SITE_URL}/servicos`;
 export const Route = createFileRoute("/servicos/")({
   head: () => ({
     meta: [
-      { title: "Serviços | MV Construtora — Terraplenagem e Obras no Maranhão" },
+      { title: "Serviços | MV Construtora — Terraplenagem e Obras em MA, PI e CE" },
       {
         name: "description",
         content:
-          "As 10 frentes de atuação da MV Construtora no Maranhão: terraplenagem, infraestrutura viária, obras civis, drenagem, limpeza de áreas, locação de máquinas, transporte, Munck, apoio a grandes obras e serviços rurais.",
+          "As 10 frentes de atuação da MV Construtora no Maranhão, Piauí e Ceará: terraplenagem, infraestrutura viária, obras civis, drenagem, limpeza de áreas, locação de máquinas, transporte, Munck, apoio a grandes obras e serviços rurais.",
       },
-      { property: "og:title", content: "Serviços da MV Construtora no Maranhão" },
+      { property: "og:title", content: "Serviços da MV Construtora — MA, PI e CE" },
       { property: "og:url", content: URL_PAGINA },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "pt_BR" },
@@ -53,13 +53,13 @@ function ServicosIndex() {
             <SectionTitle
               as="h1"
               eyebrow="O que fazemos"
-              title="Serviços de terraplenagem, obras e locação de máquinas no Maranhão."
+              title="Serviços de terraplenagem, obras e locação de máquinas no Nordeste."
             />
           </div>
           <p className="mt-7 max-w-2xl leading-7 text-zinc-600">
             A MV Construtora atua em dez frentes complementares, da preparação do terreno à entrega
             da obra. Com base em Pindaré-Mirim, mobilizamos máquinas, equipamentos e equipes para
-            obras públicas e privadas em todo o estado do Maranhão.
+            obras públicas e privadas no Maranhão, Piauí e Ceará.
           </p>
         </section>
 
