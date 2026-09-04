@@ -94,6 +94,13 @@ Slug inválido devolve 404 real (`notFound()` no loader).
 - **Blog: os 9 posts que eram esboço foram escritos** — os 10 agora estão entre
   1.208 e 1.751 palavras, dentro da faixa da skill.
 - **Acessibilidade 100** confirmada por Lighthouse no build de produção.
+- **Animações não escondem mais conteúdo.** Usuários relataram seções em branco no
+  celular. O HTML servido tinha **31 elementos com `opacity: 0`** (o framer
+  serializa o estado `hidden` no SSR) — sem JS hidratado, blocos invisíveis. A
+  opacidade saiu das animações de entrada; `hidden` agora é só `{ y: 24 }`, e o
+  gatilho passou a disparar 25% antes da seção entrar na tela
+  (`VIEWPORT_REVEAL` em `animacoes.ts`). Medido: 31 → 0.
+  **Regra:** animação de entrada nunca deve gatilhar opacidade em conteúdo SSR.
 - **Preview do GitHub Pages voltou a ter `noindex`** — a detecção agora usa
   `import.meta.env.BASE_URL !== "/"`, que o Vite sempre define. A versão anterior
   dependia de uma env var `VITE_*` que não chegava ao bundle, e o preview ficou

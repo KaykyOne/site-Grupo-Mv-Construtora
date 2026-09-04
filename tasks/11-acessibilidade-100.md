@@ -6,6 +6,29 @@
 - **Impacto:** 🟡 Médio (+ conformidade e argumento de qualidade)
 - **Depende de:** task 10 (o link vazio do rodapé é uma das 3 falhas)
 
+> **CORREÇÃO DE USABILIDADE (04/09/2026)** — relato de usuários no celular: seções
+> apareciam **em branco** até a animação disparar.
+>
+> Duas causas, ambas corrigidas:
+>
+> 1. **Gatilho tardio.** O `SectionTitle` usava `amount: 0.4` — só animava com 40%
+>    do bloco visível — e o fade durava 0,95 s. Agora existe `VIEWPORT_REVEAL` em
+>    `src/components/site/animacoes.ts`, único para todo o site: dispara com 25% de
+>    folga **antes** de a seção entrar na tela, e a duração caiu para 0,45 s.
+> 2. **Causa de raiz: `opacity: 0` no HTML servido.** O framer serializa o estado
+>    `hidden` como style inline no SSR — o HTML chegava com **31 elementos
+>    invisíveis**. Enquanto o JS não hidratava, esses blocos não existiam na tela.
+>    Num aparelho modesto em 4G, isso são segundos de tela branca.
+>
+> A opacidade foi removida das animações de entrada: `hidden` agora é só
+> `{ y: 24 }`. O pior caso virou "conteúdo 24px abaixo da posição final", que é
+> imperceptível. Medido depois: **31 → 0** elementos com `opacity: 0` no HTML, e
+> 0 de 163 blocos de texto invisíveis no navegador.
+>
+> Regra para quem mexer depois: **animação de entrada não pode gatilhar
+> opacidade em conteúdo renderizado no servidor.** Se a animação falhar, ela não
+> pode levar o conteúdo junto.
+
 ---
 
 ## Problema

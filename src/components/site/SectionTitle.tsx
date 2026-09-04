@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 
+import { VIEWPORT_REVEAL } from "./animacoes";
 import { useReveal } from "@/hooks/use-reduced-motion";
 
 export function SectionTitle({
@@ -21,7 +22,7 @@ export function SectionTitle({
       variants={reveal}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: 0.4 }}
+      viewport={VIEWPORT_REVEAL}
       className="max-w-3xl"
     >
       <p className="mb-5 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.24em] text-red-600">

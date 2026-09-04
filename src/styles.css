@@ -101,3 +101,19 @@ html {
     color: #fff;
   }
 }
+
+/*
+  Compensa o header fixo (76px) na navegação por âncora.
+
+  Sem isso, clicar em "Localização" rola até o topo exato da seção — que fica
+  ATRÁS do header, escondendo o título. O usuário tem a impressão de que o clique
+  não funcionou ou levou ao lugar errado.
+
+  `scroll-margin-top` diz ao navegador para parar 96px antes, deixando o título
+  visível abaixo do header.
+*/
+[id]:target,
+section[id],
+main[id] {
+  scroll-margin-top: 96px;
+}

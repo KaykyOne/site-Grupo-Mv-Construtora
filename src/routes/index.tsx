@@ -8,6 +8,7 @@ import { organizacaoSchema, websiteSchema, faqSchema, videosSchema, SITE_URL } f
 import { CTAButton } from "@/components/site/CTAButton";
 import { SectionTitle } from "@/components/site/SectionTitle";
 import { VideoPlayer } from "@/components/site/VideoPlayer";
+import { VIEWPORT_REVEAL } from "@/components/site/animacoes";
 import { useReveal } from "@/hooks/use-reduced-motion";
 import { EMPRESA, MAPS_EMBED_URL, MAPS_OPEN_URL, telLink, waLink } from "@/config/empresa";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
@@ -336,9 +337,10 @@ function DiferenciaisSlideshow() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 25 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      initial={{ y: 24 }}
+      whileInView={{ y: 0 }}
+      transition={{ duration: 0.45, ease: "easeOut" }}
+      viewport={VIEWPORT_REVEAL}
       className="relative"
     >
       <div className="relative h-[520px] w-full overflow-hidden lg:h-[600px]">
@@ -605,8 +607,11 @@ function Index() {
                   <motion.div
                     layout
                     key={item.slug}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    // Sem opacity no `initial`: os 6 cards são renderizados no SSR e
+                    // ficariam invisíveis até o JS hidratar. O fade continua na saída,
+                    // que só acontece quando o usuário troca o filtro — aí o JS já rodou.
+                    initial={{ y: 20 }}
+                    animate={{ y: 0 }}
                     exit={{ opacity: 0, scale: 0.96 }}
                     transition={{ duration: 0.35 }}
                   >
@@ -673,7 +678,7 @@ function Index() {
           <motion.div
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={VIEWPORT_REVEAL}
             variants={{ show: { transition: { staggerChildren: 0.13 } } }}
             className="mt-16 grid border-t border-zinc-300 lg:grid-cols-3"
           >
@@ -736,8 +741,8 @@ function Index() {
                   light
                 />
                 <p className="mt-6 max-w-2xl text-lg leading-8 text-white/80">
-                  De PindarÃ©-Mirim para obras em todo o MaranhÃ£o, a MV Construtora une
-                  experiÃªncia de campo, planejamento e relaÃ§Ãµes de confianÃ§a.
+                  De Pindaré-Mirim para obras em todo o Maranhão, a MV Construtora une
+                  experiência de campo, planejamento e relações de confiança.
                 </p>
                 <div className="mt-10 max-w-3xl space-y-0 leading-7 text-white/80 [&>h3]:mt-5 [&>h3]:border-l-2 [&>h3]:border-red-500 [&>h3]:bg-zinc-950/75 [&>h3]:px-5 [&>h3]:py-4 [&>h3]:text-lg [&>h3]:font-semibold [&>h3]:text-white [&>p]:bg-zinc-950/75 [&>p]:px-5 [&>p]:pb-5 [&>p]:text-sm [&>ul]:bg-zinc-950/75 [&>ul]:px-5 [&>ul]:pb-5 [&>ul]:pt-1 [&>ul]:text-sm">
                   <h3 className="text-xl font-semibold text-white">Nossa história</h3>
@@ -885,9 +890,10 @@ function Index() {
           <div className="mx-auto max-w-5xl px-5 text-center sm:px-8">
             <Quote className="mx-auto mb-8" size={40} strokeWidth={1.4} />
             <motion.blockquote
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              initial={{ y: 20 }}
+              whileInView={{ y: 0 }}
+              transition={{ duration: 0.45, ease: "easeOut" }}
+              viewport={VIEWPORT_REVEAL}
               className="text-3xl font-semibold leading-tight tracking-[-0.035em] sm:text-5xl"
             >
               “A MV entende a urgência, mobiliza a equipe rapidamente e mantem a obra avançando sem
