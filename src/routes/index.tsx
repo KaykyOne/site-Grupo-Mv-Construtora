@@ -459,7 +459,7 @@ function Index() {
         {/* HERO */}
         <section
           id="inicio"
-          className="relative flex min-h-[620px] items-end overflow-hidden bg-zinc-950 sm:min-h-[700px] lg:min-h-[780px]"
+          className="relative flex min-h-screen min-h-[100dvh] items-end overflow-hidden bg-zinc-950"
         >
           {/* A imagem ocupa 100% da largura e passa por baixo do header translúcido. */}
           <HeroBackgroundSlideshow />
@@ -493,22 +493,22 @@ function Index() {
             transition={{ duration: 7, repeat: Infinity }}
           />
 
-          <div className="relative z-10 mx-auto w-full max-w-7xl px-5 pb-14 pt-[150px] sm:px-8 sm:pb-16 lg:pb-20">
+          <div className="relative z-10 mx-auto w-full max-w-7xl px-5 pb-10 pt-28 sm:px-8 sm:pb-12 sm:pt-32 lg:pb-[clamp(2rem,5vh,5rem)] lg:pt-[clamp(6rem,13vh,9.375rem)]">
             <motion.div
               initial="hidden"
               animate="show"
               variants={{ show: { transition: { staggerChildren: 0.16 } } }}
-              className="max-w-4xl"
+              className="max-w-5xl"
             >
               <motion.div
                 variants={reveal}
-                className="mb-7 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em] text-red-400"
+                className="mb-4 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em] text-red-400 lg:mb-[clamp(1rem,2.5vh,1.75rem)]"
               >
                 <span className="h-px w-10 bg-red-500" /> Pindaré-Mirim · Maranhão · Desde 2011
               </motion.div>
               <motion.h1
                 variants={reveal}
-                className="max-w-3xl text-4xl font-semibold leading-[112%] tracking-[-0.055em] text-white [text-shadow:0_2px_18px_rgb(0_0_0_/_0.65)] sm:text-5xl lg:text-[70px]"
+                className="max-w-5xl text-4xl font-semibold leading-[112%] tracking-[-0.055em] text-white [text-shadow:0_2px_18px_rgb(0_0_0_/_0.65)] sm:text-5xl lg:text-[clamp(3.5rem,7vh,4.375rem)] lg:leading-[1.05]"
               >
                 Terraplenagem e Locação de Máquinas Pesadas no{" "}
                 <span className="text-white/80">Maranhão, Piauí e Ceará</span>
@@ -521,13 +521,13 @@ function Index() {
               </motion.p>
               <motion.p
                 variants={reveal}
-                className="mt-5 max-w-xl text-base leading-7 text-white/90 [text-shadow:0_1px_10px_rgb(0_0_0_/_0.7)] sm:text-lg"
+                className="mt-3 max-w-2xl text-base leading-7 text-white/90 [text-shadow:0_1px_10px_rgb(0_0_0_/_0.7)] sm:mt-4 sm:text-lg"
               >
                 Terraplenagem, obras civis, infraestrutura viária, drenagem e locação de máquinas
                 pesadas no Maranhão, Piauí e Ceará, com segurança, produtividade e compromisso do
                 primeiro movimento de terra até a entrega.
               </motion.p>
-              <motion.div variants={reveal} className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <motion.div variants={reveal} className="mt-6 flex flex-col gap-3 sm:mt-7 sm:flex-row">
                 <CTAButton href="#contato">Solicitar orçamento</CTAButton>
                 <CTAButton href="#servicos">Conhecer soluções</CTAButton>
               </motion.div>
