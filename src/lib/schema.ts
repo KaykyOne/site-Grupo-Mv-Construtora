@@ -7,6 +7,7 @@
 
 import { SERVICOS, CIDADES_ATENDIDAS } from "@/data/servicos";
 import { YOUTUBE_CANAL } from "@/data/videos";
+import { EMPRESA } from "@/config/empresa";
 
 export const SITE_URL = "https://www.grupomvconstrutora.com.br";
 
@@ -15,7 +16,7 @@ export const organizacaoSchema = {
   "@type": "GeneralContractor",
   "@id": `${SITE_URL}/#organizacao`,
   name: "MV Construtora",
-  legalName: "MV Construtora",
+  legalName: EMPRESA.razaoSocial,
   alternateName: ["Grupo MV Construtora", "Construtora MV", "MV Construtora Maranhão"],
   url: SITE_URL,
   logo: `${SITE_URL}/assets/logomv.png`,
@@ -24,21 +25,23 @@ export const organizacaoSchema = {
     "Empresa de terraplenagem, obras civis, infraestrutura viária, drenagem e locação de " +
     "máquinas pesadas sediada em Pindaré-Mirim, Maranhão, com atuação no Vale do Pindaré " +
     "e em todo o estado desde 2011.",
-  taxID: "14.299.029/0001-20",
-  vatID: "14.299.029/0001-20",
-  foundingDate: "2011-09-14",
+  taxID: EMPRESA.cnpj,
+  vatID: EMPRESA.cnpj,
+  foundingDate: EMPRESA.fundacao,
   founder: {
     "@type": "Person",
     name: "Alan Robson Leite Pereira",
   },
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Rodovia MA-320, Pitombeira (próximo ao Condomínio OASIS)",
-    addressLocality: "Pindaré-Mirim",
-    addressRegion: "MA",
-    postalCode: "65370-000",
+    streetAddress: `${EMPRESA.logradouro}, ${EMPRESA.numero}`,
+    addressLocality: EMPRESA.cidade,
+    addressRegion: EMPRESA.estado,
+    postalCode: EMPRESA.cep,
     addressCountry: "BR",
   },
+  telephone: `+${EMPRESA.whatsapp}`,
+  email: EMPRESA.email,
   // TODO: confirmar as coordenadas exatas da base no Google Maps
   // (botão direito sobre o local -> as coordenadas aparecem no topo do menu).
   geo: {
@@ -46,8 +49,6 @@ export const organizacaoSchema = {
     latitude: -3.6089,
     longitude: -45.3419,
   },
-  telephone: "+5598992368928",
-  email: "atendimento@grupomvconstrutora.com.br",
   priceRange: "$$",
   currenciesAccepted: "BRL",
   openingHoursSpecification: [

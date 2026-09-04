@@ -1,3 +1,5 @@
+import { SITE_BASE_PATH } from "@/config/navegacao";
+
 function escaparHtml(texto: string) {
   return texto.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
@@ -6,7 +8,11 @@ function formatarLinha(texto: string) {
   return escaparHtml(texto)
     .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
     .replace(/`(.+?)`/g, "<code>$1</code>")
-    .replace(/\[([^\]]+)\]\((\/[a-z0-9-/#]+)\)/g, '<a href="$2">$1</a>');
+    .replace(
+      /\[([^\]]+)\]\((\/[a-z0-9-/#]+)\)/g,
+      (_, rotulo: string, caminho: string) =>
+        `<a href="${SITE_BASE_PATH}${caminho.replace(/^\//, "")}">${rotulo}</a>`,
+    );
 }
 
 /** Renderizador enxuto para os posts versionados; Markdown não executa HTML arbitrário. */

@@ -6,6 +6,7 @@ import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { CtaFinal } from "@/components/site/CtaFinal";
 import { SectionTitle } from "@/components/site/SectionTitle";
 import { SITE_URL } from "@/config/empresa";
+import { SITE_BASE_PATH } from "@/config/navegacao";
 import { maquinasDoServico } from "@/data/frota";
 import { CIDADES_ATENDIDAS, SERVICOS } from "@/data/servicos";
 import { breadcrumbSchema, faqSchema, servicoSchema } from "@/lib/schema";
@@ -230,7 +231,7 @@ function PaginaServico() {
               ))}
             </ul>
             <a
-              href="/#area-de-atuacao"
+              href={`${SITE_BASE_PATH}#area-de-atuacao`}
               className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-red-400 hover:text-red-300"
             >
               Ver a área de atuação completa <ArrowRight size={16} />

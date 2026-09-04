@@ -2,6 +2,7 @@ import { MessageCircle } from "lucide-react";
 
 import { CTAButton } from "@/components/site/CTAButton";
 import { EMPRESA, waLink } from "@/config/empresa";
+import { SITE_BASE_PATH } from "@/config/navegacao";
 
 /**
  * Bloco de conversão usado no fim das páginas internas.
@@ -28,7 +29,7 @@ export function CtaFinal({ servico }: { servico?: string }) {
           <CTAButton href={waLink(assunto)} target="_blank" rel="noreferrer" variante="escura">
             <MessageCircle size={18} /> Chamar no WhatsApp
           </CTAButton>
-          <CTAButton href="/#contato" variante="clara">
+          <CTAButton href={`${SITE_BASE_PATH}#contato`} variante="clara">
             Solicitar orçamento pelo site
           </CTAButton>
         </div>

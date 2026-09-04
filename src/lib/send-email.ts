@@ -31,9 +31,9 @@ export const sendEmail = createServerFn({
     const resend = new Resend(process.env.RESEND_API_KEY);
 
     return await resend.emails.send({
-      from: "MV Construtora <atendimento@grupomvconstrutora.com.br>",
+      from: "MV Construtora <mvconstrutoraeimobiliaria@outlook.com>",
 
-      to: ["atendimento@grupomvconstrutora.com.br"],
+      to: ["mvconstrutoraeimobiliaria@outlook.com"],
 
       replyTo: data.email,
 
@@ -302,10 +302,10 @@ ${data.mensagem}
                   &#127760;&nbsp; grupomvconstrutora.com.br
                 </td>
                 <td style="padding:0 14px; font-family:'Segoe UI', Arial, Helvetica, sans-serif; font-size:13px; color:#d1d5db; border-right:1px solid #2e2e2e;">
-                  &#9993;&#65039;&nbsp; atendimento@grupomvconstrutora.com.br
+                  &#9993;&#65039;&nbsp; mvconstrutoraeimobiliaria@outlook.com
                 </td>
                 <td style="padding:0 0 0 14px; font-family:'Segoe UI', Arial, Helvetica, sans-serif; font-size:13px; color:#d1d5db;">
-                  &#128222;&nbsp; (98) 99236-8928
+                  &#128222;&nbsp; (98) 9197-2921
                 </td>
               </tr>
             </table>
